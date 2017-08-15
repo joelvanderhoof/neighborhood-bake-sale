@@ -11,7 +11,7 @@ const mongoose = require('mongoose')
 // Import Schema
 const Customer = require('./models/Customer')
 
-const DBconnect = 'mongodb://localhost/neighborhood-bake-sale' || 'mongodb://<dbuser>:<dbpassword>@ds119578.mlab.com:19578/heroku_hlgv59g4'
+const DBconnect = 'mongodb://<dbuser>:<dbpassword>@ds119578.mlab.com:19578/heroku_hlgv59g4'
 
 // Configure DB
 mongoose.connect(DBconnect)
