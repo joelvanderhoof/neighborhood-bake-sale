@@ -10,6 +10,10 @@ import SearchMap from './children/SearchMap'
 import Store from './children/Store'
 
 export default class Main extends Component {
+    constructor(props) {
+        super(props)
+    }
+    
     render() {
         return (
             <Router>
