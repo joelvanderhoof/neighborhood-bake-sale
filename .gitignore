@@ -57,5 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+
 # MAC
 .DS_Store
+# dist folder for transpiled code
+dist

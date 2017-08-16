@@ -1,21 +1,29 @@
-// React Dependencies
-import React, {Component} from 'react';
-import Login from './Login/Login'
 
-class Main extends Component  {
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+import Nav from './Nav'
+import SearchMap from './children/SearchMap'
+import Store from './children/Store'
+
+export default class Main extends Component {
     constructor(props) {
-        super(props);
+        super(props)
     }
-
-    // Render
+    
     render() {
         return (
-           <div className='container'>
-               <h1>Main Component</h1>
-               <Login />
-            </div>
+            <Router>
+                <div className='container'>
+                    <Nav />
+                    <Route  path='/search-map' component={SearchMap} />
+                    <Route  path='/store' component={Store} />
+                </div>
+            </Router>
         )
-    };
-};
-
-export default Main;
+    }
+}
