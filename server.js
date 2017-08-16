@@ -4,6 +4,9 @@ const bodyParser = require('body-parser')
 const path = require('path')
 const logger = require('morgan')
 
+// Run Morgan for Logging
+app.use(logger("dev"));
+
 //const db = require('./models')
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
