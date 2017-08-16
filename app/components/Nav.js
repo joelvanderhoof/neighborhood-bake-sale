@@ -6,19 +6,19 @@ import { NavLink } from 'react-router-dom'
         <ul className='nav'>
             <li>
                 <NavLink exact activeClassName='active' to='/'>
-                    Home
+                    <button className='btn btn-primary'>Home</button>
                 </NavLink>
             </li>
             <br />
             <li>
                 <NavLink activeClassName='active' to='/search-map'>
-                    Search Map
+                <button className='btn btn-info'>Search Map</button>
                 </NavLink>
             </li>
             <br />
             <li>
                 <NavLink activeClassName='active' to='/store'>
-                    Store
+                <button className='btn btn-primary'>Store</button>
                 </NavLink>
             </li>
         </ul>

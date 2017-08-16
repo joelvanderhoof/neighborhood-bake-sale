@@ -60,5 +60,4 @@ typings/
 
 # MAC
 .DS_Store
-# dist folder for transpiled code
-dist
+
