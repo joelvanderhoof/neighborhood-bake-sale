@@ -2,9 +2,9 @@
   "name": "neighborhood-bake-sale",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "webpack -p",
     "run": "webpack-dev-server --open"
   },
   "repository": {
