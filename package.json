@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "webpack -p",
     "run": "webpack-dev-server --open"
   },
   "repository": {
