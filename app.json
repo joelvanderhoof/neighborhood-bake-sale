@@ -1,0 +1,21 @@
+{
+  "name": "neighborhood-bake-sale",
+  "scripts": {
+    "postdeploy": "node server.js"
+  },
+  "env": {
+    "MONGODB_URI": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
