@@ -4,8 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "run": "webpack-dev-server --open"
-  },
+    "test": "echo \"Error: no test specified\" && exit 1"  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joelvanderhoof/neighborhood-bake-sale.git"
