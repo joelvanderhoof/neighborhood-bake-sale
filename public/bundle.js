@@ -26338,7 +26338,7 @@ exports = module.exports = __webpack_require__(230)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n    background: green;\n}\n.nav {\n    display: flex;\n}\n\n.active {\n    font-weight: bold;\n}\n\n.nav {\n    margin-right: 15px;\n    margin-left: 15px;\n}", ""]);
+exports.push([module.i, "body {\n    background: whitesmoke;\n}\n/* .nav {\n    display: flex;\n}\n\n.active {\n    font-weight: bold;\n}\n\n.nav {\n    margin-right: 15px;\n    margin-left: 15px;\n} */", ""]);
 
 // exports
 
