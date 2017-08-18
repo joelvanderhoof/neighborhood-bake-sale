@@ -61,3 +61,6 @@ typings/
 # MAC
 .DS_Store
 
+# Webpack
+bundle.js
+bundle.min.js
