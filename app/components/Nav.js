@@ -21,6 +21,11 @@ import { NavLink } from 'react-router-dom'
                 <button className='btn btn-primary'>Store</button>
                 </NavLink>
             </li>
+            <li>
+                <NavLink activeClassName='active' to='/selleradmin'>
+                <button className='btn btn-primary'>Seller Admin</button>
+                </NavLink>
+            </li>
         </ul>
     )
  }
