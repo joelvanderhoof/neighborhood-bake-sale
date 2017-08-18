@@ -1,10 +1,6 @@
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import MenuItems from "./MenuItems";
-
-
+// import MenuItems from "./MenuItems";
 
 class Menu extends Component {
     constructor(props) {
@@ -18,7 +14,7 @@ class Menu extends Component {
     render() {
       return (
          <div>  
-         <MenuItems />
+         {/* <MenuItems /> */}
          </div>
       );
     }
