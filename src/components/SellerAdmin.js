@@ -36,7 +36,7 @@ class SellerAdmin extends Component {
           <StoreTitle title={testObj.title}/>
           <StoreHours hours={testObj.hours}/>
           <StoreDescription description={testObj.description}/>
-          <Menu />
+          <Menu menu={testObj.menu}/>
          </div>
       );
     }
