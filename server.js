@@ -10,7 +10,11 @@ const mongoose = require('mongoose');
 // Import Schema
 const Customer = require('./models/Customer');
 
-const DBconnect = 'mongodb://<dbuser>:<dbpassword>@ds119578.mlab.com:19578/heroku_hlgv59g4';
+// Use for development
+const DBconnect = 'mongodb://localhost/neighborhood-bake-sale';
+
+// Use for production
+//const DBconnect = 'mongodb://<dbuser>:<dbpassword>@ds119578.mlab.com:19578/heroku_hlgv59g4';
 
 // Configure DB
 mongoose.connect(DBconnect);
@@ -37,7 +41,7 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(cookieParser());
 
 // Serve files from the public folder
-app.use(express.static(path.join(__dirname,'dist')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Sets up express routes
@@ -45,7 +49,7 @@ app.use('/api',API);
 
 // Serve home page
 app.get('*', (req, res) => {
-    res.sendFile('./index.html');
+    res.sendFile('index.html');
 });
 
 //Sets up express to handle 404 NOT FOUND
