@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-
-// Store is accessed via REST API. Example: neightborhood-bake-sale.com/store/:storeId, where :storeId is the mongoose _id of the store OR an auto incremented number so it is easier to read/deal with. 
-// Get request at /store/:storeId is supplied on page load and we will have all of the store's data stored into props.
+import {BrowserRouter as Router} from 'react-router-dom';
+import StoreTitle from "./Seller/StoreTitle";
+import StoreHours from "./Seller/StoreHours";
+import StoreDescription from "./Seller/StoreDescription";
 
 export default class Store extends Component {
   constructor(props) {
@@ -16,6 +16,9 @@ export default class Store extends Component {
       <Router>
         <div className='container border'>
           <h1>Store Front Component</h1>
+          <StoreTitle />
+          <StoreHours />
+          <StoreDescription />
         </div>
       </Router>
     )
