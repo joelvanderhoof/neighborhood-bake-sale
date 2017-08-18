@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-class StoreTitle extends Component {
+class MenuItem extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -11,13 +11,13 @@ class StoreTitle extends Component {
     }
   
     render() {
-      return (
-         <div>  
-           <h1>{this.props.title}</h1>
-         </div>
-      );
+        return (
+          <li>  
+            {this.props.item}
+          </li>
+       );
     }
   }
   
-  export default StoreTitle;
+  export default MenuItem;
   

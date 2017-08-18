@@ -1,19 +1,32 @@
+
 import React, { Component } from 'react';
 
 class StoreHours extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+    constructor(props) {
+      super(props);
+      this.state = {
+        
+      };
+  
+    }
+    
+    listHours() {
+      let timeList;
+      timeList = this.props.hours.map((time, i)=>{
+        return <li key={i}>{time}</li>
+      });
+      return timeList;
+    }
 
+    render() {
+      return (
+         <div>
+           <h4>Hours of Operation</h4>  
+           {this.listHours()}
+         </div>
+      );
+    }
   }
-
-  render() {
-    return (
-      <div>
-        <h1>4:00PM-5:00PM</h1>
-      </div>
-    );
-  }
-}
-
-export default StoreHours;
+  
+  export default StoreHours;
+  
