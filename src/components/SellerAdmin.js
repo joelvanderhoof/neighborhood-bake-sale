@@ -5,7 +5,6 @@ import StoreHours from "./Seller/StoreHours";
 import StoreDescription from "./Seller/StoreDescription";
 // import OrderQueue from "./Seller/OrderQueue";
 import EditButton from "./Seller/EditButton";
-import SaveButton from "./Seller/SaveButton";
 
 let testObj = {
   storeID: "1",
@@ -83,6 +82,10 @@ class SellerAdmin extends Component {
     return (
       <div>
         <h1>Seller Admin Page</h1>
+        <EditButton
+          editFunc={this.setEdit}
+          saveFunc={this.setSave}
+          edit={this.state.edit}/>
         <StoreTitle
           title={this.state.title}
           edit={this.state.edit}
@@ -99,8 +102,6 @@ class SellerAdmin extends Component {
           menu={this.state.menu}
           edit={this.state.edit}
           updateState={this.updateState}/>
-        <SaveButton save={this.setSave}/>
-        <EditButton edit={this.setEdit}/>
       </div>
     );
   }
