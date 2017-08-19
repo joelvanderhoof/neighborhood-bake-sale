@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class EditButton extends Component {
     constructor(props) {
@@ -10,22 +10,16 @@ class EditButton extends Component {
     render() {
         if (this.props.edit) {
             return (
-                <button
-                    type="button"
-                    className="btn btn-info"
-                    onClick={() => this.props.saveFunc()}>
-                    Save
+                <button type="button" className="btn btn-info" onClick={ () => this.props.saveFunc() }>
+                  Save
                 </button>
-            );
+                );
         }
         return (
-            <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() => this.props.editFunc()}>
-                Edit
+            <button type="button" className="btn btn-danger" onClick={ () => this.props.editFunc() }>
+              Edit
             </button>
-        );
+            );
     }
 }
 

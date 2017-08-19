@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Menu from "./Seller/Menu";
 import StoreTitle from "./Seller/StoreTitle";
 import StoreHours from "./Seller/StoreHours";
@@ -34,15 +34,10 @@ class SellerAdmin extends Component {
       description: testObj.description
     };
 
-    this.setEdit = this
-      .setEdit
-      .bind(this);
-    this.setSave = this
-      .setSave
-      .bind(this);
-    this.updateState = this
-      .updateState
-      .bind(this);
+    this.setEdit = this.setEdit.bind(this);
+    this.setSave = this.setSave.bind(this);
+    this.updateState = this.updateState.bind(this);
+    this.addToStateArray = this.addToStateArray.bind(this);
 
   }
 
@@ -57,8 +52,25 @@ class SellerAdmin extends Component {
       edit: !this.state.edit
     });
   }
+  
+  addToStateArray(value) {
+    if(value === "menu"){
+      let currentMenu = this.state.menu;
+      currentMenu.push("");
+      this.setState({menu: currentMenu});
+    }
+    if(value === "hours"){
+      let currentHours = this.state.hours;
+      currentHours.push("");
+      this.setState({hours: currentHours});
+    }
+  }
 
   updateState(key, value, index) {
+    //if value empty, do nothing
+    if(value.length === 0) {
+      return;
+    }
     //no index - not an array
     if (index === undefined) {
       let stateObj = {};
@@ -82,28 +94,13 @@ class SellerAdmin extends Component {
     return (
       <div>
         <h1>Seller Admin Page</h1>
-        <EditButton
-          editFunc={this.setEdit}
-          saveFunc={this.setSave}
-          edit={this.state.edit}/>
-        <StoreTitle
-          title={this.state.title}
-          edit={this.state.edit}
-          updateState={this.updateState}/>
-        <StoreHours
-          hours={this.state.hours}
-          edit={this.state.edit}
-          updateState={this.updateState}/>
-        <StoreDescription
-          description={this.state.description}
-          edit={this.state.edit}
-          updateState={this.updateState}/>
-        <Menu
-          menu={this.state.menu}
-          edit={this.state.edit}
-          updateState={this.updateState}/>
+        <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ this.state.edit } />
+        <StoreTitle title={ this.state.title } edit={ this.state.edit } updateState={ this.updateState } />
+        <StoreHours hours={ this.state.hours } edit={ this.state.edit } updateState={ this.updateState } />
+        <StoreDescription description={ this.state.description } edit={ this.state.edit } updateState={ this.updateState } />
+        <Menu menu={ this.state.menu } edit={ this.state.edit } updateState={ this.updateState } addToStateArray={ this.addToStateArray} />
       </div>
-    );
+      );
   }
 }
 
