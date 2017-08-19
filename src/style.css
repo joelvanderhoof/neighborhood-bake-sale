@@ -26,3 +26,22 @@ body {
   border-width: 1px;
   border-style: solid;
 }
+
+/* Store */
+#review-text {
+  margin-bottom: 15px;
+}
+
+#review-container {
+  height: 500px;
+}
+
+/* Store Rating */
+.rating-item {
+  padding: 15px;
+  margin: 2px;
+}
+
+.rating-item:hover {
+  background: yellow
+}
