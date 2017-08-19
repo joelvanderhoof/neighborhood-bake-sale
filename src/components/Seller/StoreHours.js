@@ -1,5 +1,5 @@
-
 import React, { Component } from 'react';
+import StoreHoursItems from "./StoreHoursItems";
 
 class StoreHours extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class StoreHours extends Component {
     listHours() {
       let timeList;
       timeList = this.props.hours.map((time, i)=>{
-        return <li key={i}>{time}</li>
+        return <StoreHoursItems key={i} index={i} time={time} edit={this.props.edit} updateState={this.props.updateState}/>
       });
       return timeList;
     }

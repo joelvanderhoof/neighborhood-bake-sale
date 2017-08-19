@@ -14,7 +14,7 @@ class Menu extends Component {
     createMenuItems() {
       let menuList;
       menuList = this.props.menu.map((menuItem, i)=>{
-        return <MenuItem key={i} item={menuItem}/>
+        return <MenuItem key={i} index={i} item={menuItem} edit={this.props.edit} updateState={this.props.updateState}/>
       });
       return menuList;
     }
