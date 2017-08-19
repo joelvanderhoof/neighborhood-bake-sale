@@ -65,3 +65,9 @@ body {
    color: gold;
    font-size: 30px;
 }
+
+/* Store Map */
+#store-map {
+  width: 300px;
+  height: 300px;
+}

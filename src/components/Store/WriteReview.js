@@ -5,10 +5,12 @@ class WriteReview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviewText: ''
+      reviewText: '',
+      rating: '',
     };
     this.postReview = this.postReview.bind(this);
     this.getRating = this.getRating.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -19,28 +21,30 @@ class WriteReview extends Component {
   }
 
   getRating(rating) {
-    console.log(rating);
+    this.setState({
+      rating: rating
+    })
   }
 
   handleChange(event) {
-    console.log(event);
     this.setState({
       [event.currentTarget.name]: event.target.value
     });
   };
 
   handleSubmit(event) {
-    console.log('params',this.params);
-    console.log('props',this.props);
     event.preventDefault();
-    let params = this.state;
+    let review = this.state;
     
-    this.postReview(params);
+    this.postReview(review);
     this.setState({reviewText: ''})
   }
 
-  handleClick() {
-    console.log('clicked');
+  handleClick(event) {
+    event.preventDefault();
+    // Place holder for file stack
+    // alert('File Stack goes here');
+    console.log('clicked')
   }
   reviewInput() {}
 
@@ -50,9 +54,15 @@ class WriteReview extends Component {
         <h4>
           <strong>Your review</strong>
         </h4>
+        <hr />
         <Rating getRating={ this.getRating } />
         <hr />
-        <div id='review-container'>
+        <div id='review-container' className='border'>
+          <div className='container'>
+          {this.state.reviewText}
+          </div>
+        </div>
+
           <form onSubmit={this.handleSubmit}>
             <div className='form-group'>
               <textarea
@@ -65,10 +75,9 @@ class WriteReview extends Component {
                 onChange={this.handleChange}
                 required />
             </div>
-            <button type='button' className='btn btn-sm pull-right'>Attach Photo <i className="fa fa-camera" aria-hidden="true" onClick={this.handleClick}></i></button>
-            <button type='submit' className='btn btn-sm'>Submit Review <i className="fa fa-pencil" aria-hidden="true" onClick={this.handleClick}></i></button>
+            <button type='button' className='btn btn-sm pull-right' onClick={ this.handleClick } >Attach Photo <i className="fa fa-camera" aria-hidden="true" ></i></button>
+            <button type='submit' className='btn btn-sm'>Submit Review <i className="fa fa-pencil" aria-hidden="true"></i></button>
           </form>
-        </div>
       </div>
     );
   }
