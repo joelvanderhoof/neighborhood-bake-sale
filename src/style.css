@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.nav {
+  display: flex;
+  margin-bottom: 15px;
+  padding: 15px;
+  background: #2B2B2B;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.nav li {
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+
+/* General commonly used styles */
+.border {
+  border-width: 1px;
+  border-style: solid;
+}
+
+/* Store */
+#review-text {
+  margin-bottom: 15px;
+}
+
+#review-container {
+  height: 500px;
+}
+
+/* Store Rating */
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: left;
+}
+
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+  padding: 10px;
+  margin: 10px;
+  font-size: 30px;
+}
+
+.rating > span:hover,
+.rating > span:hover ~ span {
+  color: transparent;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+   left: 0; 
+   color: gold;
+   font-size: 30px;
+}
