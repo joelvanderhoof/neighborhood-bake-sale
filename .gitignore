@@ -57,19 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
+
+# MAC
+.DS_Store
+
 # Webpack
 bundle.js
 bundle.min.js
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
