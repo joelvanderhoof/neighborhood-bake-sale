@@ -1,7 +1,39 @@
 {
   "name": "neighborhood-bake-sale",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joelvanderhoof/neighborhood-bake-sale.git"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joelvanderhoof/neighborhood-bake-sale/issues"
+  },
+  "homepage": "https://github.com/joelvanderhoof/neighborhood-bake-sale#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "html-webpack-plugin": "^2.30.1",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.4",
+    "webpack-dev-server": "^2.7.1"
+  },
   "dependencies": {
     "@google/maps": "^0.4.3",
     "axios": "^0.16.2",
@@ -17,25 +49,6 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.2",
-    "stripe": "^4.24.0",
-    "react-scripts": "1.0.11"
-  },
-  "devDependencies": {
-    "nodemon": "^1.11.0",
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
-    "css-loader": "^0.28.4",
-    "html-webpack-plugin": "^2.30.1",
-    "style-loader": "^0.18.2",
-    "webpack": "^3.5.4",
-    "webpack-dev-server": "^2.7.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "stripe": "^4.24.0"
   }
 }
