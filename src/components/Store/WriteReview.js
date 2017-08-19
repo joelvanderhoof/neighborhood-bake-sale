@@ -7,12 +7,9 @@ class WriteReview extends Component {
     this.state = {
       reviewText: ''
     };
-    this.handleChange = this
-      .handleChange
-      .bind(this);
-    this.handleSubmit = this
-      .handleSubmit
-      .bind(this);
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -23,14 +20,19 @@ class WriteReview extends Component {
   };
 
   handleSubmit(event) {
-    let params = this.state;
-    this
-      .props
-      .postReview(params);
-    this.setState({reviewText: ''})
+    console.log('params',this.params);
+    console.log('props',this.props);
     event.preventDefault();
+    let params = this.state;
+    
+    this.props.postReview(params);
+    this.setState({reviewText: ''})
+    
   }
 
+  handleClick(event) {
+    console.log('clicked');
+  }
   reviewInput() {}
 
   render() {
@@ -42,7 +44,6 @@ class WriteReview extends Component {
         <Rating/>
         <hr />
         <div id='review-container'>
-
           <form onSubmit={this.handleSubmit}>
             <div className='form-group'>
               <textarea
@@ -55,9 +56,9 @@ class WriteReview extends Component {
                 onChange={this.handleChange}
                 required />
             </div>
-            <button type='submit' className='btn btn-sm'> Submit <i className="fa fa-pencil" aria-hidden="true"></i></button>
+            <button type='button' className='btn btn-sm pull-right'>Attach Photo <i className="fa fa-camera" aria-hidden="true" onClick={this.handleClick}></i></button>
+            <button type='submit' className='btn btn-sm'>Submit Review <i className="fa fa-pencil" aria-hidden="true" onClick={this.handleClick}></i></button>
           </form>
-
         </div>
       </div>
     );
