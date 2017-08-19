@@ -1,23 +1,43 @@
+import React, {Component} from 'react';
 
-import React, { Component } from 'react';
+class StoreTitle extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      
+    };
 
-class MenuItem extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        
-      };
-  
-    }
-  
-    render() {
-        return (
-          <li>  
-            {this.props.item}
-          </li>
-       );
-    }
+    this.handleChange = this
+      .handleChange
+      .bind(this);
   }
-  
-  export default MenuItem;
-  
+
+  handleChange(e) {
+    this.props.updateState("menu",e.target.value, this.props.index);
+  }
+
+  render() {
+    if (this.props.edit) {
+      return (
+        <div className="form-group row">
+          <div className="col-4">
+            <input
+              className="form-control"
+              name="title"
+              type="text"
+              onChange={this.handleChange}
+              defaultValue={this.props.item}
+              id="storeTitle"/>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <li>
+        {this.props.item}
+      </li>
+    );
+  }
+}
+
+export default StoreTitle;

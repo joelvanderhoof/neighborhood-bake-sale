@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-class StoreDescription extends Component {
+class StoreHoursItems extends Component {
   constructor(props) {
     super(props);
     this.state = {
-     
+      
     };
 
     this.handleChange = this
@@ -13,31 +13,31 @@ class StoreDescription extends Component {
   }
 
   handleChange(e) {
-    this.props.updateState("description",e.target.value);
+    this.props.updateState("hours",e.target.value, this.props.index);
   }
 
   render() {
     if (this.props.edit) {
       return (
         <div className="form-group row">
-          <div className="col-10">
+          <div className="col-4">
             <input
               className="form-control"
-              name="description"
+              name="title"
               type="text"
               onChange={this.handleChange}
-              defaultValue={this.props.description}
-              id="storedescription"/>
+              defaultValue={this.props.time}
+              id="StoreHoursItems"/>
           </div>
         </div>
       );
     }
     return (
-      <div className="row">
-        <p> Description: {this.props.description}</p>
-      </div>
+      <li>
+        {this.props.time}
+      </li>
     );
   }
 }
 
-export default StoreDescription;
+export default StoreHoursItems;
