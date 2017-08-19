@@ -7,9 +7,19 @@ class WriteReview extends Component {
     this.state = {
       reviewText: ''
     };
-
+    this.postReview = this.postReview.bind(this);
+    this.getRating = this.getRating.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  postReview(review) {
+    // Placeholder, will need to do an AJAX call to submit the review
+    console.log('review to be posted: ', review);
+  }
+
+  getRating(rating) {
+    console.log(rating);
   }
 
   handleChange(event) {
@@ -25,12 +35,11 @@ class WriteReview extends Component {
     event.preventDefault();
     let params = this.state;
     
-    this.props.postReview(params);
+    this.postReview(params);
     this.setState({reviewText: ''})
-    
   }
 
-  handleClick(event) {
+  handleClick() {
     console.log('clicked');
   }
   reviewInput() {}
@@ -41,7 +50,7 @@ class WriteReview extends Component {
         <h4>
           <strong>Your review</strong>
         </h4>
-        <Rating/>
+        <Rating getRating={ this.getRating } />
         <hr />
         <div id='review-container'>
           <form onSubmit={this.handleSubmit}>
