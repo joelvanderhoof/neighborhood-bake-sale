@@ -23,12 +23,35 @@ let testObj = {
   review: [], // Array of reviews
 }
 
+let pizza = {
+  name: "slice of pizza",
+  description: "cheese, sauce, craft pepperoni",
+  price: 150,
+  quantity: 10 //current inventory
+};
+
+let sandwich = {
+  name: "peanut butter sammy",
+  description: "cheese, peanuts, craft jam",
+  price: 200,
+  quantity: 10 //current inventory
+};
+
+let drink = {
+  name: "cup of coke",
+  description: "coke, secret, craft can",
+  price: 100,
+  quantity: 15 //current inventory
+};
+
+let testMenu = [pizza, sandwich, drink];
+
 class SellerAdmin extends Component {
   constructor(props) {
     super(props);
     this.state = {
       edit: false,
-      menu: testObj.menu,
+      menu: testMenu, //testObj.menu,
       title: testObj.title,
       hours: testObj.hours,
       description: testObj.description
@@ -38,6 +61,7 @@ class SellerAdmin extends Component {
     this.setSave = this.setSave.bind(this);
     this.updateState = this.updateState.bind(this);
     this.addToStateArray = this.addToStateArray.bind(this);
+    this.removeFromStateArray = this.removeFromStateArray.bind(this);
 
   }
 
@@ -52,23 +76,50 @@ class SellerAdmin extends Component {
       edit: !this.state.edit
     });
   }
-  
+
+  //add slot in hours or menu array
   addToStateArray(value) {
-    if(value === "menu"){
+    if (value === "menu") {
       let currentMenu = this.state.menu;
       currentMenu.push("");
-      this.setState({menu: currentMenu});
+      this.setState({
+        menu: currentMenu
+      });
     }
-    if(value === "hours"){
+    if (value === "hours") {
       let currentHours = this.state.hours;
       currentHours.push("");
-      this.setState({hours: currentHours});
+      this.setState({
+        hours: currentHours
+      });
+    }
+  }
+
+  //removes from hour or menu array
+  removeFromStateArray(value, index) {
+    if (value === "menu") {
+      let currentMenu = this.state.menu;
+      console.log(currentMenu)
+      console.log(index)
+      currentMenu.splice(index, 1);
+      console.log(currentMenu);
+    this.setState({
+      menu: currentMenu
+    });
+    console.log(this.state.menu);
+    }
+    if (value === "hours") {
+      let currentHours = this.state.hours;
+      currentHours.splice(index, 1);
+      this.setState({
+        hours: currentHours
+      });
     }
   }
 
   updateState(key, value, index) {
     //if value empty, do nothing
-    if(value.length === 0) {
+    if (value.length === 0) {
       return;
     }
     //no index - not an array
@@ -98,7 +149,8 @@ class SellerAdmin extends Component {
         <StoreTitle title={ this.state.title } edit={ this.state.edit } updateState={ this.updateState } />
         <StoreHours hours={ this.state.hours } edit={ this.state.edit } updateState={ this.updateState } />
         <StoreDescription description={ this.state.description } edit={ this.state.edit } updateState={ this.updateState } />
-        <Menu menu={ this.state.menu } edit={ this.state.edit } updateState={ this.updateState } addToStateArray={ this.addToStateArray} />
+        <Menu menu={ this.state.menu } edit={ this.state.edit } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
+        />
       </div>
       );
   }

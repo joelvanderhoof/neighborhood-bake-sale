@@ -29,12 +29,16 @@ class StoreTitle extends Component {
               defaultValue={this.props.item}
               id="storeTitle"/>
           </div>
+          <button className="btn btn-danger" onClick={()=>this.props.removeFromStateArray("menu", this.props.index)}>Delete</button>
         </div>
       );
     }
     return (
       <li>
-        {this.props.item}
+        {"Item: " + this.props.item}
+        {"** Description: " + this.props.description}
+        {"** Price: " + this.props.price}
+        {"** Quantity: " + this.props.quantity}
       </li>
     );
   }
