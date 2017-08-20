@@ -100,13 +100,12 @@ class SellerAdmin extends Component {
     if (value === "menu") {
       let currentMenu = this.state.menu;
       console.log(currentMenu)
-      console.log(index)
       currentMenu.splice(index, 1);
       console.log(currentMenu);
-    this.setState({
-      menu: currentMenu
-    });
-    console.log(this.state.menu);
+      this.setState({
+        menu: currentMenu
+      });
+      console.log(this.state.menu);
     }
     if (value === "hours") {
       let currentHours = this.state.hours;
@@ -117,7 +116,7 @@ class SellerAdmin extends Component {
     }
   }
 
-  updateState(key, value, index) {
+  updateState(key, value, index, type) {
     //if value empty, do nothing
     if (value.length === 0) {
       return;
@@ -130,7 +129,7 @@ class SellerAdmin extends Component {
     } else if (key === "menu") { //array menu
       let tempMenu = this.state.menu;
       let stateObj = {};
-      tempMenu[index] = value;
+      tempMenu[index][type] = value;
       stateObj[key] = tempMenu;
       this.setState(stateObj);
     } else if (key === "hours") { //array hours
