@@ -37,7 +37,9 @@ router.route('/user/:userID?')
         res.send('Put made to /api/user')
     })
     .delete((req, res) => {
-        res.send('Delete made to /api/user')
+        User.remove({ _id: req.params.userID }, function (err) {
+            if (err) return handleError(err);
+        });
     });
 
 router.route('/store/:storeID?')
@@ -79,7 +81,9 @@ router.route('/store/:storeID?')
         res.send('Put made to /api/store')
     })
     .delete((req, res) => {
-        res.send('Delete made to /api/store')
+        Store.remove({ _id: req.params.storeID }, function (err) {
+            if (err) return handleError(err);
+        });
     });
 
 router.route('/menu/:menuitemID?')
@@ -119,7 +123,9 @@ router.route('/menu/:menuitemID?')
         res.send('Put made to /api/menu')
     })
     .delete((req, res) => {
-        res.send('Delete made to /api/menu')
+        MenuItem.remove({ _id: req.params.menuitemID }, function (err) {
+            if (err) return handleError(err);
+        });
     });
 
 router.route('/review/:reviewID?')
@@ -159,7 +165,9 @@ router.route('/review/:reviewID?')
         res.send('Put made to /api/review')
     })
     .delete((req, res) => {
-        res.send('Delete made to /api/review')
+        Review.remove({ _id: req.params.reviewID }, function (err) {
+            if (err) return handleError(err);
+        });
     });
 
 router.route('/customer')
