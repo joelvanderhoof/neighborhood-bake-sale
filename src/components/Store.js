@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import StoreFront from './Store/StoreFront';
 import WriteReview from './Store/WriteReview';
 
@@ -45,8 +45,11 @@ class Store extends Component {
     return (
       <Router>
         <div className='container border'>
-          <Route exact path='/store' component={StoreFront} store={this.state.store} />
-          <Route path='/review' component={WriteReview} />
+          <Switch>
+            <Route exact path='/store' component={StoreFront} store={this.state.store} />
+            <Route path='/review' component={WriteReview} />
+            <Route render={ () => { return <p> Page Not Found</p>} } /> {/* To be replaced with a 404 error page */}
+          </ Switch>
         </div>
       </Router>
     )

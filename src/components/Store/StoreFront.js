@@ -13,11 +13,11 @@ class StoreFront extends Component {
   }
   render(){
     return (
-      <div>
+      <div className='container'>
         <h1>Store Front Component</h1>
-        <StoreTitle title={this.props.title} />
-       {/* <StoreHours hours={this.props.hours}/> */}
-        {/* <StoreDescription description={this.props.store.description}/> */}
+        <StoreTitle title={ "John's Bistro" } />
+        <StoreHours hours={ ["9:00AM-12:00PM", "1:00PM-6:00PM"] }/>
+        <StoreDescription description={ "Neighborhood Italian Spot" }/>
         <StoreMap />
         <br />
         <Link className='btn btn-info' to='/review'>
