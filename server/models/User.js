@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-var CustomerSchema = new Schema({
-    _id:  Number,
+const UserSchema = new Schema({
     firstName: {
         type: String,
         trim: true,
@@ -38,9 +37,13 @@ var CustomerSchema = new Schema({
     photo: String, //image URL
     orders: [{
         type: Schema.Types.ObjectId, 
-        ref: 'Order'}] // Array of orders
+        ref: 'Order'}], // Array of orders
+    isSeller: Boolean, // 
+    stores: [{
+        type: Schema.Types.ObjectId, 
+        ref: 'Store'}] // Array of orders
 });
 
-var Customer = mongoose.model("Customer", CustomerSchema);
+const User = mongoose.model("User", UserSchema);
 
-module.exports = Customer;
+module.exports = User;

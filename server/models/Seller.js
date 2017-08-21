@@ -2,13 +2,7 @@
 
 // const Schema = mongoose.Schema;
 
-// var CustomerSchema = new Schema();
-
-// var Customer = mongoose.model("Customer", CustomerSchema);
-
-// module.exports = Customer;
-
-// {
+// var CustomerSchema = new Schema( {
 //     sellerID: String, //seller ID will match order.sellerID
 //     firstName: String,
 //     lastName: String,
@@ -17,4 +11,9 @@
 //     permit: String, 
 //     password: String,
 
-// }
+// });
+
+// var Customer = mongoose.model("Customer", CustomerSchema);
+
+// module.exports = Customer;
+
