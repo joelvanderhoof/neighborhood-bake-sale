@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import WriteReview from './Store/WriteReview';
+import StoreMap from './Store/StoreMap';
 
 // const routes = [
 //   { path: '/review',
@@ -18,14 +19,8 @@ import WriteReview from './Store/WriteReview';
 export default class Store extends Component {
   constructor(props) {
     super(props)
-
     this.state = {}
-    this.postReview = this.postReview.bind(this);
-  }
 
-  postReview(review) {
-    // Placeholder, will need to do an AJAX call to submit the review
-    console.log('review to be posted: ', review);
   }
 
   render() {
@@ -33,14 +28,20 @@ export default class Store extends Component {
       <Router>
         <div className='container border'>
           <h1>Store Front Component</h1>
-          <Link to='/review'>
+          <StoreMap />
+          <br />
+          {/* <Route exact path='/store'> */}
+          <Link to='/store/review'>
             <button className='btn btn-info'>Write Review</button>
           </Link>
+          {/* </Route> */}
+          
 
-          <Route path='/review' render= {props => <WriteReview postReview={this.postReview}/>}/>
           {/* {routes.map((route, i) => (
             <RouteWithSubRoutes key={i} {...route}/>
           ))} */}
+
+          <Route exact path='/store/review' component={WriteReview} />
 
         </div>
       </Router>
