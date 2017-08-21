@@ -4,11 +4,16 @@ body {
   font-family: sans-serif;
 }
 
+a, a:hover {
+  text-decoration: none;
+  color: #d0021b;
+}
+
 .nav {
   display: flex;
   margin-bottom: 15px;
   padding: 15px;
-  background: #2B2B2B;
+  border-bottom: 1px black solid;
 }
 
 .active {
@@ -17,7 +22,6 @@ body {
 
 .nav li {
   margin-right: 15px;
-  margin-left: 15px;
 }
 
 
