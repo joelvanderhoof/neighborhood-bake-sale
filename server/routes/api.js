@@ -33,8 +33,14 @@ router.route('/user/:userID?')
             }
         });
     })
+
+    // Send an array of objects in  req.body.users
     .put((req, res) => {
-        res.send('Put made to /api/user')
+        req.body.users.forEach(userData) {
+            User.update({ _id: userData.id }, userData, (err) => {
+                if err console.log(err);
+            });
+        }
     })
     .delete((req, res) => {
         User.remove({ _id: req.params.userID }, function (err) {
@@ -77,8 +83,13 @@ router.route('/store/:storeID?')
             }
         });
     })
+    // Send an array of objects in req.body.stores
     .put((req, res) => {
-        res.send('Put made to /api/store')
+        req.body.users.forEach(storeData) {
+            Store.update({ _id: storeData.id }, storeData, (err) => {
+                if err console.log(err);
+            });
+        }
     })
     .delete((req, res) => {
         Store.remove({ _id: req.params.storeID }, function (err) {
@@ -119,8 +130,13 @@ router.route('/menu/:menuitemID?')
             }
         });
     })
+    // Send an array of objects in  req.body.menuItems
     .put((req, res) => {
-        res.send('Put made to /api/menu')
+        req.body.menuItems.forEach(menuItemData) {
+            MenuItem.update({ _id: menuItemData.id }, menuItemData, (err) => {
+                if err console.log(err);
+            });
+        }
     })
     .delete((req, res) => {
         MenuItem.remove({ _id: req.params.menuitemID }, function (err) {
@@ -161,8 +177,13 @@ router.route('/review/:reviewID?')
             }
         });
     })
+    // Send an array of objects in  req.body.reviews
     .put((req, res) => {
-        res.send('Put made to /api/review')
+        req.body.reviews.forEach(reviewData) {
+            Review.update({ _id: reviewData.id }, reviewData, (err) => {
+                if err console.log(err);
+            });
+        }
     })
     .delete((req, res) => {
         Review.remove({ _id: req.params.reviewID }, function (err) {
@@ -170,7 +191,7 @@ router.route('/review/:reviewID?')
         });
     });
 
-router.route('/customer')
+router.route('/order')
     .get((req, res) => {
         res.send('Get made to /api/order')
     })
@@ -184,18 +205,18 @@ router.route('/customer')
         res.send('Delete made to /api/order')
     });
 
-router.route('/customer')
+router.route('/useLater')
     .get((req, res) => {
-        res.send('Get made to /api/order')
+        res.send('Get made to /api/useLater')
     })
     .post((req, res) => {
-        res.send('Post made to /api/order')
+        res.send('Post made to /api/useLater')
     })
     .put((req, res) => {
-        res.send('Put made to /api/order')
+        res.send('Put made to /api/useLater')
     })
     .delete((req, res) => {
-        res.send('Delete made to /api/order')
+        res.send('Delete made to /api/useLater')
     });
 
 module.exports = router;
