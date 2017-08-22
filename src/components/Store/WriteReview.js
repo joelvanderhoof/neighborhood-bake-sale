@@ -1,83 +1,62 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import Rating from './WriteReview/Rating';
+import ReviewForm from './WriteReview/ReviewForm';
+import Reviews from './WriteReview/Reviews';
 
 class WriteReview extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reviewText: '',
-      rating: '',
+      rating: ''
     };
-    this.postReview = this.postReview.bind(this);
-    this.getRating = this.getRating.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.getReview = this
+      .getReview
+      .bind(this);
+    this.getRating = this
+      .getRating
+      .bind(this);
   }
 
-  postReview(review) {
+  getReview(review) {
     // Placeholder, will need to do an AJAX call to submit the review
-    console.log('review to be posted: ', review);
+    this.setState({reviewText: review})
   }
 
   getRating(rating) {
-    this.setState({
-      rating: rating
-    })
+    this.setState({rating: rating})
   }
-
-  handleChange(event) {
-    this.setState({
-      [event.currentTarget.name]: event.target.value
-    });
-  };
-
-  handleSubmit(event) {
-    event.preventDefault();
-    let review = this.state;
-    
-    this.postReview(review);
-    this.setState({reviewText: ''})
-  }
-
-  handleClick(event) {
-    event.preventDefault();
-    // Place holder for file stack
-    // alert('File Stack goes here');
-    console.log('clicked')
-  }
-  reviewInput() {}
 
   render() {
     return (
-      <div>
-        <h4>
+      <div className='container'>
+        <Link className='btn' to='/store'>
+          <i className="fa fa-angle-double-left" aria-hidden="true"></i>
+          {'\u00A0'}Back
+        </Link>
+        <hr/>
+        <h4 className='text-center'>
           <strong>Your review</strong>
         </h4>
-        <hr />
-        <Rating getRating={ this.getRating } />
-        <hr />
-        <div id='review-container' className='border'>
-          <div className='container'>
-          {this.state.reviewText}
-          </div>
-        </div>
+        <Rating getRating={this.getRating}/>
+        <hr/>
 
-          <form onSubmit={this.handleSubmit}>
-            <div className='form-group'>
-              <textarea
-                className='form-control'
-                type='text'
-                id='review-text'
-                name='reviewText'
-                value={this.state.reviewText}
-                placeholder='Write your review here...'
-                onChange={this.handleChange}
-                required />
-            </div>
-            <button type='button' className='btn btn-sm pull-right' onClick={ this.handleClick } >Attach Photo <i className="fa fa-camera" aria-hidden="true" ></i></button>
-            <button type='submit' className='btn btn-sm'>Submit Review <i className="fa fa-pencil" aria-hidden="true"></i></button>
-          </form>
+        <div className='container-store border d-flex align-items-around'>
+
+          <div className='col-6'>
+            {this.state.rating && <h4>Rating: {this.state.rating}
+            </h4>}
+            <br/> {this.state.reviewText && <h4>Review: {this.state.reviewText}
+            </h4>}
+          </div>
+          <div className='col-6'>
+            <Reviews />          
+          </div>
+
+        </div>
+        <ReviewForm getReview={this.getReview}/>
       </div>
     );
   }

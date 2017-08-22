@@ -32,6 +32,10 @@ a, a:hover {
 }
 
 /* Store */
+.container-store {
+  padding: 15px 15px;
+}
+
 #review-text {
   margin-bottom: 15px;
 }
@@ -42,33 +46,58 @@ a, a:hover {
 
 /* Store Rating */
 .rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-  text-align: left;
-}
-
-.rating > span {
   display: inline-block;
-  position: relative;
-  width: 1.1em;
-  padding: 10px;
-  margin: 10px;
-  font-size: 30px;
 }
 
-.rating > span:hover,
-.rating > span:hover ~ span {
-  color: transparent;
+.rating:not(:checked) > div > input {
+  position:absolute;
+  top:-9999px;
+  clip:rect(0,0,0,0);
 }
 
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
-   left: 0; 
-   color: gold;
-   font-size: 30px;
+.rating:not(:checked) > div > label {
+  float:right;
+  width:1em;
+  padding:0 .1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:200%;
+  line-height:1.2;
+  color:#ddd;
+  text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
 }
+
+.rating:not(:checked) > div > label:before {
+  content: '★ ';
+}
+
+.rating > div > input:checked ~ label {
+  color: #f70;
+  text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > div > label:hover,
+.rating:not(:checked) > div > label:hover ~ label {
+  color: gold;
+  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > div > input:checked + label:hover,
+.rating > div > input:checked + label:hover ~ label,
+.rating > div > input:checked ~ label:hover,
+.rating > div > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #ea0;
+  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > div >label:active {
+  position:relative;
+  top:2px;
+  left:2px;
+}
+
 
 /* Store Map */
 #store-map {
