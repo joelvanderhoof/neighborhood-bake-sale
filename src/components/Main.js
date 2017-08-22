@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './Nav';
+import Home from './Home';
 import SearchMap from './children/SearchMap';
 import Store from './Store';
 import SellerAdmin from './SellerAdmin'
@@ -13,6 +14,7 @@ export default class Main extends Component {
                     <Nav />
                     <div className='container'>
                         <Switch>
+                            <Route exact path='/' component={ Home } />
                             <Route path='/search-map' component={SearchMap} />
                             <Route path='/store' component={Store} />
                             <Route path='/selleradmin' component={SellerAdmin} />
