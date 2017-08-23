@@ -24,24 +24,27 @@ let testObj = {
 }
 
 let pizza = {
-  name: "slice of pizza",
-  description: "cheese, sauce, craft pepperoni",
-  price: 150,
-  quantity: 10 //current inventory
+  name: "Large Pepperoni Pizza",
+  description: "Gluten Free, Cheese from the rare hipster Cow, Pepperoni made from an Oak Tree",
+  price: 1150,
+  img: "http://cdn.schwans.com/media/images/products/56720-1-1540.jpg",
+  availability: "In Stock!" //current inventory
 };
 
 let sandwich = {
-  name: "peanut butter sammy",
-  description: "cheese, peanuts, craft jam",
+  name: "Cardboard",
+  description: "Made with no Peanuts",
   price: 200,
-  quantity: 10 //current inventory
+  img: "https://static.pexels.com/photos/236834/pexels-photo-236834.jpeg",
+  availability: "Sold Out!" //current inventory
 };
 
 let drink = {
-  name: "cup of coke",
-  description: "coke, secret, craft can",
+  name: "Fat Free Burger",
+  description: "0 Calories",
   price: 100,
-  quantity: 15 //current inventory
+  img: "https://static.pexels.com/photos/8996/pexels-photo.jpg",
+  availability: "Sold Out!" //current inventory
 };
 
 let testMenu = [pizza, sandwich, drink];
@@ -72,9 +75,11 @@ class SellerAdmin extends Component {
   }
 
   setSave() {
-    this.setState({
-      edit: !this.state.edit
-    });
+    // this.setState({
+    //   edit: !this.state.edit
+    // });
+
+    console.log(this.state);
   }
 
   //add slot in hours or menu array
@@ -99,13 +104,10 @@ class SellerAdmin extends Component {
   removeFromStateArray(value, index) {
     if (value === "menu") {
       let currentMenu = this.state.menu;
-      console.log(currentMenu)
       currentMenu.splice(index, 1);
-      console.log(currentMenu);
       this.setState({
         menu: currentMenu
       });
-      console.log(this.state.menu);
     }
     if (value === "hours") {
       let currentHours = this.state.hours;
@@ -118,9 +120,9 @@ class SellerAdmin extends Component {
 
   updateState(key, value, index, type) {
     //if value empty, do nothing
-    if (value.length === 0) {
-      return;
-    }
+    // if (value.length === 0) {
+    //   return;
+    // }
     //no index - not an array
     if (index === undefined) {
       let stateObj = {};
@@ -143,13 +145,23 @@ class SellerAdmin extends Component {
   render() {
     return (
       <div>
-        <h1>Seller Admin Page</h1>
-        <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ this.state.edit } />
-        <StoreTitle title={ this.state.title } edit={ this.state.edit } updateState={ this.updateState } />
-        <StoreHours hours={ this.state.hours } edit={ this.state.edit } updateState={ this.updateState } />
-        <StoreDescription description={ this.state.description } edit={ this.state.edit } updateState={ this.updateState } />
-        <Menu menu={ this.state.menu } edit={ this.state.edit } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
-        />
+        <h1 className="text-center">Seller Admin Page <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ true } /></h1>
+        <div className="row">
+          <div className="col-md-6 border">
+            <StoreTitle title={ this.state.title } edit={ false } updateState={ this.updateState } />
+            {/* <StoreHours hours={ this.state.hours } edit={ false } updateState={ this.updateState } />
+            <StoreDescription description={ this.state.description } edit={ false } updateState={ this.updateState } /> */}
+            <Menu menu={ this.state.menu } edit={ false } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
+            />
+          </div>
+          <div className="col-md-6 border">
+            <StoreTitle title={ this.state.title } edit={ true } updateState={ this.updateState } />
+            <StoreHours hours={ this.state.hours } edit={ true } updateState={ this.updateState } />
+            <StoreDescription description={ this.state.description } edit={ true } updateState={ this.updateState } />
+            <Menu menu={ this.state.menu } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
+            />
+          </div>
+        </div>
       </div>
       );
   }

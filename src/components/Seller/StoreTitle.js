@@ -19,17 +19,18 @@ class StoreTitle extends Component {
   render() {
     if (this.props.edit) {
       return (
-        <div className="form-group row">
-          <div className="col-10">
-            <input className="form-control" name="title" type="text" onChange={ this.handleChange } defaultValue={ this.props.title } id="storeTitle" />
+        <div>
+          <h4 className="text-center">Store Name</h4>
+          <div className="row">
+            <div className="col-lg-8 offset-lg-2">
+              <input className="form-control" name="title" type="text" onChange={ this.handleChange } defaultValue={ this.props.title } id="storeTitle" />
+            </div>
           </div>
         </div>
         );
     }
     return (
-      <div className="row">
-        <h1 className="col-10">Title: { this.props.title }</h1>
-      </div>
+      <h1 className="text-center">{ this.props.title }</h1>
       );
   }
 }

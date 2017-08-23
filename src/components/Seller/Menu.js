@@ -16,8 +16,8 @@ class Menu extends Component {
     let menuList;
     menuList = this.props.menu.map((menuItem, i) => {
       console.log(i);
-      return <MenuItem key={ i } index={ i } item={ menuItem.name } description={ menuItem.description } price={ menuItem.price } quantity={ menuItem.quantity }
-               edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray } />
+      return <MenuItem key={ i } index={ i } item={ menuItem.name } description={ menuItem.description } price={ menuItem.price } availability={ menuItem.availability }
+               img={ menuItem.img } edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray } />
     });
     return menuList;
   }
@@ -26,13 +26,12 @@ class Menu extends Component {
     if (this.props.menu.length > 0) {
       return (
         <div>
-          <div className="row">
-            <h4>Menu</h4>
-            <AddMenuItemButton edit={ this.props.edit } addToStateArray={ this.props.addToStateArray } />
+          <div className="row justify-content-center text-center">
+            <h4 className="col-4">Inventory <AddMenuItemButton edit={ this.props.edit } addToStateArray={ this.props.addToStateArray } /></h4>
           </div>
-          <ul>
+          <div>
             { this.createMenuItems() }
-          </ul>
+          </div>
         </div>
         );
     }
