@@ -26,6 +26,11 @@ import { NavLink } from 'react-router-dom'
                     Seller Admin
                 </NavLink>
             </li>
+            <li>
+                <NavLink activeClassName='active' to='/customeradmin'>
+                    Customer Admin
+                </NavLink>
+            </li>
         </ul>
     )
  }
