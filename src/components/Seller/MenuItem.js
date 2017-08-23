@@ -37,7 +37,7 @@ class StoreTitle extends Component {
           <div className="form-group">
             <div className="row">
               <input className="form-control col-lg-4" type="text" onChange={ (e) => this.handleChange(e, "name") } value={ this.props.item } placeholder="name" />
-              <input className="form-control col-lg-4" type="text" onChange={ (e) => this.handleChange(e, "price") } value={ this.props.price } placeholder="price" />
+              <input className="form-control col-lg-4" type="number" onChange={ (e) => this.handleChange(e, "price") } value={ this.props.price } placeholder="price" />
               <select className="form-control col-lg-4" onChange={ (e) => this.handleChange(e, "availability") } value={ this.props.availability }>
                 <option>In Stock!</option>
                 <option>Sold Out!</option>
