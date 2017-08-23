@@ -5,6 +5,7 @@ import Home from './Home';
 import SearchMap from './children/SearchMap';
 import Store from './Store';
 import SellerAdmin from './SellerAdmin'
+import CustomerAdmin from './Customer/CustomerAdmin';
 
 export default class Main extends Component {
     render() {
@@ -18,6 +19,7 @@ export default class Main extends Component {
                             <Route path='/search-map' component={SearchMap} />
                             <Route path='/store' component={Store} />
                             <Route path='/selleradmin' component={SellerAdmin} />
+                            <Route path='/customeradmin' component={CustomerAdmin} />
                             <Route render={ () => {return <p> Page Not Found</p>}} /> {/* To be replaced with a 404 error page */}
                         </ Switch>
                     </div>
