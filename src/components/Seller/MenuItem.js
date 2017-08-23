@@ -21,24 +21,32 @@ class StoreTitle extends Component {
   render() {
     if (this.props.edit) {
       return (
-        <div className="form-group row">
-          <div className="col-4">
-            <input className="form-control" name="title" type="text" onChange={ (e) => this.handleChange(e, "name") } value={ this.props.item } placeholder="name"/>
-            <input className="form-control" name="title" type="text" onChange={ (e) => this.handleChange(e, "description") } value={ this.props.description } placeholder="description" />
-            <input className="form-control" name="title" type="text" onChange={ (e) => this.handleChange(e, "price") } value={ this.props.price } placeholder="price" />
-            <input className="form-control" name="title" type="text" onChange={ (e) => this.handleChange(e, "quantity") } value={ this.props.quantity } placeholder="quantity" />
+        <div className="col-lg-10 offset-lg-1">
+          <div className="form-group">
+            <div className="row">
+              <input className="form-control col-lg-4" name="title" type="text" onChange={ (e) => this.handleChange(e, "name") } value={ this.props.item } placeholder="name" />
+              <input className="form-control col-lg-4" name="title" type="text" onChange={ (e) => this.handleChange(e, "price") } value={ this.props.price } placeholder="price" />
+                <select className="form-control col-lg-4" id="exampleSelect1" onChange={ (e) => this.handleChange(e, "availability") } value={ this.props.availability }>
+                  <option>In Stock!</option>
+                  <option>Sold Out!</option>
+                </select>
+ 
+            </div>
+            <div className="row">
+              <input className="form-control" name="title" type="text" onChange={ (e) => this.handleChange(e, "description") } value={ this.props.description } placeholder="description" />
+            </div>
+            <button className="btn btn-danger" onClick={ () => this.props.removeFromStateArray("menu", this.props.index) }>Delete</button>
           </div>
-          <button className="btn btn-danger" onClick={ () => this.props.removeFromStateArray("menu", this.props.index) }>Delete</button>
         </div>
         );
     }
     return (
-      <li>
+      <div>
         { "Item: " + this.props.item }
         { "** Description: " + this.props.description }
         { "** Price: " + this.props.price }
-        { "** Quantity: " + this.props.quantity }
-      </li>
+        { "** Availability: " + this.props.availability }
+      </div>
       );
   }
 }

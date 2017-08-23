@@ -21,7 +21,7 @@ class StoreHours extends Component {
   render() {
     return (
       <div>
-        <h4>Hours of Operation</h4>
+        <h4 className="text-center">Hours of Operation</h4>
         { this.listHours() }
       </div>
       );

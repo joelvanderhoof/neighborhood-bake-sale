@@ -13,7 +13,7 @@ export default class Main extends Component {
             <Router>
                 <div className='main'>
                     <Nav />
-                    <div className='container'>
+                    <div className='container-fluid'>
                         <Switch>
                             <Route exact path='/' component={ Home } />
                             <Route path='/search-map' component={SearchMap} />
