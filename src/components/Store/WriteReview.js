@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import Rating from './WriteReview/Rating';
+import Rating from '../Shared/Rating';
 import ReviewForm from './WriteReview/ReviewForm';
 import Reviews from './WriteReview/Reviews';
 
