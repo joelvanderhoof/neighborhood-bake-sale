@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
  
-class StoreMap extends Component {
+class Map extends Component {
 
   render() {
     return (
-      <div>
+      <div className={this.props.mapStyle}>
         Map Component
         {/* Api key AIzaSyAEjV1RAoMKseN8q9Xp5kpzKEqcLl5nsz0 */}
       </div>
@@ -12,4 +12,4 @@ class StoreMap extends Component {
   }
 }
 
-export default StoreMap;
+export default Map;
