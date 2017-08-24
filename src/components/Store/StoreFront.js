@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import StoreMap from './StoreMap';
-import StoreTitle from "../Seller/StoreTitle";
+import Map from '../Shared/Map';
+import StoreTitle from '../Shared/StoreTitle';
 import StoreHours from "../Seller/StoreHours";
-import StoreDescription from "../Seller/StoreDescription";
+import StoreDescription from "../Shared//StoreDescription";
+import Rating from '../Shared/Rating';
+import AddPhoto from './AddPhoto';
+import Bookmark from './Bookmark';
 
 class StoreFront extends Component {
   constructor(props) {
@@ -47,15 +50,17 @@ class StoreFront extends Component {
 
         {/* Row */}
         <div className='row'>
-          <div className='col-12'>
-            <StoreTitle title={this.state.title}/>
-            <Link to='/review'>
-              Write Review {'\u00A0'}
-              <i className="fa fa-pencil" aria-hidden="true"></i>
-            </Link>
+          <div className='col-7'>
+            <StoreTitle title={this.state.title} storeTitleStyle='h1'/>
+            <StoreDescription description={this.state.description} storeDescriptionStyle='h6'/>
+            <Rating />
           </div>
-          <div className='col-12'>
-            <StoreDescription description={this.state.description}/>
+          <div className='col-5'>
+          <Link className='store-front-nav' to='/review'>
+            <button><span style={ {color: 'gold', textShadow:'1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' }}>★</span> Write Review {'\u00A0'}</button>
+          </Link>
+          <AddPhoto AddPhotoStyle='store-front-nav'/>
+          <Bookmark BookmarkStyle='store-front-nav'/>
           </div>
         </div>
         {/* End Row */}
@@ -69,12 +74,20 @@ class StoreFront extends Component {
               alt='Italian Bistro'/> {/* To be replaced with StorePhoto */}
             <StoreHours hours={["9:00AM-12:00PM", "1:00PM-6:00PM"]}/>
           </div>
-          <div className='col-4'>
-            <StoreMap/>
-          </div>
+          
         </div>
         {/* End Row */}
+        {/* Row */}
+        <div className='row'>
+          <div className='col-7'>
+            <div className='border d-flex align-items-center justify-content-center'>
+              <Map />
+            </div>
+            
+          </div>
 
+        </div>
+        {/* End Row */}
       </div>
     )
   }

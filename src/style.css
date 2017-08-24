@@ -57,8 +57,8 @@ a, a:hover {
 
 .rating:not(:checked) > div > label {
   float:right;
-  width:1em;
-  padding:0 .1em;
+  width:1.28em;
+  margin: 0px 0.25em;
   overflow:hidden;
   white-space:nowrap;
   cursor:pointer;
