@@ -53,7 +53,7 @@ class StoreFront extends Component {
           <div className='col-7'>
             <StoreTitle title={this.state.title} storeTitleStyle='h1'/>
             <StoreDescription description={this.state.description} storeDescriptionStyle='h6'/>
-            <Rating />
+            <Rating rating='4'/> {/* Need a field for rating */}
           </div>
           <div className='col-5'>
           <Link className='store-front-nav' to='/review'>
@@ -64,7 +64,7 @@ class StoreFront extends Component {
           </div>
         </div>
         {/* End Row */}
-
+        <hr />
         {/* Row */}
         <div className='row justify-content-between'>
           <div className='col-6'>
