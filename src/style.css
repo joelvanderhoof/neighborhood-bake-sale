@@ -100,9 +100,21 @@ a, a:hover {
 
 
 /* Store Map */
-#store-map {
+.store-map {
   width: 300px;
   height: 300px;
+  padding: 5px;
+}
+
+.map {
+  width: 200px;
+  height: 200px;
+}
+
+/* Store Menu */
+.store-front-menu {
+  margin-top: 15px;
+  padding: 5px;
 }
 
 /* Seller Admin */
