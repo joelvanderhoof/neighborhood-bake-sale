@@ -92,12 +92,15 @@ a, a:hover {
   text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
 }
 
-.rating > div >label:active {
+.rating > div > label:active {
   position:relative;
   top:2px;
   left:2px;
 }
 
+.store-front-star {
+  pointer-events: none;
+}
 
 /* Store Map */
 .store-map {
