@@ -22,7 +22,7 @@ class Rating extends Component {
       return (
         <fieldset className="rating">
           <h4 className='d-inline-block'>Reviews: {this.props.numReviews}</h4>
-          <div className='float-left'>
+          <div className='float-left store-front-star'>
             <input type="radio" id="5" name="rating" disabled='true' checked={this.props.rating === '5'} value={this.state.rating} onClick={this.handleClick} /><label htmlFor="5" title="Rocks!" ></label>
             <input type="radio" id="4" name="rating" disabled='true' checked={this.props.rating === '4'} value={this.state.rating} onClick={this.handleClick} /><label htmlFor="4" title="Pretty good" ></label>
             <input type="radio" id="3" name="rating" disabled='true' checked={this.props.rating === '3'} value={this.state.rating} onClick={this.handleClick} /><label htmlFor="3" title="Meh" ></label>
