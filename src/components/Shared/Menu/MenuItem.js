@@ -7,9 +7,8 @@ class MenuItem extends Component {
 
     };
 
-    this.handleChange = this
-      .handleChange
-      .bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event, type) {
@@ -28,6 +27,16 @@ class MenuItem extends Component {
         <span style={{color: 'green'}}><strong>{this.props.availability}</strong></span>
       );
     }
+  }
+
+  handleClick(event) {
+    console.log('clicked');
+    // console.log(event.target);
+    // let order = {
+    //   item: this.props.item,
+    //   price: this.props.price
+    // }
+    // this.props.addToOrder(order);
   }
 
   render() {
@@ -72,7 +81,7 @@ class MenuItem extends Component {
               <p className="col-lg-12">{ this.props.description }</p>
             </div>
             { this.availability() }
-            { this.props.availability !== 'Sold Out!' && <button className='m-2 btn btn-secondary' onClick={ (e) => this.props.addToOrder }> <i className="fa fa-plus" aria-hidden="true"> Add to order</i></button>}
+            { this.props.availability !== 'Sold Out!' && <button onClick={this.handleClick} className='m-2 btn btn-secondary' > <i className="fa fa-plus" aria-hidden="true"> Add to order</i></button>}
           </div>
         </div>
       );

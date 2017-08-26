@@ -46,7 +46,7 @@ class StoreFront extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      customerOrder: '',
+      customerOrder: [],
     }
 
   }
@@ -77,9 +77,10 @@ class StoreFront extends Component {
   }
 
   addToOrder(order) {
-    this.setState({
-      customerOrder: order,
-    })
+    console.log(order)
+    // this.setState({
+    //   customerOrder: order,
+    // })
   }
 
   render() {
