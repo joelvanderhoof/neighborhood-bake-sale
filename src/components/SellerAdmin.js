@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Menu from "./Seller/Menu";
-import StoreTitle from "./Seller/StoreTitle";
+// import StoreTitle from "./Seller/StoreTitle";
 import StoreHours from "./Seller/StoreHours";
-import StoreDescription from "./Seller/StoreDescription";
+import StoreDescription from "./Shared/StoreDescription";
 // import OrderQueue from "./Seller/OrderQueue";
 import EditButton from "./Seller/EditButton";
 
@@ -18,6 +18,7 @@ let testObj = {
     "9:00AM-12:00PM", "1:00PM-6:00PM"
   ], // Array of daily hours
   description: "Neighborhood Italian Spot",
+  storePhoto: "http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg",
   photo: [], // Array of image URL
   certified: false, // Store passes inspection
   review: [], // Array of reviews
@@ -119,10 +120,6 @@ class SellerAdmin extends Component {
   }
 
   updateState(key, value, index, type) {
-    //if value empty, do nothing
-    // if (value.length === 0) {
-    //   return;
-    // }
     //no index - not an array
     if (index === undefined) {
       let stateObj = {};
@@ -145,18 +142,27 @@ class SellerAdmin extends Component {
   render() {
     return (
       <div>
-        <h1 className="text-center">Seller Admin Page <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ true } /></h1>
+        <h1 className="text-center">{ this.state.title }'s Admin Page <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ true } /></h1>
+        { /*  <StoreTitle title={ this.state.title } edit={ false } updateState={ this.updateState } /> */ }
+        <div className="text-center">
+          <StoreDescription description={ this.state.description } edit={ false } updateState={ this.updateState } />
+        </div>
         <div className="row">
           <div className="col-md-6 border">
-            <StoreTitle title={ this.state.title } edit={ false } updateState={ this.updateState } />
-            {/* <StoreHours hours={ this.state.hours } edit={ false } updateState={ this.updateState } />
-            <StoreDescription description={ this.state.description } edit={ false } updateState={ this.updateState } /> */}
-            <Menu menu={ this.state.menu } edit={ false } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
-            />
+            <div className="row">
+              <div className="col-lg-6 col-md-12 col-sm-12">
+                <Menu menu={ this.state.menu } edit={ false } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
+                />
+              </div>
+              <div className="col-6">
+                <img className='img-fluid rounded mt-3' src='http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg' alt='Italian Bistro' />
+                <StoreHours hours={ this.state.hours } edit={ false } updateState={ this.updateState } />
+              </div>
+            </div>
           </div>
           <div className="col-md-6 border">
-            <StoreTitle title={ this.state.title } edit={ true } updateState={ this.updateState } />
-            <StoreHours hours={ this.state.hours } edit={ true } updateState={ this.updateState } />
+            { /*   <StoreTitle title={ this.state.title } edit={ true } updateState={ this.updateState } /> */ }
+            <StoreHours hours={ this.state.hours } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray } />
             <StoreDescription description={ this.state.description } edit={ true } updateState={ this.updateState } />
             <Menu menu={ this.state.menu } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
             />

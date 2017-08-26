@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StoreHoursItems from "./StoreHoursItems";
+import AddHourItemButton from "./AddHourItemButton";
 
 class StoreHours extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class StoreHours extends Component {
   listHours() {
     let timeList;
     timeList = this.props.hours.map((time, i) => {
-      return <StoreHoursItems key={ i } index={ i } time={ time } edit={ this.props.edit } updateState={ this.props.updateState } />
+      return <StoreHoursItems key={ i } index={ i } time={ time } edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray }
+             />
     });
     return timeList;
   }
@@ -21,7 +23,7 @@ class StoreHours extends Component {
   render() {
     return (
       <div>
-        <h4 className="text-center">Hours of Operation</h4>
+        <h4 className="text-center">Hours of Operation <AddHourItemButton edit={ this.props.edit } addToStateArray={ this.props.addToStateArray }/> </h4>
         { this.listHours() }
       </div>
       );
