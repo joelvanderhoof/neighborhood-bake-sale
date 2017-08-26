@@ -16,7 +16,6 @@ class Order extends Component {
     return (
       <div>
         <div className={this.props.orderStyle}>
-        {this.props.customerOrder}
         Order
         </div>
         <button className='btn btn-secondary float-right mt-1' onClick={this.handleClick}>Place order</button>
