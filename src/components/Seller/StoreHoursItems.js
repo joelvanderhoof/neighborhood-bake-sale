@@ -23,6 +23,7 @@ class StoreHoursItems extends Component {
           <div className="col-lg-4 offset-lg-4">
             <input className="form-control" name="title" type="text" onChange={ this.handleChange } defaultValue={ this.props.time } id="StoreHoursItems" />
           </div>
+          <button className="btn btn-danger" onClick={ () => this.props.removeFromStateArray("hours", this.props.index) }>X</button>
         </div>
         );
     }

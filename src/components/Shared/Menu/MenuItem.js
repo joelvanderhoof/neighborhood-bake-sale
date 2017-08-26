@@ -9,6 +9,7 @@ class MenuItem extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.addToOrderButton = this.addToOrderButton.bind(this);
   }
 
   handleChange(event, type) {
@@ -25,6 +26,14 @@ class MenuItem extends Component {
     } else{
       return (
         <span style={{color: 'green'}}><strong>{this.props.availability}</strong></span>
+      );
+    }
+  }
+  // Button function to create add to order button only if on store page and not seller admin page
+  addToOrderButton() {
+    if(this.props.addToOrder) {
+      return (
+        <button onClick={this.handleClick} className='m-2 btn btn-secondary' > <i className="fa fa-plus" aria-hidden="true"> Add to order</i></button>
       );
     }
   }
@@ -79,7 +88,7 @@ class MenuItem extends Component {
               <p className="col-lg-12">{ this.props.description }</p>
             </div>
             { this.availability() }
-            { this.props.availability !== 'Sold Out!' && <button onClick={this.handleClick} className='m-2 btn btn-secondary' > <i className="fa fa-plus" aria-hidden="true"> Add to order</i></button>}
+            { this.props.availability !== 'Sold Out!' && this.addToOrderButton()}
           </div>
         </div>
       );
