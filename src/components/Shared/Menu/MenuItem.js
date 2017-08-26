@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 
-class StoreTitle extends Component {
+class MenuItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
 
     };
 
-    this.handleChange = this
-      .handleChange
-      .bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event, type) {
@@ -21,13 +20,21 @@ class StoreTitle extends Component {
   availability(){
     if(this.props.availability === "Sold Out!"){
       return (
-        <h1 style={{color: 'red'}}>{this.props.availability}</h1>
+        <span style={{color: 'red'}}><strong>{this.props.availability}</strong></span>
       );
     } else{
       return (
-        <h1 style={{color: 'green'}}>{this.props.availability}</h1>
+        <span style={{color: 'green'}}><strong>{this.props.availability}</strong></span>
       );
     }
+  }
+
+  handleClick(event) {
+    let order = {
+      item: this.props.item,
+      price: this.props.price
+    }
+    this.props.addToOrder(order);
   }
 
   render() {
@@ -55,27 +62,29 @@ class StoreTitle extends Component {
           </div>
         </div>
         );
-    }
-    return (
-      <div className="row">
-        <div className="col-lg-4">
-          <img className="img-fluid border" src={ this.props.img } alt="menu item" />
-        </div>
-        <div className="col-lg-8">
-          <div className="row">
-            <h3 className="col-lg-8">{ this.props.item }</h3>
-            <p className="col-lg-4">
-              { "$" + parseFloat(this.props.price / 100).toFixed(2) }
-            </p>
+    } else {
+      return (
+        <div className="row border m-1 pt-3 pb-3">
+          <div className="col-lg-4">
+            <img className="img-fluid border" src={ this.props.img } alt='menu item' />
           </div>
-          <div className="row">
-            <p className="col-lg-12">{ this.props.description }</p>
+          <div className="col-lg-8">
+            <div className="row">
+              <span className="col-lg-8"><strong>{ this.props.item }</strong></span>
+              <p className="col-lg-4">
+                { "$" + parseFloat(this.props.price / 100).toFixed(2) }
+              </p>
+            </div>
+            <div className="row">
+              <p className="col-lg-12">{ this.props.description }</p>
+            </div>
+            { this.availability() }
+            { this.props.availability !== 'Sold Out!' && <button onClick={this.handleClick} className='m-2 btn btn-secondary' > <i className="fa fa-plus" aria-hidden="true"> Add to order</i></button>}
           </div>
-          { this.availability() }
         </div>
-      </div>
       );
+    }
   }
 }
 
-export default StoreTitle;
+export default MenuItem;

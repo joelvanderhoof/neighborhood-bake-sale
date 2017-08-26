@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Map from '../Shared/Map';
+import Map from '../../Shared/Map';
 
 class StoreMap extends Component {
 

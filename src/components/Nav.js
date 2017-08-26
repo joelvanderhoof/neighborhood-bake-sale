@@ -9,13 +9,6 @@ import { NavLink } from 'react-router-dom'
                     Home
                 </NavLink>
             </li>
-            <br />
-            <li>
-                <NavLink activeClassName='active' to='/search-map'>
-                    Search Map
-                </NavLink>
-            </li>
-            <br />
             <li>
                 <NavLink activeClassName='active' to='/store'>
                     Store
