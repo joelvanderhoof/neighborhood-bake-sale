@@ -58,7 +58,7 @@ New Store Object:
 { 
     "sellerID": "5999d619126eaa49efa998e2",
     "location": "123 Main Street, Here, CA 92831",
-        "hours": "[ {day: Monday, hours: 9-5}, {day: Tuesday, hours: 9-5}, {day: Wednesday, hours: 9-5}, {day: Thursday, hours: 9-5}, {day: Friday, hours: 9-5}, ]",
+    "hours": "[ {day: Monday, hours: 9-5}, {day: Tuesday, hours: 9-5}, {day: Wednesday, hours: 9-5}, {day: Thursday, hours: 9-5}, {day: Friday, hours: 9-5}, ]",
     "description": "This is a short description about my store.  It is a store that sells things.",
     "photos": "http://www.hamburgerhamlet.com/wp-content/uploads/2014/11/the-hamburger-hamlet-sherman-oaks-40.jpg", 
     "certified": true

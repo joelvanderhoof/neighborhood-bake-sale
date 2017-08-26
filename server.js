@@ -2,13 +2,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const passport = require('passport');
+//const config = require('./config');
 
+//const localSignupStrategy = require('./server/passport/local-signup');
+//const localLoginStrategy = require('./server/passport/local-signin');
+
+
+//Mongo/Mongoose --------------------------------------------------------------
 //const db = require('./models');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-
-// Import Schema
-// const Customer = require('./server/models/Customer');
 
 // Use for development
 const DBconnect = 'mongodb://localhost/neighborhood-bake-sale';
@@ -28,6 +32,7 @@ db.on('error', (err) => {
 db.once('openUri', () => {
     console.log(`Mongoose connected`);
 });
+//-------------------------------------------------------------------------------
 
 // Initialize express app
 const app = express();
@@ -42,15 +47,18 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(cookieParser());
 
 // Serve files from the public folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, 'build')));
+
+// app.use(express.static('./server/static/'));
+// app.use(express.static('./client/dist/'));
 
 
 //Sets up express routes
 app.use('/api', API);
 //RTCSessionDescription
 // Serve home page
-app.get('*', (req, res) => {
-    res.sendFile('index.html');
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build/index.html'));
 });
 
 //Sets up express to handle 404 NOT FOUND
