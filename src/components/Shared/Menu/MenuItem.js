@@ -30,13 +30,11 @@ class MenuItem extends Component {
   }
 
   handleClick(event) {
-    console.log('clicked');
-    // console.log(event.target);
-    // let order = {
-    //   item: this.props.item,
-    //   price: this.props.price
-    // }
-    // this.props.addToOrder(order);
+    let order = {
+      item: this.props.item,
+      price: this.props.price
+    }
+    this.props.addToOrder(order);
   }
 
   render() {
