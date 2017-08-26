@@ -46,6 +46,7 @@ class StoreFront extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      customerOrder: []
     }
 
     this.addToOrder = this.addToOrder.bind(this);
@@ -77,10 +78,7 @@ class StoreFront extends Component {
   }
 
   addToOrder(order) {
-    console.log(order)
-    this.setState({
-      customerOrder: order,
-    })
+    this.setState({ customerOrder: this.state.customerOrder.concat(order) })
   }
 
   render() {
@@ -119,7 +117,7 @@ class StoreFront extends Component {
                 src='http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg'
                 alt='Italian Bistro'/> {/* To be replaced with StorePhoto */}
               <StoreHours hours={['9:00AM-12:00PM', '1:00PM-6:00PM']}/>
-              <Order customerOrder={this.state.customerOrder} orderStyle='border d-flex justify-content-center mt-3 order' />
+              <Order customerOrder={this.state.customerOrder} orderStyle='border mt-3 order' />
               <Reviews />
           </div>
           {/* End Right Column */}

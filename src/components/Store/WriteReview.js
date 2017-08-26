@@ -12,12 +12,8 @@ class WriteReview extends Component {
       rating: ''
     };
 
-    this.getReview = this
-      .getReview
-      .bind(this);
-    this.getRating = this
-      .getRating
-      .bind(this);
+    this.getReview = this.getReview.bind(this);
+    this.getRating = this.getRating.bind(this);
   }
 
   getReview(review) {
