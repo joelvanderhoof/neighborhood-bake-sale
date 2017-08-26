@@ -59,7 +59,7 @@ class StoreTitle extends Component {
     return (
       <div className="row">
         <div className="col-lg-4">
-          <img className="img-fluid border" src={ this.props.img } />
+          <img className="img-fluid border" src={ this.props.img } alt="menu item" />
         </div>
         <div className="col-lg-8">
           <div className="row">
