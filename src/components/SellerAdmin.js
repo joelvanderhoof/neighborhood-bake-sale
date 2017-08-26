@@ -5,6 +5,8 @@ import StoreHours from "./Seller/StoreHours";
 import StoreDescription from "./Shared/StoreDescription";
 // import OrderQueue from "./Seller/OrderQueue";
 import EditButton from "./Seller/EditButton";
+import StoreImage from "./Seller/StoreImage";
+// import StoreFront from "./Store/StoreFront.js";
 
 let testObj = {
   storeID: "1",
@@ -18,7 +20,7 @@ let testObj = {
     "9:00AM-12:00PM", "1:00PM-6:00PM"
   ], // Array of daily hours
   description: "Neighborhood Italian Spot",
-  storePhoto: "http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg",
+  storeImage: "http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg",
   photo: [], // Array of image URL
   certified: false, // Store passes inspection
   review: [], // Array of reviews
@@ -58,7 +60,8 @@ class SellerAdmin extends Component {
       menu: testMenu, //testObj.menu,
       title: testObj.title,
       hours: testObj.hours,
-      description: testObj.description
+      description: testObj.description,
+      storeimage: testObj.storeImage
     };
 
     this.setEdit = this.setEdit.bind(this);
@@ -155,7 +158,7 @@ class SellerAdmin extends Component {
                 />
               </div>
               <div className="col-6">
-                <img className='img-fluid rounded mt-3' src='http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg' alt='Italian Bistro' />
+                <StoreImage storeImage={this.state.storeimage} edit={false}/>
                 <StoreHours hours={ this.state.hours } edit={ false } updateState={ this.updateState } />
               </div>
             </div>
@@ -163,6 +166,7 @@ class SellerAdmin extends Component {
           <div className="col-md-6 border">
             { /*   <StoreTitle title={ this.state.title } edit={ true } updateState={ this.updateState } /> */ }
             <StoreHours hours={ this.state.hours } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray } />
+            <StoreImage storeImage={this.state.storeimage} edit={true} updateState={ this.updateState }/>
             <StoreDescription description={ this.state.description } edit={ true } updateState={ this.updateState } />
             <Menu menu={ this.state.menu } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
             />
