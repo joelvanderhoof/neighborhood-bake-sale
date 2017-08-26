@@ -7,7 +7,7 @@ import Bookmark from './StoreFront/Bookmark';
 import Order from './StoreFront/Order';
 
 import StoreTitle from '../Shared/StoreTitle';
-import StoreHours from '../Seller/StoreHours';
+import StoreHours from '../Shared/StoreHours';
 import StoreDescription from '../Shared//StoreDescription';
 import Reviews from '../Shared/Reviews';
 import Rating from '../Shared/Rating';
@@ -87,17 +87,25 @@ class StoreFront extends Component {
 
         {/* Row */}
         <div className='row'>
-          <div className='col-7'>
+          <div className='col-lg-6 col-sm-12'>
             <StoreTitle title={this.state.title} storeTitleStyle='h1'/>
             <StoreDescription description={this.state.description} storeDescriptionStyle='h6'/>
-            <Rating rating='4' numReviews='751'/> {/* Need a field for rating and number of reviews*/}
+            <img
+                className='img-fluid rounded mt-3 mb-3'
+                src='http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg'
+                alt='Italian Bistro'/> {/* To be replaced with StorePhoto */}
+            <StoreHours storeHoursStyle='list-unstyled' hours={['9:00AM-12:00PM', '1:00PM-6:00PM']}/>
+            <hr />
+            <Rating ratingStyle='rating col-12 mb-3' rating='4' numReviews='751'/> {/* Need a field for rating and number of reviews*/}
           </div>
-          <div className='col-5'>
-          <Link className='store-front-nav' to='/review'>
-            <button><span style={ {color: 'gold', textShadow:'1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' }}>★</span> Write Review {'\u00A0'}</button>
-          </Link>
-          <AddPhoto AddPhotoStyle='store-front-nav'/>
-          <Bookmark BookmarkStyle='store-front-nav'/>
+          <div className='col-lg-6 col-md-12 align-middle'>
+            <div className='store-front-link border'>
+              <Link className='btn col-md-4 col-sm-12' to='/review'>
+                <div><span style={ {color: 'gold', textShadow:'1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' }}>★</span>{'\u00A0'} Write Review </div>
+              </Link>
+              <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12'/>
+              <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12'/>
+            </div>
           </div>
         </div>
         {/* End Row */}
@@ -105,25 +113,22 @@ class StoreFront extends Component {
         {/* Row */}
         <div className='row justify-content-between'>
           {/* Left Column */}
-          <div className='col-6'>
+          <div className='col-md-6 col-sm-12'>
             
             <Menu menu={ this.state.menu } addToOrder={ this.addToOrder } menuStyle='border justify-content-center store-front-menu mt-3 p-3' />
           </div>
           {/* End Left Column */}
           {/* Right Column */}
-          <div className='col-6'>
-            <img
-                className='img-fluid rounded mt-3'
-                src='http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg'
-                alt='Italian Bistro'/> {/* To be replaced with StorePhoto */}
-              <StoreHours hours={['9:00AM-12:00PM', '1:00PM-6:00PM']}/>
+          <div className='col-md-6 col-sm-12'>
               <Order customerOrder={this.state.customerOrder} orderStyle='border mt-3 order' />
-              <Reviews />
           </div>
           {/* End Right Column */}
         </div>
         {/* End Row */}
         <div className='row'>
+          <div className='col-12'>
+            <Reviews />
+          </div>
           <div className='col-12'>
             <StoreMap storeMapStyle='border d-flex flex-column align-items-center justify-content-center store-map mt-3' location={this.state.location}/>
           </div>

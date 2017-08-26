@@ -31,6 +31,10 @@ a, a:hover {
   border-style: solid;
 }
 
+.red {
+  color: #d0021b;
+}
+
 /* Store */
 .container-store {
   padding: 15px 15px;
@@ -42,6 +46,10 @@ a, a:hover {
 
 #review-container {
   height: 500px;
+}
+
+.store-front-links {
+  height: 30px;
 }
 
 /* Store Rating */
@@ -62,7 +70,7 @@ a, a:hover {
   overflow:hidden;
   white-space:nowrap;
   cursor:pointer;
-  font-size:200%;
+  font-size:1em;
   line-height:1.2;
   color:#ddd;
   text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);

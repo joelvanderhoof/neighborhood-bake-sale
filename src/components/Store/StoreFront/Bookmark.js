@@ -5,9 +5,9 @@ class Bookmark extends Component {
 
  render() {
    return (
-     <button className={this.props.BookmarkStyle}>
-       Bookmark {'\u00A0'} <i className="fa fa-book" aria-hidden="true"></i>
-     </button>
+     <div className={this.props.BookmarkStyle}>
+      <i className="fa fa-book" aria-hidden="true"></i> {'\u00A0'}  Bookmark 
+     </div>
    );
  }
 }
