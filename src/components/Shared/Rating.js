@@ -20,7 +20,7 @@ class Rating extends Component {
   render() {
     if(this.props.rating) {
       return (
-        <fieldset className="rating">
+        <fieldset className={this.props.ratingStyle}>
           <h4 className='d-inline-block'>Reviews: {this.props.numReviews}</h4>
           <div className='float-left store-front-star'>
             <input type="radio" id="5" name="rating" disabled='true' checked={this.props.rating === '5'} value={this.state.rating} onClick={this.handleClick} /><label htmlFor="5" title="Rocks!" ></label>

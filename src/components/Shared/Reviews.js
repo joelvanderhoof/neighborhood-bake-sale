@@ -37,7 +37,7 @@ class Reviews extends Component {
   render() {
     return (
       <ul className='list-unstyled mt-3'>
-        <h1>Current Reviews: </h1>
+        <strong>Current Reviews: </strong>
         {this.mapReviews()}
       </ul>
     )

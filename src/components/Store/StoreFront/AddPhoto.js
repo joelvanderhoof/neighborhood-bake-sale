@@ -4,9 +4,9 @@ class AddPhoto extends Component {
 
  render() {
    return (
-     <button className={this.props.AddPhotoStyle}>
-       Add Photo {'\u00A0'} <i className="fa fa-camera" aria-hidden="true"></i>
-     </button>
+     <div className={this.props.AddPhotoStyle}>
+       <i className="fa fa-camera" aria-hidden="true"></i> {'\u00A0'} Add Photo  
+     </div>
    );
  }
 }
