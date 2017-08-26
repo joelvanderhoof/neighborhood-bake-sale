@@ -129,3 +129,51 @@ a, a:hover {
 
 
 /* Seller Admin */
+.stamp-container{
+  width: 100px;
+}
+
+.stamp{
+  color: red;
+  border-color: red;
+  padding: 5px;
+  left:50px;
+  top:10px;
+  border-radius:5px;
+  position:relative;
+  background-color: white;
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+  animation-delay:0.5s;
+  -webkit-animation-delay:0.5s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  opacity: 0;
+  -webkit-animation-fill-mode:forwards;
+   animation-fill-mode:forwards;
+}
+
+@-webkit-keyframes pulse{
+  0%{
+    color: red;
+    border-color: red;
+    opacity: 0;
+  }
+  10%{
+    color: red;
+    border-color: red;
+    opacity:.50;
+    transform-origin: 50% 50%;
+    transform: rotate(-2deg) scale(5);
+    transition: all .3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  }
+  100%{
+    opacity:1;
+    transform: rotate(-15deg) scale(1);
+    color: red;
+    border-color: red;
+  }
+}
+
+
+
