@@ -2,23 +2,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const passport = require('passport');
+//const config = require('./config');
 
-//const db = require('./models');
+//const localSignupStrategy = require('./server/passport/local-signup');
+//const localLoginStrategy = require('./server/passport/local-signin');
+
+
+//Mongo/Mongoose --------------------------------------------------------------
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-
-// Import Schema
-const Customer = require('./models/Customer');
-
-// Use for development
-const DBconnect = 'mongodb://localhost/neighborhood-bake-sale';
-
-// Use for production
-//const DBconnect = 'mongodb://<dbuser>:<dbpassword>@ds119578.mlab.com:19578/heroku_hlgv59g4';
+const DBconnect = 'mongodb://tiger-foodie:benColeIsAwesome1@ds119578.mlab.com:19578/heroku_hlgv59g4';
 
 // Configure DB
+mongoose.Promise = Promise;
 mongoose.connect(DBconnect);
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 db.on('error', (err) => {
     console.error(`Mongoose error: ${err}`);
@@ -27,11 +26,12 @@ db.on('error', (err) => {
 db.once('openUri', () => {
     console.log(`Mongoose connected`);
 });
+//-------------------------------------------------------------------------------
 
 // Initialize express app
 const app = express();
-const PORT = process.env.PORT || 3000;
-const API = require('./routes/api-routes');
+const PORT = process.env.PORT || 8080;
+const API = require('./server/routes/api');
 
 // Use body parser to parse incoming requests as json
 app.use(bodyParser.json());
@@ -41,15 +41,18 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(cookieParser());
 
 // Serve files from the public folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, 'build')));
+
+// app.use(express.static('./server/static/'));
+// app.use(express.static('./client/dist/'));
 
 
 //Sets up express routes
-app.use('/api',API);
-
+app.use('/api', API);
+//RTCSessionDescription
 // Serve home page
-app.get('*', (req, res) => {
-    res.sendFile('index.html');
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 //Sets up express to handle 404 NOT FOUND
