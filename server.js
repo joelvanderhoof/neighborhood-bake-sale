@@ -58,7 +58,7 @@ app.use('/api', API);
 //RTCSessionDescription
 // Serve home page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build/index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 //Sets up express to handle 404 NOT FOUND
