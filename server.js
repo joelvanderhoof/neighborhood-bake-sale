@@ -10,15 +10,9 @@ const passport = require('passport');
 
 
 //Mongo/Mongoose --------------------------------------------------------------
-//const db = require('./models');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-
-// Use for development
-//const DBconnect = 'mongodb://localhost/neighborhood-bake-sale';
-
-// Use for production
-const DBconnect = 'mongodb://<dbuser>:<dbpassword>@ds119578.mlab.com:19578/heroku_hlgv59g4';
+const DBconnect = 'mongodb://tiger-foodie:benColeIsAwesome1@ds119578.mlab.com:19578/heroku_hlgv59g4';
 
 // Configure DB
 mongoose.Promise = Promise;
