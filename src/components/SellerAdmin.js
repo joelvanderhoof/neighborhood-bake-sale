@@ -148,25 +148,26 @@ class SellerAdmin extends Component {
         <h1 className="text-center">{ this.state.title }'s Admin Page <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ true } /></h1>
         { /*  <StoreTitle title={ this.state.title } edit={ false } updateState={ this.updateState } /> */ }
         <div className="text-center">
-          <StoreDescription description={ this.state.description } edit={ false } updateState={ this.updateState } />
         </div>
         <div className="row">
           <div className="col-md-6 border">
             <div className="row">
+              <div className="col-6">
+                <StoreDescription description={ this.state.description } edit={ false } updateState={ this.updateState } />
+                <StoreImage storeImage={ this.state.storeimage } edit={ false } />
+                <StoreHours hours={ this.state.hours } edit={ false } updateState={ this.updateState } />
+              </div>
               <div className="col-lg-6 col-md-12 col-sm-12">
                 <Menu menu={ this.state.menu } edit={ false } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
                 />
-              </div>
-              <div className="col-6">
-                <StoreImage storeImage={this.state.storeimage} edit={false}/>
-                <StoreHours hours={ this.state.hours } edit={ false } updateState={ this.updateState } />
               </div>
             </div>
           </div>
           <div className="col-md-6 border">
             { /*   <StoreTitle title={ this.state.title } edit={ true } updateState={ this.updateState } /> */ }
-            <StoreHours hours={ this.state.hours } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray } />
-            <StoreImage storeImage={this.state.storeimage} edit={true} updateState={ this.updateState }/>
+            <StoreHours hours={ this.state.hours } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
+            />
+            <StoreImage storeImage={ this.state.storeimage } edit={ true } updateState={ this.updateState } />
             <StoreDescription description={ this.state.description } edit={ true } updateState={ this.updateState } />
             <Menu menu={ this.state.menu } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
             />
