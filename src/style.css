@@ -6,14 +6,14 @@ body {
 
 a, a:hover {
   text-decoration: none;
-  color: #d0021b;
+  color: #FFFFFF;
 }
 
 .nav {
   display: flex;
   margin-bottom: 15px;
   padding: 15px;
-  border-bottom: 1px black solid;
+  border-bottom: 1px;
 }
 
 .active {
