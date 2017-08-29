@@ -29,8 +29,8 @@ class StoreHoursItems extends Component {
         );
     }
     return (
-      <p className="">
-        { this.props.day + " " + this.props.time }
+      <p className="col-md-8 offset-md-3">
+        { this.props.day + " - " + this.props.time }
       </p>
       );
   }
