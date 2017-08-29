@@ -3,11 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
-//const config = require('./config');
-
-//const localSignupStrategy = require('./server/passport/local-signup');
-//const localLoginStrategy = require('./server/passport/local-signin');
-
 
 //Mongo/Mongoose --------------------------------------------------------------
 const cookieParser = require('cookie-parser');
@@ -43,13 +38,9 @@ app.use(cookieParser());
 // Serve files from the public folder
 app.use(express.static(path.resolve(__dirname, 'build')));
 
-// app.use(express.static('./server/static/'));
-// app.use(express.static('./client/dist/'));
-
-
 //Sets up express routes
 app.use('/api', API);
-//RTCSessionDescription
+
 // Serve home page
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
@@ -67,6 +58,6 @@ app.use(function(error, req, res) {
 
 
 // Start server
-    app.listen(PORT,()=>{
-        console.log(`The server is listening on port${PORT}`);
-    });
+app.listen(PORT,()=>{
+    console.log(`The server is listening on port${PORT}`);
+});

@@ -31,7 +31,7 @@ class CustomerAdmin extends Component {
                 <div className="row">
                     <div className="col-4">
                         <div className="card" style={{width: '20rem'}}>
-                            <img className="card-img-top" src="https://media.wired.com/photos/5933392eaef9a462de985b45/master/w_660,c_limit/yeun.jpg" alt="Card image cap"/>
+                            <img className="card-img-top" src="https://media.wired.com/photos/5933392eaef9a462de985b45/master/w_660,c_limit/yeun.jpg" alt="Card cap"/>
                             <div className="card-body">
                                 <h4 className="card-title">Glen</h4>
                                 <p className="card-text">I love to eat....and when I'm not eating, I kill zombies!</p>
