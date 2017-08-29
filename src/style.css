@@ -15,14 +15,13 @@ a, a:hover, a:active, a:link, a:visited {
   border-bottom: 1px black solid;
 }
 
-.active {
-  font-weight: bold;
-}
-
 .nav li {
   margin-right: 15px;
 }
 
+.active {
+  font-weight: bold;
+}
 
 /* General commonly used styles */
 .border {
