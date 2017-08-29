@@ -4,7 +4,7 @@ body {
   font-family: sans-serif;
 }
 
-a, a:hover {
+a, a:hover, a:active, a:link, a:visited {
   text-decoration: none;
   color: #d0021b;
 }
