@@ -63,7 +63,7 @@ bundle.min.js
 
 # testing
 /coverage
-/build
+build
 
 # misc
 bundle.min.js
