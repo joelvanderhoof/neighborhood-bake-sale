@@ -10,7 +10,6 @@ a, a:hover {
 }
 
 .nav {
-  display: flex;
   margin-bottom: 15px;
   padding: 15px;
   border-bottom: 1px black solid;
