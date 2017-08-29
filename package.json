@@ -8,6 +8,7 @@
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.4",
+    "express-session": "^1.15.5",
     "jsonwebtoken": "^7.4.3",
     "mongoose": "^4.11.8",
     "morgan": "^1.8.2",
@@ -35,6 +36,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "server": "nodemon server.js",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
