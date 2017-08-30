@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CustomerSchema = new Schema({
-    customerID: Number, //same as the ID from the Customer collection
+    customerID: String, //same as the ID from the Customer model
     sellerID: String, //same as the ID from the Seller collection
-    order: Array, //Array of menu items
+    order: [{
+            type: Schema.Types.ObjectId, 
+            ref: 'MenuItem'}], //Array of menu item IDs
     total: Number, //Order sales amount
     status: String, //The status will be set to specific strings by specific functions
     // To check status compare the strings

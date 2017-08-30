@@ -8,6 +8,7 @@ const MenuItemSchema = new Schema({
     image: String, // image URL
     description: String,
     price: Number, // price in cents
+    inventory: Number
 });
 
 const MenuItem = mongoose.model("MenuItem", MenuItemSchema);
