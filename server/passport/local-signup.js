@@ -8,9 +8,10 @@ module.exports = new PassportLocalStrategy({
   passReqToCallback: true
 }, (req, email, password, done) => {
   const userData = {
-    email: emai.trim(),
+    email: email.trim(),
     password: password.trim(),
-    name: req.body.name.trim()
+    firstName: req.body.firstName.trim(),
+    lastName: req.body.lastName.trim()
   };
 
   const newUser = new User(userData);

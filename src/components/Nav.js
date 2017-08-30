@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import Auth from '../modules/Auth';
 
 function Nav() {
     return (
@@ -28,12 +29,22 @@ function Nav() {
             </ul>
 
             <ul className='navbar-nav'>
-                <NavLink className='mr-3' activeClassName='active' to='signup'>
-                    Sign Up
+              {Auth.isUserAuthenticate() ? 
+              <li> 
+                <NavLink className='mr-3' activeClassName='active' to='logout'>
+                    Log Out
                 </NavLink>
-                <NavLink activeClassName='active' to='login'>
-                    Log In
-                </NavLink>
+              </li> 
+              : 
+              <li>}
+              <NavLink className='mr-3' activeClassName='active' to='signup'>
+                  Sign Up
+              </NavLink>
+              <NavLink activeClassName='active' to='login'>
+                  Log In
+              </NavLink>
+              </li>
+              }
             </ul>
         </nav>
     )
