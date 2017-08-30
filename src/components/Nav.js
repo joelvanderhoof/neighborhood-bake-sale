@@ -3,14 +3,9 @@ import { NavLink } from 'react-router-dom'
 
 function Nav() {
     return (
-<<<<<<< HEAD
         <nav className='nav navbar navbar-toggleable-md'>
             <ul className='navbar-nav mr-auto'>
               <li>
-=======
-        <ul className="nav navbar-inverse" style={{backgroundColor: "#1f5380"}}>
-            <li>
->>>>>>> Eve-Dev
                 <NavLink exact activeClassName='active' to='/'>
                   Home
                 </NavLink>
