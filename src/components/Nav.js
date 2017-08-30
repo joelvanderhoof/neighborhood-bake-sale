@@ -29,19 +29,19 @@ function Nav() {
             </ul>
 
             <ul className='navbar-nav'>
-              {Auth.isUserAuthenticate() ? 
+              {Auth.isUserAuthenticated() ? 
               <li> 
                 <NavLink className='mr-3' activeClassName='active' to='logout'>
-                    Log Out
+                  Log Out
                 </NavLink>
               </li> 
               : 
-              <li>}
+              <li>
               <NavLink className='mr-3' activeClassName='active' to='signup'>
-                  Sign Up
+                Sign Up
               </NavLink>
               <NavLink activeClassName='active' to='login'>
-                  Log In
+                Log In
               </NavLink>
               </li>
               }

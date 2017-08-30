@@ -7,7 +7,6 @@ import Home from './Home';
 import Store from './Store';
 import SellerAdmin from './SellerAdmin'
 import CustomerAdmin from './Customer/CustomerAdmin';
-import Auth from '../modules/Auth';
 
 export default class Main extends Component {
     render() {
@@ -21,8 +20,8 @@ export default class Main extends Component {
                             <Route path='/store' component={Store} />
                             <Route path='/selleradmin' component={SellerAdmin} />
                             <Route path='/customeradmin' component={CustomerAdmin} />
-                            <Route path='/auth/signup' component={SignUp} />
-                            <Route path='/auth/login' component={Login} />
+                            <Route path='/signup' component={SignUp} />
+                            <Route path='/login' component={Login} />
                             <Route path='/auth/logout' />
                             <Route render={ () => {return <p> Page Not Found</p>}} /> {/* To be replaced with a 404 error page */}
                         </ Switch>
