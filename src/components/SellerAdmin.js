@@ -92,7 +92,15 @@ class SellerAdmin extends Component {
   addToStateArray(value) {
     if (value === "menu") {
       let currentMenu = this.state.menu;
-      currentMenu.push("");
+      let emptyMenuItem = {
+        name: "Menu Name",
+        description: "Menu Description",
+        price: 0,
+        image: "https://static.pexels.com/photos/563067/pexels-photo-563067.jpeg",
+        availability: "Sold Out!" //current inventory
+      };
+
+      currentMenu.push(emptyMenuItem);
       this.setState({
         menu: currentMenu
       });

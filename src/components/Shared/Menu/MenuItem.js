@@ -63,7 +63,7 @@ class MenuItem extends Component {
               <textarea className="form-control" type="text" onChange={ (e) => this.handleChange(e, "description") } value={ this.props.description } placeholder="description" />
             </div>
             <div className="row">
-              <input className="form-control" type="text" onChange={ (e) => this.handleChange(e, "img") } value={ this.props.img } placeholder="img url" />
+              <input className="form-control" type="text" onChange={ (e) => this.handleChange(e, "image") } value={ this.props.img } placeholder="img url" />
             </div>
             <div className="row">
               <button className="btn btn-danger col-lg-12" onClick={ () => this.props.removeFromStateArray("menu", this.props.index) }>Delete Menu Item</button>
