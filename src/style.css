@@ -14,6 +14,12 @@ a, a:hover, a:active, a:link, a:visited {
   margin-bottom: 15px;
   padding: 15px;
   border-bottom: 1px;
+  background-color: #1f5380;
+}
+
+.nav, a:visited{
+  text-decoration: none;
+  color: #FBF7F7;
 }
 
 .nav li {
