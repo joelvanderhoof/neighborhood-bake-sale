@@ -1,27 +1,57 @@
 import React, { Component } from 'react';
 
 class SignUpForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  
+  handleChange(event) {
+    this.setState({
+      [event.currentTarget.name]: event.target.value
+    });
+  };
+
+  handleSubmit (event) {
+    event.preventDefault();
+    this.props.saveState(this.state);
+    this.setState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: ''
+    })
+  }
+
   render () {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div className='form-group'>
-          <label for='firstName'>First Name: </label>
-          <input className='form-control' type='text' name='firstName' required />
+          <label htmlFor='firstName'>First Name: </label>
+          <input className='form-control' type='text' name='firstName' value={this.state.firstName} onChange={this.handleChange} required />
         </div>
 
         <div className='form-group'>
-          <label for='lastName'>Last Name: </label>
-          <input className='form-control' type='text' name='lastName' required />
+          <label htmlFor='lastName'>Last Name: </label>
+          <input className='form-control' type='text' name='lastName' value={this.state.lastName} onChange={this.handleChange} required />
         </div>
 
         <div className='form-group'>
-          <label for='email'>Email: </label>
-          <input className='form-control' type='text' name='email' required />
+          <label htmlFor='email'>Email: </label>
+          <input className='form-control' type='email' name='email' value={this.state.email} onChange={this.handleChange} required />
         </div>
 
         <div className='form-group'>
-          <label for='password'>Password: </label>
-          <input className='form-control' type='text' name='password' required />
+          <label htmlFor='password'>Password: </label>
+          <input className='form-control' type='password' name='password' value={this.state.password} onChange={this.handleChange} required />
           <p className='red'>Password must be at least 10 characters long</p>
         </div>
 

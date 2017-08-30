@@ -4,8 +4,8 @@ body {
   font-family: sans-serif;
 }
 
-a,
-a:hover {
+
+a, a:hover, a:active, a:link, a:visited {
   text-decoration: none;
   color: #d0021b;
 }
@@ -16,14 +16,13 @@ a:hover {
   border-bottom: 1px black solid;
 }
 
-.active {
-  font-weight: bold;
-}
-
 .nav li {
   margin-right: 15px;
 }
 
+.active {
+  font-weight: bold;
+}
 
 /* General commonly used styles */
 
