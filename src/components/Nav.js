@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
  function Nav () {
     return (
-        <ul className='nav navbar-inverse bg-primary'>
+        <ul className="nav navbar-inverse" style={{backgroundColor: "#1f5380"}}>
             <li>
                 <NavLink exact activeClassName='active' to='/'>
                     Home

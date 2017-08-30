@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Search from './Homepage/Search';
 import Image from './Homepage/Image';
 
+
 class Home extends Component {
   render () {
     return (
