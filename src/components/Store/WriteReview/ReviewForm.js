@@ -23,8 +23,6 @@ class ReviewForm extends Component {
     this.setState({reviewText: ''})
   }
 
-
-
   render() {
     return(
       <form onSubmit={this.handleSubmit}>

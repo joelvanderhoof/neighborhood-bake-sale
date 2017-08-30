@@ -1,38 +1,48 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
- function Nav () {
+function Nav() {
     return (
+<<<<<<< HEAD
+        <nav className='nav navbar navbar-toggleable-md'>
+            <ul className='navbar-nav mr-auto'>
+              <li>
+=======
         <ul className="nav navbar-inverse" style={{backgroundColor: "#1f5380"}}>
             <li>
+>>>>>>> Eve-Dev
                 <NavLink exact activeClassName='active' to='/'>
-                    Home
+                  Home
                 </NavLink>
-            </li>
-            <br />
-            <li>
-                <NavLink activeClassName='active' to='/search-map'>
-                    Search Map
-                </NavLink>
-            </li>
-            <br />
-            <li>
+              </li>
+              <li>
                 <NavLink activeClassName='active' to='/store'>
-                    Store
+                  Store
                 </NavLink>
-            </li>
-            <li>
+              </li>
+              <li>
                 <NavLink activeClassName='active' to='/selleradmin'>
-                    Seller Admin
+                  Seller Admin
                 </NavLink>
-            </li>
-            <li>
+              </li>
+              <li>
                 <NavLink activeClassName='active' to='/customeradmin'>
-                    Customer Admin
+                  Customer Admin
                 </NavLink>
-            </li>
-        </ul>
-    )
- }
+              </li>
+            </ul>
 
- export default Nav
+            <ul className='navbar-nav'>
+                <NavLink className='mr-3' activeClassName='active' to='signup'>
+                    Sign Up
+                </NavLink>
+                <NavLink activeClassName='active' to='login'>
+                    Log In
+                </NavLink>
+            </ul>
+        </nav>
+    )
+}
+
+export default Nav
+

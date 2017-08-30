@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import MenuItem from "./MenuItem";
+import MenuItem from "../Shared/Menu/MenuItem";
 import AddMenuItemButton from "./AddMenuItemButton";
 
 class Menu extends Component {
@@ -15,9 +15,8 @@ class Menu extends Component {
   createMenuItems() {
     let menuList;
     menuList = this.props.menu.map((menuItem, i) => {
-      console.log(i);
       return <MenuItem key={ i } index={ i } item={ menuItem.name } description={ menuItem.description } price={ menuItem.price } availability={ menuItem.availability }
-               img={ menuItem.img } edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray } />
+               img={ menuItem.image } edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray } />
     });
     return menuList;
   }
@@ -25,9 +24,9 @@ class Menu extends Component {
   render() {
     if (this.props.menu.length > 0) {
       return (
-        <div>
-          <div className="row justify-content-center text-center">
-            <h4 className="col-4">Inventory <AddMenuItemButton edit={ this.props.edit } addToStateArray={ this.props.addToStateArray } /></h4>
+        <div className="col-lg-12">
+          <div className="row justify-content-center">
+            <h4>Inventory <AddMenuItemButton edit={ this.props.edit } addToStateArray={ this.props.addToStateArray } /></h4>
           </div>
           <div>
             { this.createMenuItems() }
