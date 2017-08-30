@@ -104,3 +104,15 @@ a, a:hover {
   width: 300px;
   height: 300px;
 }
+
+
+/* Customer Admin styles */
+.card {
+  margin-bottom: 5px;
+}
+
+.list-group-item.active {
+  background-color: #d0021b;
+}
+
+
