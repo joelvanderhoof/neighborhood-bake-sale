@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CustomerReviews from './CustomerReviews';
 import CustomerOrders from './CustomerOrders';
-import helpers from '../utils/helpers';
+// import helpers from '../utils/helpers';
 
 /***********TEST DATA*************************************/
 
@@ -22,9 +22,8 @@ var sushis = {
     comments: "Sushi was just right"
 }
 
-var testReviews = {
-    restaurantName: [bakerys, sushis]
-}
+var testReviews = [bakerys, sushis];
+
 
 var order1 = {
     id: 1,
@@ -38,9 +37,7 @@ var order2 = {
     price: "$100.00"
 }
 
-var testOrders = {
-    orders: [order1, order2]
-}
+var testOrders =  [order1, order2];
 
 /*********************************************************/
 
@@ -53,8 +50,8 @@ class CustomerAdmin extends Component {
             orders: testOrders,
             reviews: testReviews
         };
-        // this.getReviews = this.getReviews.bind(this);
-        // this.getOrders = this.getOrders.bind(this);
+        this.renderReviews = this.renderReviews.bind(this);
+        this.renderOrders = this.renderOrders.bind(this);
     }
 
     getProfile() {
@@ -82,9 +79,7 @@ class CustomerAdmin extends Component {
         console.log(ordersList);
         return ordersList.map(item => (
             <CustomerOrders key={item.id}>
-                <ul className="list-group">
-                    {item.comments}
-                </ul>
+                {item.food}
             </CustomerOrders>
         ));
     }
@@ -96,7 +91,7 @@ class CustomerAdmin extends Component {
                 <div className="row">
                     <div className="col-4">
                         <div className="card" style={{width: '20rem'}}>
-                            <img className="card-img-top" src="https://media.wired.com/photos/5933392eaef9a462de985b45/master/w_660,c_limit/yeun.jpg" alt="Card cap"/>
+                            <img className="card-img-top" src="" alt="Card cap"/>
                             <div className="card-body">
                                 <h4 className="card-title">{this.state.profilename}</h4>
                                 <p className="card-text">{this.state.quote}</p>
@@ -106,10 +101,9 @@ class CustomerAdmin extends Component {
                     <div className="col-8">
                         <div className="tab-content" id="nav-tabContent">
                             <div className="tab-pane fade show active" id="list-messages" role="tabpanel">future development</div>
-                            <div className="tab-pane fade" id="list-reviews" role="tabpanel"></div>
-                            <div className="tab-pane fade" id="list-orders" role="tabpanel">...</div>
+                            <div className="tab-pane fade" id="list-reviews" role="tabpanel">{this.renderReviews()}</div>
+                            <div className="tab-pane fade" id="list-orders" role="tabpanel">{this.renderOrders()}</div>
                             <div className="tab-pane fade" id="list-settings" role="tabpanel">future development</div>
-
                         </div>
                     </div>
                 </div>
