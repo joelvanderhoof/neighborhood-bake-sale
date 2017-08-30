@@ -163,9 +163,9 @@ class SellerAdmin extends Component {
           <div className="col-md-6 border sellerLeft pre-scrollable">
             <div className="row">
               <div className="col-xl-6 col-md-12 col-sm-12">
+              <StoreDescription description={ this.state.description } edit={ false } updateState={ this.updateState } />
                 <StoreImage storeImage={ this.state.storeimage } edit={ false } />
                 <StoreHours hours={ this.state.hours } edit={ false } updateState={ this.updateState } />
-                <StoreDescription description={ this.state.description } edit={ false } updateState={ this.updateState } />
               </div>
               <div className="col-xl-6 col-md-12 col-sm-12">
                 <Menu menu={ this.state.menu } edit={ false } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
