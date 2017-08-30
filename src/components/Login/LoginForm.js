@@ -1,17 +1,43 @@
 import React, { Component } from 'react';
 
 class LoginForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: '',
+      password: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  
+  handleChange(event) {
+    this.setState({
+      [event.currentTarget.name]: event.target.value
+    });
+  };
+
+  handleSubmit (event) {
+    event.preventDefault();
+    this.props.saveState(this.state);
+    this.setState({
+      email: '',
+      password: ''
+    })
+  }
+
   render () {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div className='form-group'>
-          <label for='email'>Email: </label>
-          <input className='form-control' type='text' name='email' required />
+          <label htmlFor='email'>Email: </label>
+          <input className='form-control' type='email' name='email' value={this.state.email} onChange={this.handleChange} required />
         </div>
 
         <div className='form-group'>
-          <label for='password'>Password: </label>
-          <input className='form-control' type='text' name='password' required />
+          <label htmlFor='password'>Password: </label>
+          <input className='form-control' type='password' name='password' value={this.state.password} onChange={this.handleChange} required />
           <p className='red'>Password must be at least 10 characters long</p>
         </div>
 
