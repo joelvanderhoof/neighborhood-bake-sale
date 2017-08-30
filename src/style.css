@@ -16,14 +16,6 @@ a, a:hover, a:active, a:link, a:visited {
   border-bottom: 1px;
 }
 
-<<<<<<< HEAD
-=======
-.active {
-  font-weight: bold;
-  color: black;
-}
-
->>>>>>> Eve-Dev
 .nav li {
   margin-right: 15px;
 }
