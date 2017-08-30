@@ -4,6 +4,7 @@ body {
   font-family: sans-serif;
 }
 
+
 a, a:hover, a:active, a:link, a:visited {
   text-decoration: none;
   color: #d0021b;
@@ -24,6 +25,7 @@ a, a:hover, a:active, a:link, a:visited {
 }
 
 /* General commonly used styles */
+
 .border {
   border-width: 1px;
   border-style: solid;
@@ -33,7 +35,9 @@ a, a:hover, a:active, a:link, a:visited {
   color: #d0021b;
 }
 
+
 /* Store */
+
 .container-store {
   padding: 15px 15px;
 }
@@ -50,65 +54,69 @@ a, a:hover, a:active, a:link, a:visited {
   height: 30px;
 }
 
+
 /* Store Rating */
+
 .rating {
   display: inline-block;
 }
 
-.rating:not(:checked) > div > input {
-  position:absolute;
-  top:-9999px;
-  clip:rect(0,0,0,0);
+.rating:not(:checked)>div>input {
+  position: absolute;
+  top: -9999px;
+  clip: rect(0, 0, 0, 0);
 }
 
-.rating:not(:checked) > div > label {
-  float:right;
-  width:1.28em;
+.rating:not(:checked)>div>label {
+  float: right;
+  width: 1.28em;
   margin: 0px 0.25em;
-  overflow:hidden;
-  white-space:nowrap;
-  cursor:pointer;
-  font-size:1em;
-  line-height:1.2;
-  color:#ddd;
-  text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 1em;
+  line-height: 1.2;
+  color: #ddd;
+  text-shadow: 1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0, 0, 0, .5);
 }
 
-.rating:not(:checked) > div > label:before {
+.rating:not(:checked)>div>label:before {
   content: '★ ';
 }
 
-.rating > div > input:checked ~ label {
+.rating>div>input:checked~label {
   color: #f70;
-  text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+  text-shadow: 1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0, 0, 0, .5);
 }
 
-.rating:not(:checked) > div > label:hover,
-.rating:not(:checked) > div > label:hover ~ label {
+.rating:not(:checked)>div>label:hover,
+.rating:not(:checked)>div>label:hover~label {
   color: gold;
-  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+  text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5);
 }
 
-.rating > div > input:checked + label:hover,
-.rating > div > input:checked + label:hover ~ label,
-.rating > div > input:checked ~ label:hover,
-.rating > div > input:checked ~ label:hover ~ label,
-.rating > label:hover ~ input:checked ~ label {
+.rating>div>input:checked+label:hover,
+.rating>div>input:checked+label:hover~label,
+.rating>div>input:checked~label:hover,
+.rating>div>input:checked~label:hover~label,
+.rating>label:hover~input:checked~label {
   color: #ea0;
-  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+  text-shadow: 1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0, 0, 0, .5);
 }
 
-.rating > div > label:active {
-  position:relative;
-  top:2px;
-  left:2px;
+.rating>div>label:active {
+  position: relative;
+  top: 2px;
+  left: 2px;
 }
 
 .store-front-star {
   pointer-events: none;
 }
 
+
 /* Store Map */
+
 .store-map {
   width: 100%;
   height: 600px;
@@ -120,58 +128,66 @@ a, a:hover, a:active, a:link, a:visited {
   height: 200px;
 }
 
+
 /* Order */
+
 .order {
   min-height: 400px;
 }
 
 
 /* Seller Admin */
-.stamp-container{
+
+.stamp-container {
   width: 100px;
 }
 
-.stamp{
+.stamp {
   color: red;
   border-color: red;
   padding: 5px;
-  left:50px;
-  top:10px;
-  border-radius:5px;
-  position:relative;
+  left: 50px;
+  top: 10px;
+  border-radius: 5px;
+  position: relative;
   background-color: white;
   -webkit-animation-name: pulse;
   animation-name: pulse;
-  animation-delay:0.5s;
-  -webkit-animation-delay:0.5s;
+  animation-delay: 0.5s;
+  -webkit-animation-delay: 0.5s;
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
   opacity: 0;
-  -webkit-animation-fill-mode:forwards;
-   animation-fill-mode:forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 }
 
-@-webkit-keyframes pulse{
-  0%{
+@-webkit-keyframes pulse {
+  0% {
     color: red;
     border-color: red;
     opacity: 0;
   }
-  10%{
+  10% {
     color: red;
     border-color: red;
-    opacity:.50;
+    opacity: .50;
     transform-origin: 50% 50%;
     transform: rotate(-2deg) scale(5);
     transition: all .3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
   }
-  100%{
-    opacity:1;
+  100% {
+    opacity: 1;
     transform: rotate(-15deg) scale(1);
     color: red;
     border-color: red;
   }
 }
 
+ /* .sellerContainer {
+   height: 100%;
+ } */
 
-
+ .pre-scrollable {
+  max-height: 900px;
+ }
