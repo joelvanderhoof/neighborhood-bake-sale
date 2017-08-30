@@ -6,13 +6,13 @@ module.exports = (passport, user) => {
   let LocalStrategy = require('passport-local').Strategy;
 
   passport.serializeUser((user, done) => {
-    console.log('serialized User', user)
+    console.log('User has been serialized. \n user Id: ', user.id)
     done(null, user.id);
   });
 
   // Deserialize the user
   passport.deserializeUser((id, done) => {
-    console.log('deserialized id', id)
+    console.log('User has been deserialized. Id: ', id)
     User.findById(id).then((user) => {
       if (user) {
         done(null, user.get());
@@ -21,15 +21,14 @@ module.exports = (passport, user) => {
       }
     });
   });
+// -----------------------------------------------------------------------------------------
   // Signup uses email as username and will have a hashed password
   passport.use('local-signup', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true // allows us to pass back the entire request to the callback
   }, (req, email, password, done) => {
-    console.log('req body',req.body);
-    console.log('email',email);
-    console.log('password',password);
+    console.log('Sign up has been received: \n',req.body);
     let generateHash =  (password) => {
       return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
     };
@@ -54,29 +53,27 @@ module.exports = (passport, user) => {
             lastName: req.body.lastName
           };
           //Creates user with password
-          console.log(data);
+          console.log('This object will be created on mongo: \n',data);
           User.create(data)
             .then((newUser, created) => {
               if (!newUser) {
                 return done(null, false);
-              }
-
-              if (newUser) {
+              }else {
                 return done(null, newUser);
               }
             });
         }
       });
   }));
-
-  //LOCAL SIGNIN
-  passport.use('local-signin', new LocalStrategy({
+// -----------------------------------------------------------------------------------------
+  //LOCAL login
+  passport.use('local-login', new LocalStrategy({
     // by default, local strategy uses username and password, we will override with email
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true // allows us to pass back the entire request to the callback
   }, (req, email, password, done) => {
-    console.log('req body',req.body);
+    console.log('Log in has been received: \n',req.body);
     let User = user;
     let isValidPassword =  (userpass, password) => {
       return bCrypt.compareSync(password, userpass);
@@ -85,21 +82,23 @@ module.exports = (passport, user) => {
     User.findOne({
         email: req.body.email
       })
-      .then( (user) => {
+      .then( (user) => { 
         //Checks database if the email already exists
         if (!user) {
+          console.log(`Email is invalid: ${req.body.email}`)
           return done(null, false, {
             message: 'Email does not exist'
           });
         }
         //Checks database if the hashed passwords match
         if (!isValidPassword(user.password, password)) {
+          console.log('Invalid Password')
           return done(null, false, {
             message: 'Incorrect password.'
           });
         }
-        let userinfo = user; // Unsure if this works.
-        return done(null, userinfo);
+        console.log('User object to be returned: \n',user)
+        return done(null, user);
         //Error handler
       })
       .catch( (err) => {

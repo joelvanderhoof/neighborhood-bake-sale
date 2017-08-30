@@ -2,15 +2,14 @@
 var exports = module.exports = {};
 
 exports.signup = function(req,res){
-	res.redirect('/');
+	res.redirect('/signup');
 };
 
-exports.signin = function(req,res){
-	res.redirect('/');
+exports.login = function(req,res){
+	res.redirect('/login');
 };
 
 exports.home = function(req,res){
-	let userInfo = req.user;
   res.redirect('/');
 };
 
