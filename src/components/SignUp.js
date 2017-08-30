@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SignUpForm from './SignUp/SignUpForm';
+import helpers from './utils/helpers';
 
 class SignUp extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class SignUp extends Component {
   }
 
   saveState (currentState) {
-    console.log(currentState);
+    helpers.signup(currentState);
   }
 
   render () {

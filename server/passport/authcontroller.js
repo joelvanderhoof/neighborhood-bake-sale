@@ -1,21 +1,21 @@
 //exports to ..routes/auth.js
-const exports = module.exports = {};
+var exports = module.exports = {};
 
-exports.signup = (req,res) => {
+exports.signup = function(req,res){
 	res.redirect('/');
 };
 
-exports.signin = (req,res) => {
+exports.signin = function(req,res){
 	res.redirect('/');
 };
 
-exports.home = (req,res) => {
+exports.home = function(req,res){
 	let userInfo = req.user;
   res.redirect('/');
 };
 
-exports.logout = (req,res) => {
-  req.session.destroy((err) => {
+exports.logout = function(req,res){
+  req.session.destroy(function(err) {
   res.redirect('/');
   });
 };

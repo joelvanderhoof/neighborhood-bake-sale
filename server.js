@@ -37,48 +37,55 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(cookieParser());
 
+// Serve files from the public folder
+app.use(express.static(path.resolve(__dirname, 'build')));
+
 // Passport ------------------------------------------------------------------
 app.use(session({
     secret: 'benColeIsAwesome1',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: { secure: true }
 }))
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Serve files from the public folder
-app.use(express.static(path.resolve(__dirname, 'build')));
+// Load passport strategies
+const User = require('./server/models/User');
+// const Store = require('./../models/Store');
+
+require('./server/passport/passport.js')(passport, User);
+const authRoute = require('./server/routes/auth.js')(app, passport);
 
 // Sets login route before /api express routes
-app.post('/login',
-passport.authenticate('local', { successRedirect: '/',
-                                 failureRedirect: '/login',
-                                 failureFlash: false }) // set false for now, will revisit
-);
+// app.post('/login',
+// passport.authenticate('local', { successRedirect: '/',
+//                                  failureRedirect: '/login',
+//                                  failureFlash: false }) // set false for now, will revisit
+// );
 
-// Passport Local Strategy
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-}, (username, password, done) => {
-    User.findOne({ username: email },  (err, user) => {
-        if (err) { 
-            return done(err);
-        }
-        if (!user) {
-            return done(null, false, { message: 'Invalid email.' });
-        }
-        if (!user.validPassword(password)) {
-            return done(null, false, { message: 'Invalid password.' });
-        }
-        return done(null, user);
-    });
-}));
+// // Passport Local Strategy
+// passport.use(new LocalStrategy({
+//     usernameField: 'email',
+//     passwordField: 'password'
+// }, (username, password, done) => {
+//     User.findOne({ username: email },  (err, user) => {
+//         if (err) { 
+//             return done(err);
+//         }
+//         if (!user) {
+//             return done(null, false, { message: 'Invalid email.' });
+//         }
+//         if (!user.validPassword(password)) {
+//             return done(null, false, { message: 'Invalid password.' });
+//         }
+//         return done(null, user);
+//     });
+// }));
 
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
+// passport.serializeUser((user, done) => {
+//     done(null, user.id);
+// });
 // temporarily using dummy deserializedUser
 // passport.deserializeUser((id, done) => { 
 //     User.findById(id, (err, user) => {
@@ -86,25 +93,25 @@ passport.serializeUser((user, done) => {
 //     });
 // });
 
-passport.deserializeUser(function(id, done) {
-    console.log('Deserialize user called.');
-    return done(null, { firstName: 'Foo', lastName: 'Bar' });
-  });
+// passport.deserializeUser(function(id, done) {
+//     console.log('Deserialize user called.');
+//     return done(null, { firstName: 'Foo', lastName: 'Bar' });
+//   });
 
-app.get('/login' ,(req,res) => {
-    req.login(user, (err) => {
-        if (err) {
-            return next(err);
-        }
-        return res.redirect('/users/' + req.user.username);
-    });
-})
+// app.get('/login' ,(req,res) => {
+//     req.login(user, (err) => {
+//         if (err) {
+//             return next(err);
+//         }
+//         return res.redirect('/users/' + req.user.username);
+//     });
+// })
 
 
-app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-});
+// app.get('/logout', (req, res) => {
+//     req.logout();
+//     res.redirect('/');
+// });
 //-------------------------------------------------------------------------------
 
 //Sets up express routes

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LoginForm from './Login/LoginForm';
+import helpers from './utils/helpers';
 
 class Login extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Login extends Component {
   }
 
   saveState (currentState) {
-    console.log(currentState);
+    helpers.logIn(currentState);
   }
 
   render () {
