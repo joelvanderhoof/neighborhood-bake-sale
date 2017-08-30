@@ -74,18 +74,18 @@ class MenuItem extends Component {
     } else {
       return (
         <div className="row border m-1 pt-3 pb-3">
-          <div className="col-lg-4">
+          <div className="col-md-4 col-sm-12">
             <img className="img-fluid border" src={ this.props.img } alt='menu item' />
+
+            { "$" + parseFloat(this.props.price / 100).toFixed(2) }
+
           </div>
-          <div className="col-lg-8">
+          <div className="col-md-8 col-sm-12">
             <div className="row">
-              <span className="col-lg-8"><strong>{ this.props.item }</strong></span>
-              <p className="col-lg-4">
-                { "$" + parseFloat(this.props.price / 100).toFixed(2) }
-              </p>
+              <span className="col-md-8"><strong>{ this.props.item }</strong></span>
             </div>
             <div className="row">
-              <p className="col-lg-12">
+              <p className="col-md-12">
                 { this.props.description }
               </p>
             </div>
