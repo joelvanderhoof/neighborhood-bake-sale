@@ -24,7 +24,7 @@ class StoreHours extends Component {
   render() {
     return (
       <div className="border">
-        <h4 className="text-center" style={{"border-bottom": "4px red solid"}}>Hours of Operation</h4>
+        <h4 className="text-center" style={{"borderBottom": "4px red solid"}}>Hours of Operation</h4>
         { this.listHours() }
       </div>
       );

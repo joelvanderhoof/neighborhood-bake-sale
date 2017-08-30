@@ -156,7 +156,7 @@ a, a:hover, a:active, a:link, a:visited {
   color: red;
   border-color: red;
   padding: 5px;
-  left: 50px;
+  left: -20px;
   top: 10px;
   border-radius: 5px;
   position: relative;
@@ -199,6 +199,6 @@ a, a:hover, a:active, a:link, a:visited {
  } */
 
  .pre-scrollable {
-  max-height: 900px;
+  max-height: 850px;
  }
 

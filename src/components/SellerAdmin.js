@@ -92,7 +92,15 @@ class SellerAdmin extends Component {
   addToStateArray(value) {
     if (value === "menu") {
       let currentMenu = this.state.menu;
-      currentMenu.push("");
+      let emptyMenuItem = {
+        name: "Menu Name",
+        description: "Menu Description",
+        price: 0,
+        image: "https://static.pexels.com/photos/563067/pexels-photo-563067.jpeg",
+        availability: "Sold Out!" //current inventory
+      };
+
+      currentMenu.push(emptyMenuItem);
       this.setState({
         menu: currentMenu
       });
@@ -154,12 +162,12 @@ class SellerAdmin extends Component {
         <div className="row sellerContainer">
           <div className="col-md-6 border sellerLeft pre-scrollable">
             <div className="row">
-              <div className="col-6">
+              <div className="col-xl-6 col-md-12 col-sm-12">
+              <StoreDescription description={ this.state.description } edit={ false } updateState={ this.updateState } />
                 <StoreImage storeImage={ this.state.storeimage } edit={ false } />
                 <StoreHours hours={ this.state.hours } edit={ false } updateState={ this.updateState } />
-                <StoreDescription description={ this.state.description } edit={ false } updateState={ this.updateState } />
               </div>
-              <div className="col-lg-6 col-md-12 col-sm-12">
+              <div className="col-xl-6 col-md-12 col-sm-12">
                 <Menu menu={ this.state.menu } edit={ false } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
                 />
               </div>
