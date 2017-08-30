@@ -1,47 +1,52 @@
 import React, { Component } from 'react';
 import Menu from "./Seller/Menu";
-import StoreTitle from "./Seller/StoreTitle";
+// import StoreTitle from "./Seller/StoreTitle";
 import StoreHours from "./Seller/StoreHours";
-import StoreDescription from "./Seller/StoreDescription";
+import StoreDescription from "./Shared/StoreDescription";
 // import OrderQueue from "./Seller/OrderQueue";
 import EditButton from "./Seller/EditButton";
+import StoreImage from "./Seller/StoreImage";
+// import StoreFront from "./Store/StoreFront.js";
+import axios from "axios";
 
 let testObj = {
-  storeID: "1",
-  sellerID: "111", // Same as Sellers.ID
-  title: "John's Bistro",
+  storeID: "1", //Same as Sellers.ID
+  name: "John's Bistro",
   location: "Irvine, CA", // physical adress
-  menu: [
-    "Pizza", "Spaghetti", "Bread Sticks"
-  ], // Array of menu items
+  orders: [], // Array of orders
   hours: [
-    "9:00AM-12:00PM", "1:00PM-6:00PM"
-  ], // Array of daily hours
+    "9:00AM-12:00PM", "1:00PM-6:00PM", "1:00PM-6:00PM", "1:00PM-6:00PM", "1:00PM-6:00PM", "1:00PM-6:00PM", "1:00PM-6:00PM"
+  ], // Array of objects for each day
   description: "Neighborhood Italian Spot",
-  photo: [], // Array of image URL
+  storeImage: "http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg",
+  photos: [], // Array of image URL
   certified: false, // Store passes inspection
-  review: [], // Array of reviews
+  review: [], // Array of reviews IDs
 }
 
 let pizza = {
-  name: "slice of pizza",
-  description: "cheese, sauce, craft pepperoni",
-  price: 150,
-  quantity: 10 //current inventory
+  StoreID: String, //Same as Sellers.ID
+  name: "Large Pepperoni Pizza",
+  description: "Gluten Free, Cheese from the rare hipster Cow, Pepperoni made from an Oak Tree",
+  price: 1150,
+  image: "http://cdn.schwans.com/media/images/products/56720-1-1540.jpg",
+  availability: "In Stock!" //current inventory
 };
 
 let sandwich = {
-  name: "peanut butter sammy",
-  description: "cheese, peanuts, craft jam",
+  name: "Cardboard",
+  description: "Made with no Peanuts",
   price: 200,
-  quantity: 10 //current inventory
+  image: "https://static.pexels.com/photos/236834/pexels-photo-236834.jpeg",
+  availability: "Sold Out!" //current inventory
 };
 
 let drink = {
-  name: "cup of coke",
-  description: "coke, secret, craft can",
+  name: "Fat Free Burger",
+  description: "0 Calories",
   price: 100,
-  quantity: 15 //current inventory
+  image: "https://static.pexels.com/photos/8996/pexels-photo.jpg",
+  availability: "Sold Out!" //current inventory
 };
 
 let testMenu = [pizza, sandwich, drink];
@@ -52,9 +57,10 @@ class SellerAdmin extends Component {
     this.state = {
       edit: false,
       menu: testMenu, //testObj.menu,
-      title: testObj.title,
+      name: testObj.name,
       hours: testObj.hours,
-      description: testObj.description
+      description: testObj.description,
+      storeimage: testObj.storeImage
     };
 
     this.setEdit = this.setEdit.bind(this);
@@ -72,8 +78,13 @@ class SellerAdmin extends Component {
   }
 
   setSave() {
-    this.setState({
-      edit: !this.state.edit
+    // this.setState({
+    //   edit: !this.state.edit
+    // });
+
+    console.log(this.state);
+    return axios.get("api/useLater").then((data) => {
+      console.log(data);
     });
   }
 
@@ -99,13 +110,10 @@ class SellerAdmin extends Component {
   removeFromStateArray(value, index) {
     if (value === "menu") {
       let currentMenu = this.state.menu;
-      console.log(currentMenu)
       currentMenu.splice(index, 1);
-      console.log(currentMenu);
       this.setState({
         menu: currentMenu
       });
-      console.log(this.state.menu);
     }
     if (value === "hours") {
       let currentHours = this.state.hours;
@@ -117,10 +125,6 @@ class SellerAdmin extends Component {
   }
 
   updateState(key, value, index, type) {
-    //if value empty, do nothing
-    if (value.length === 0) {
-      return;
-    }
     //no index - not an array
     if (index === undefined) {
       let stateObj = {};
@@ -143,13 +147,34 @@ class SellerAdmin extends Component {
   render() {
     return (
       <div>
-        <h1>Seller Admin Page</h1>
-        <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ this.state.edit } />
-        <StoreTitle title={ this.state.title } edit={ this.state.edit } updateState={ this.updateState } />
-        <StoreHours hours={ this.state.hours } edit={ this.state.edit } updateState={ this.updateState } />
-        <StoreDescription description={ this.state.description } edit={ this.state.edit } updateState={ this.updateState } />
-        <Menu menu={ this.state.menu } edit={ this.state.edit } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
-        />
+        <h1 className="text-center">{ this.state.name }'s Admin Page <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ true } /></h1>
+        { /*  <StoreTitle title={ this.state.title } edit={ false } updateState={ this.updateState } /> */ }
+        <div className="text-center">
+        </div>
+        <div className="row sellerContainer">
+          <div className="col-md-6 border sellerLeft pre-scrollable">
+            <div className="row">
+              <div className="col-6">
+                <StoreImage storeImage={ this.state.storeimage } edit={ false } />
+                <StoreHours hours={ this.state.hours } edit={ false } updateState={ this.updateState } />
+                <StoreDescription description={ this.state.description } edit={ false } updateState={ this.updateState } />
+              </div>
+              <div className="col-lg-6 col-md-12 col-sm-12">
+                <Menu menu={ this.state.menu } edit={ false } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6 border sellerRight pre-scrollable">
+            { /*   <StoreTitle title={ this.state.title } edit={ true } updateState={ this.updateState } /> */ }
+            <StoreImage storeImage={ this.state.storeimage } edit={ true } updateState={ this.updateState } />
+            <StoreHours hours={ this.state.hours } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
+            />
+            <StoreDescription description={ this.state.description } edit={ true } updateState={ this.updateState } />
+            <Menu menu={ this.state.menu } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
+            />
+          </div>
+        </div>
       </div>
       );
   }

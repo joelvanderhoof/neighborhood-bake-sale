@@ -15,9 +15,6 @@ When we are ready to deploy, use npm run build to create a build folder. The act
 Stripe js (node)
 https://github.com/stripe/stripe-node
 
-Passport with React
-https://vladimirponomarev.com/blog/authentication-in-react-apps-jwt
-
 Google Maps (node)
 https://github.com/googlemaps/google-maps-services-js
 
@@ -58,7 +55,7 @@ New Store Object:
 { 
     "sellerID": "5999d619126eaa49efa998e2",
     "location": "123 Main Street, Here, CA 92831",
-        "hours": "[ {day: Monday, hours: 9-5}, {day: Tuesday, hours: 9-5}, {day: Wednesday, hours: 9-5}, {day: Thursday, hours: 9-5}, {day: Friday, hours: 9-5}, ]",
+    "hours": "[ {day: Monday, hours: 9-5}, {day: Tuesday, hours: 9-5}, {day: Wednesday, hours: 9-5}, {day: Thursday, hours: 9-5}, {day: Friday, hours: 9-5}, ]",
     "description": "This is a short description about my store.  It is a store that sells things.",
     "photos": "http://www.hamburgerhamlet.com/wp-content/uploads/2014/11/the-hamburger-hamlet-sherman-oaks-40.jpg", 
     "certified": true

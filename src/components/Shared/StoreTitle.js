@@ -4,12 +4,9 @@ class StoreTitle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
     };
 
-    this.handleChange = this
-      .handleChange
-      .bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
@@ -20,7 +17,7 @@ class StoreTitle extends Component {
     if (this.props.edit) {
       return (
         <div>
-          <h4 className="text-center">Store Name</h4>
+          <h4>Store Name</h4>
           <div className="row">
             <div className="col-lg-8 offset-lg-2">
               <input className="form-control" name="title" type="text" onChange={ this.handleChange } defaultValue={ this.props.title } id="storeTitle" />
@@ -30,7 +27,9 @@ class StoreTitle extends Component {
         );
     }
     return (
-      <h1 className="text-center">{ this.props.title }</h1>
+      <div className={ this.props.storeTitleStyle }>
+        { this.props.title }
+      </div>
       );
   }
 }

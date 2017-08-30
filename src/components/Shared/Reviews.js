@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ReviewItem from './ReviewItem';
+import ReviewItem from './Reviews/ReviewItem';
 
 // Dummy review data
 let reviews = [
@@ -36,8 +36,8 @@ class Reviews extends Component {
 
   render() {
     return (
-      <ul className='list-unstyled'>
-        <h1>Reviews: </h1>
+      <ul className='list-unstyled mt-3'>
+        <strong>Current Reviews: </strong>
         {this.mapReviews()}
       </ul>
     )

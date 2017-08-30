@@ -41,7 +41,7 @@ const UserSchema = new Schema({
     isSeller: Boolean, // 
     stores: [{
         type: Schema.Types.ObjectId, 
-        ref: 'Store'}] // Array of orders
+        ref: 'Store'}]
 });
 
 const User = mongoose.model("User", UserSchema);

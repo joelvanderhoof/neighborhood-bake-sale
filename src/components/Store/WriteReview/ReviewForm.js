@@ -23,8 +23,6 @@ class ReviewForm extends Component {
     this.setState({reviewText: ''})
   }
 
-
-
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
@@ -35,7 +33,7 @@ class ReviewForm extends Component {
             id='review-text'
             name='reviewText'
             value={this.state.reviewText}
-            placeholder='Write your review here...'
+            placeholder='Your review helps others learn about great local businesses.'
             onChange={this.handleChange}
             required />
         </div>

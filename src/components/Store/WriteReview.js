@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import Rating from './WriteReview/Rating';
+import Rating from '../Shared/Rating';
 import ReviewForm from './WriteReview/ReviewForm';
-import Reviews from './WriteReview/Reviews';
+import Reviews from '../Shared/Reviews';
 
 class WriteReview extends Component {
   constructor(props) {
@@ -12,12 +12,8 @@ class WriteReview extends Component {
       rating: ''
     };
 
-    this.getReview = this
-      .getReview
-      .bind(this);
-    this.getRating = this
-      .getRating
-      .bind(this);
+    this.getReview = this.getReview.bind(this);
+    this.getRating = this.getRating.bind(this);
   }
 
   getReview(review) {
