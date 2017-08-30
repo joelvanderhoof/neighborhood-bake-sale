@@ -17,7 +17,7 @@ class StoreImage extends Component {
     render() {
         if (!this.props.edit) {
             return (
-                <img className='img-fluid rounded mt-3' src={ this.props.storeImage } alt='Italian Bistro' />
+                <img className='img-fluid rounded' src={ this.props.storeImage } alt='Italian Bistro' />
                 );
         }
         return (
