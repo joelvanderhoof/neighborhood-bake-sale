@@ -33,11 +33,17 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    photo: String, //image URL
+    photo: { 
+        type: String, //image URL
+        default: null
+    }, 
     // orders: [{
     //     type: Schema.Types.ObjectId, 
     //     ref: 'Order'}], // Array of orders
-    isSeller: Boolean, // 
+    isSeller: {
+        type: Boolean,
+        default: 0
+    }, // 
     // stores: [{
     //     type: Schema.Types.ObjectId, 
     //     ref: 'Store'}]

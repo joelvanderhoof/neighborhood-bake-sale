@@ -69,7 +69,7 @@ function validateLoginForm(payload) {
 
 router.post('/signup', (req,res,next) => {
     const validationResult = validateSignupForm(req.body);
-    console.log('Validation Results: ',validationResult);
+    console.log('Validation Results: ',validationResult, '\n');
     if (!validationResult.success) {
         return res.status(400).json({
             success: false,
@@ -99,7 +99,7 @@ router.post('/signup', (req,res,next) => {
             });
         }
 
-        console.log('Successfully registered!')
+        console.log('Successfully registered! \n')
         return res.status(200).json({
             success: true,
             message: 'You have successfully signed up! Now you should be able to log in.'
@@ -130,10 +130,11 @@ router.post('/login', (req,res,next) => {
                 message: 'Could not process the form'
             });
         }
-
+        console.log('-------------------------------------------');
         console.log('User has logged in with the following data:');
-        console.log('token',token);
+        console.log('JSON Web Token',token);
         console.log('userData', userData)
+        console.log('-------------------------------------------');
         return res.json({
             success: true,
             message: 'You have successfully logged in!',
