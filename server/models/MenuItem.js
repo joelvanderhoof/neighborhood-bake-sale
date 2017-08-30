@@ -8,8 +8,6 @@ const MenuItemSchema = new Schema({
     image: String, // image URL
     description: String,
     price: Number, // price in cents
-    inventory: Number,
-    active: Boolean // enable user to turn emnu item on or off
 });
 
 const MenuItem = mongoose.model("MenuItem", MenuItemSchema);

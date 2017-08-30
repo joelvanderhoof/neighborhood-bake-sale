@@ -3,11 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
-//const config = require('./config');
-
-//const localSignupStrategy = require('./server/passport/local-signup');
-//const localLoginStrategy = require('./server/passport/local-signin');
-
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
 
 //Mongo/Mongoose --------------------------------------------------------------
 const cookieParser = require('cookie-parser');
@@ -16,7 +13,7 @@ const DBconnect = 'mongodb://tiger-foodie:benColeIsAwesome1@ds119578.mlab.com:19
 
 // Configure DB
 mongoose.Promise = Promise;
-mongoose.connect(DBconnect);
+mongoose.connect(DBconnect, { useMongoClient: true });
 const db = mongoose.connection;
 
 db.on('error', (err) => {
@@ -43,13 +40,83 @@ app.use(cookieParser());
 // Serve files from the public folder
 app.use(express.static(path.resolve(__dirname, 'build')));
 
-// app.use(express.static('./server/static/'));
-// app.use(express.static('./client/dist/'));
+// Passport ------------------------------------------------------------------
+app.use(session({
+    secret: 'benColeIsAwesome1',
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
+// Load passport strategies
+const User = require('./server/models/User');
+// const Store = require('./../models/Store');
+
+require('./server/passport/passport.js')(passport, User);
+const authRoute = require('./server/routes/auth.js')(app, passport);
+
+// Sets login route before /api express routes
+// app.post('/login',
+// passport.authenticate('local', { successRedirect: '/',
+//                                  failureRedirect: '/login',
+//                                  failureFlash: false }) // set false for now, will revisit
+// );
+
+// // Passport Local Strategy
+// passport.use(new LocalStrategy({
+//     usernameField: 'email',
+//     passwordField: 'password'
+// }, (username, password, done) => {
+//     User.findOne({ username: email },  (err, user) => {
+//         if (err) { 
+//             return done(err);
+//         }
+//         if (!user) {
+//             return done(null, false, { message: 'Invalid email.' });
+//         }
+//         if (!user.validPassword(password)) {
+//             return done(null, false, { message: 'Invalid password.' });
+//         }
+//         return done(null, user);
+//     });
+// }));
+
+// passport.serializeUser((user, done) => {
+//     done(null, user.id);
+// });
+// temporarily using dummy deserializedUser
+// passport.deserializeUser((id, done) => { 
+//     User.findById(id, (err, user) => {
+//         done(err, user);
+//     });
+// });
+
+// passport.deserializeUser(function(id, done) {
+//     console.log('Deserialize user called.');
+//     return done(null, { firstName: 'Foo', lastName: 'Bar' });
+//   });
+
+// app.get('/login' ,(req,res) => {
+//     req.login(user, (err) => {
+//         if (err) {
+//             return next(err);
+//         }
+//         return res.redirect('/users/' + req.user.username);
+//     });
+// })
+
+
+// app.get('/logout', (req, res) => {
+//     req.logout();
+//     res.redirect('/');
+// });
+//-------------------------------------------------------------------------------
 
 //Sets up express routes
 app.use('/api', API);
-//RTCSessionDescription
+
 // Serve home page
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
@@ -61,12 +128,11 @@ app.use((req, res)=> {
 });
 
 //Sets up express to handle 500 INTERNAL SERVER ERROR
-app.use(function(error, req, res) {
+app.use((error, req, res) => {
     res.status(500).send('500: Internal Server Error');
 });
 
-
 // Start server
-    app.listen(PORT,()=>{
-        console.log(`The server is listening on port${PORT}`);
-    });
+app.listen(PORT,()=>{
+    console.log(`The server is listening on port ${PORT}`);
+});
