@@ -22,6 +22,7 @@ a, a:hover, a:active, a:link, a:visited {
 
 .active {
   font-weight: bold;
+  color: black;
 }
 
 /* General commonly used styles */
