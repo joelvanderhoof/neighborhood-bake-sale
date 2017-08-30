@@ -1,11 +1,7 @@
 import Main from './components/Main';
-import Nav from './components/Nav';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
-import Store from './components/Store';
-import SellerAdmin from './components/SellerAdmin'
-import CustomerAdmin from './components/Customer/CustomerAdmin';
 import Auth from './modules/Auth';
 
 const routes = {
