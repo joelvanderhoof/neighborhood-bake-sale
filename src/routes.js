@@ -5,7 +5,7 @@ import Home from './components/Home';
 import Auth from './modules/Auth';
 
 const routes = {
-  // base component (wrapper for the whole application).
+  // Main component (wrapper for the whole application).
   component: Main,
   childRoutes: [
 

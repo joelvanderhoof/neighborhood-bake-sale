@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import Auth from '../modules/Auth';
+import Auth from './utils/Auth';
 
 function Nav() {
     return (
