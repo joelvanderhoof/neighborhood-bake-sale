@@ -29,9 +29,10 @@ export default class Main extends Component {
                     <Route path='/customeradmin' component={ CustomerAdmin } />
                     <Route path='/signup' component={ SignUp } />
                     <Route path='/login' component={ Login } />
-                    <Route path='/auth/logout' onEnter={ (nextState, replace) => {
-                                                             Auth.deauthenticateUser();
-                                                             replace('/');
+                    <Route path='/logout' onEnter={ (nextState, replace) => {
+                                                            console.log('logged out');
+                                                            Auth.deauthenticateUser();
+                                                            replace('/');
                                                          } } />
                     <Route render={ () => {
                                         return <p> Page Not Found</p>
