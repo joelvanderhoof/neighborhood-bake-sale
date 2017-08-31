@@ -27,6 +27,8 @@ db.once('openUri', () => {
 
 // Initialize express app
 const app = express();
+const server = require('http').createServer(app);
+var io = require('socket.io')(server);
 const PORT = process.env.PORT || 8080;
 
 // Use body parser to parse incoming requests as json
@@ -83,6 +85,14 @@ app.use((error, req, res) => {
 });
 
 // Start server
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log(`The server is listening on port ${PORT}`);
 });
+
+io.on('connection', function (socket) {
+    console.log("socket connection made");
+    socket.emit('news', { hello: 'world' });
+    socket.on('my other event', function (data) {
+      console.log(data);
+    });
+  });

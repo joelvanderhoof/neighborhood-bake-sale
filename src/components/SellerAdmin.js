@@ -9,6 +9,7 @@ import StoreImage from "./Seller/StoreImage";
 // import StoreFront from "./Store/StoreFront.js";
 import AddMenuItemButton from "./Seller/AddMenuItemButton";
 import axios from "axios";
+import io from 'socket.io-client';
 
 let testObj = {
   storeID: "1", //Same as Sellers.ID
@@ -72,6 +73,13 @@ class SellerAdmin extends Component {
 
   }
 
+  componentDidMount() {
+    var socket = io.connect('http://localhost:8080');
+    socket.on('news', function (data) {
+      console.log(data);
+      socket.emit('my other event', { my: 'data' });
+    });
+  }
   setEdit() {
     this.setState({
       edit: !this.state.edit
