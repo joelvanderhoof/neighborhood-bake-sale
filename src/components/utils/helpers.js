@@ -13,7 +13,7 @@ let helpers = {
 
   logIn(credentials) {
     console.log('credentials',credentials);
-    return axios.post('/login',  {
+    return axios.post('/auth/login',  {
         email: credentials.email,
         password: credentials.password
       }
@@ -22,7 +22,7 @@ let helpers = {
 
   signup(credentials) {
     console.log('credentials',credentials);
-    return axios.post('/signup',  {
+    return axios.post('/auth/signup',  {
         firstName: credentials.firstName,
         lastName: credentials.lastName,
         email: credentials.email,

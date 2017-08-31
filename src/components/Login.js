@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginForm from './Login/LoginForm';
 import helpers from './utils/helpers';
+import Auth from './utils/Auth';
 
 class Login extends Component {
   constructor(props) {
@@ -11,7 +12,11 @@ class Login extends Component {
   }
 
   saveState (currentState) {
-    helpers.logIn(currentState);
+    helpers.logIn(currentState)
+      .then( (response) => {
+        console.log(response.data);
+        Auth.authenticateUser(response.data.token);
+      });
   }
 
   render () {

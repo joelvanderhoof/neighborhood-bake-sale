@@ -3,7 +3,7 @@ class Auth {
   static authenticateUser(token) {
     localStorage.setItem('token',token);
   }
-
+  // Checks if a token is stored in local storage
   static isUserAuthenticated() {
     return localStorage.getItem('token') !== null;
   }
