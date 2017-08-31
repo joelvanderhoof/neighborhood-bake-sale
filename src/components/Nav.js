@@ -31,16 +31,16 @@ function Nav() {
             <ul className='navbar-nav'>
               {Auth.isUserAuthenticated() ? 
               <li> 
-                <NavLink className='mr-3' activeClassName='active' to='logout'>
+                <NavLink className='mr-3' activeClassName='active' to='/logout'>
                   Log Out
                 </NavLink>
               </li> 
               : 
               <li>
-              <NavLink className='mr-3' activeClassName='active' to='signup'>
+              <NavLink className='mr-3' activeClassName='active' to='/signup'>
                 Sign Up
               </NavLink>
-              <NavLink activeClassName='active' to='login'>
+              <NavLink activeClassName='active' to='/login'>
                 Log In
               </NavLink>
               </li>
