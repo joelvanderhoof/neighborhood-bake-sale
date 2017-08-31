@@ -42,6 +42,9 @@ app.use(express.static(path.resolve(__dirname, 'build')));
 //Sets up express routes
 const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
+// Pass the authenticaion checker middleware
+const authCheckMiddleware = require('./server/middleware/auth-check');
+app.use('/api', authCheckMiddleware);
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
@@ -57,9 +60,7 @@ passport.use('local-login', localLoginStrategy);
 
 require('./server/models/User');
 
-// Pass the authenticaion checker middleware
-const authCheckMiddleware = require('./server/middleware/auth-check');
-// app.use('/api', authCheckMiddleware);
+
 
 
 
