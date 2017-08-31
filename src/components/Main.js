@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './Nav';
 import Login from './Login';
+import Logout from './Logout';
 import SignUp from './SignUp';
 import Home from './Home';
 import Store from './Store';
@@ -17,23 +18,13 @@ export default class Main extends Component {
                 <Nav />
                 <div className='container-fluid'>
                   <Switch>
-                    <Route exact path='/' component={ Home } getComponent={ (location, callback) => {
-                                                                                if (Auth.isUserAuthenticated()) {
-                                                                                    callback(null, Home);
-                                                                                } else {
-                                                                                    callback(null, Login);
-                                                                                }
-                                                                            } } />
+                    <Route exact path='/' component={ Home }  />
                     <Route path='/store' component={ Store } />
                     <Route path='/selleradmin' component={ SellerAdmin } />
                     <Route path='/customeradmin' component={ CustomerAdmin } />
                     <Route path='/signup' component={ SignUp } />
                     <Route path='/login' component={ Login } />
-                    <Route path='/logout' onEnter={ (nextState, replace) => {
-                                                            console.log('logged out');
-                                                            Auth.deauthenticateUser();
-                                                            replace('/');
-                                                         } } />
+                    <Route path='/logout' component={ Logout } />
                     <Route render={ () => {
                                         return <p> Page Not Found</p>
                                     } } />
