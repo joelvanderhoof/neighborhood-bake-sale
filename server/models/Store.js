@@ -3,17 +3,38 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const StoreSchema = new Schema({
-    storeID: String,  // Same as Sellers.ID
-    location: String, // physical address
+    sellerId: String,  // from local storage
+    name: {
+        type: String,
+        default: ''
+    },
+    location: {
+        type: String,
+        default: ''
+    }, // physical address
     orders: [{
         type: Schema.Types.ObjectId, 
         ref: 'MenuItem' }], // Array of orders
-    hours: Array, // Array of hours
-    name: String,
-    description: String,
-    storeImage: String,
-    photos: Array, // Array of image URLs
-    certified: Boolean, // Store passes inspection
+    hours: { // Array of hours
+        type: Array,
+        default: []
+    }, 
+    description: {
+        type: String,
+        default: ''
+    },
+    storeImage: {
+        type: String,
+        default: ''
+    },
+    photos: { // Array of image URLs
+        type: Array,
+        default: []
+    }, 
+    certified: { // Store passes inspection
+        type: Boolean,
+        default: 0
+    }, 
     reviews: [{
                 type: Schema.Types.ObjectId, 
                 ref: 'Review' }], // Array of review IDs
