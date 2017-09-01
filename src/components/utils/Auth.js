@@ -12,6 +12,7 @@ class Auth {
   // Deauthenticate user by removing token from local storage
   static deauthenticateUser() {
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
   }
 
   // Get a token value
@@ -20,8 +21,8 @@ class Auth {
   }
 
   // Get user data
-  static getData() {
-    return localStorage.getItem('data');
+  static getUserId() {
+    return localStorage.getItem('id');
   }
 }
 
