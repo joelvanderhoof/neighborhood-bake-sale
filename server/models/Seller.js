@@ -1,3 +1,6 @@
+// Not using
+// Will likely delete
+
 // const mongoose = require('mongoose');
 
 // const Schema = mongoose.Schema;

@@ -25,9 +25,6 @@ class Menu extends Component {
     if (this.props.menu.length > 0) {
       return (
         <div className="col-lg-12">
-          <div className="row justify-content-center">
-            <h4>Inventory <AddMenuItemButton edit={ this.props.edit } addToStateArray={ this.props.addToStateArray } /></h4>
-          </div>
           <div>
             { this.createMenuItems() }
           </div>

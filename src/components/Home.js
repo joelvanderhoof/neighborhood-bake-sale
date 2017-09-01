@@ -2,8 +2,18 @@ import React, { Component } from 'react';
 import Search from './Homepage/Search';
 import Image from './Homepage/Image';
 
-
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      secretData: ''
+    };
+  }
+
+  componentDidMount() {
+}
+
   render () {
     return (
       <div className="img-fluid rounded"

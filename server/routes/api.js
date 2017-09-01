@@ -6,11 +6,12 @@ const User = require('./../models/User');
 const Store = require('./../models/Store');
 const MenuItem = require('./../models/MenuItem');
 const Review = require('./../models/Review');
+const Order = require('./../models/Order');
 
 // Basic api route structure
 router.route('/user/:userID?')
     .get((req, res) => {
-        User.find({ _id: req.params.userID })
+        User.find({ _id: req.body.userId })
             .populate("stores") 
             .exec((err, doc) => {
                 if (err) {
@@ -239,18 +240,68 @@ router.route('/review/:reviewID?')
         });
     });
 
-router.route('/order')
+router.route('/order/:orderID?')
     .get((req, res) => {
-        res.send('Get made to /api/order')
+        Order.find({
+            _id: req.params.orderID
+        })
+        .populate("menu")
+        .exec((err, doc) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(doc);
+            }
+        });
     })
     .post((req, res) => {
-        res.send('Post made to /api/order')
+       let orderData = new Order(req.body);
+        orderData.save((err, doc) => {
+            if (err) {
+                console.log(err);
+            } else {
+                User.findOneAndUpdate(
+                    {
+                        _id: req.body.userID
+                    },
+                    {
+                        $push: {
+                            'orders': doc._id
+                        }
+                    },
+                    {
+                        new: true
+                    },
+                    function(error, doc) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.send(doc);
+                        }
+                    })
+            }
+        });
     })
     .put((req, res) => {
-        res.send('Put made to /api/order')
+        req.body.orders.forEach((orderData) => {
+            Order.update({
+                _id: orderData.id
+            }, 
+            orderData, 
+            (err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        })
     })
     .delete((req, res) => {
-        res.send('Delete made to /api/order')
+        Order.remove({
+            _id: req.params.orderID
+        }, 
+        (err) => {
+            if (err) return handleError(err);
+        });
     });
 
 router.route('/useLater')
@@ -268,4 +319,11 @@ router.route('/useLater')
         res.send('Delete made to /api/useLater')
     });
 
+
+// Login
+router.get('/dashboard', (req, res) => {
+    res.status(200).json({
+        message: "You're authorized to see this secret message."
+    });
+});
 module.exports = router;

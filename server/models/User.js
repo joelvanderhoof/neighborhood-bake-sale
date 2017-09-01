@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt-nodejs');
 
-const Schema = mongoose.Schema;
-
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
         trim: true,
@@ -34,14 +33,47 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    photo: String, //image URL
-    orders: [{
-        type: Schema.Types.ObjectId, 
-        ref: 'Order'}], // Array of orders
-    isSeller: Boolean, // 
-    stores: [{
-        type: Schema.Types.ObjectId, 
-        ref: 'Store'}]
+    photo: { 
+        type: String, //image URL
+        default: null
+    }, 
+    // orders: [{
+    //     type: Schema.Types.ObjectId, 
+    //     ref: 'Order'}], // Array of orders
+    isSeller: {
+        type: Boolean,
+        default: 0
+    }, // 
+    // stores: [{
+    //     type: Schema.Types.ObjectId, 
+    //     ref: 'Store'}]
+});
+
+// Compare the passed password with the vlue in the database
+UserSchema.methods.comparePassword = function comparePassword(password, callback) {
+    bcrypt.compare(password, this.password, callback);
+};
+
+// Pre-hook that will hash the password prior to saving it
+UserSchema.pre('save', function saveHook(next) {
+    const user = this;
+    // Proceed further only if the password is hashed or the user is new
+    if (!user.isModified('password')) {
+        return next();
+    }
+
+    return bcrypt.genSalt((saltError,salt) => {
+        if (saltError) {
+            return next(saltError);
+        }
+
+        return bcrypt.hash(user.password, salt, (hasError, hash) => {
+            // replace password string with the hashed password
+            user.password = hash;
+
+            return next();
+        });
+    });
 });
 
 const User = mongoose.model("User", UserSchema);

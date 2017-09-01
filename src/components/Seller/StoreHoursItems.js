@@ -20,8 +20,8 @@ class StoreHoursItems extends Component {
     if (this.props.edit) {
       return (
         <div className="form-group row">
-            <label className="col-md-1 col-form-label">{this.props.day}</label>
-            <div className="col-md-10 offset-md-1">
+            <label className="col-md-1 offset-md-1 col-form-label">{this.props.day}</label>
+            <div className="col-md-8 offset-md-1">
               <input className="form-control" name="title" type="text" onChange={ this.handleChange } defaultValue={ this.props.time } id="StoreHoursItems" />
             </div>
           {/* <button className="btn btn-danger" onClick={ () => this.props.removeFromStateArray("hours", this.props.index) }>X</button> */}
