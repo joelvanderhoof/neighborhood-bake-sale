@@ -43,14 +43,18 @@ module.exports = new PassportLocalStrategy({
       const payload = {
         sub: user._id
       };
-
       // If the user email exists and the passwords match, create a JSON Web Token string
       const token = jwt.sign(payload, config.jwtSecret);
       const data = {
+        id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email
       };
+
+      console.log('------------------');
+      console.log('token',token);
+      console.log('data',data);
       return done(null, token, data);
     });
   });
