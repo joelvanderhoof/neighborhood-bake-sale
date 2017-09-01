@@ -12,7 +12,7 @@ const Order = require('./../models/Order');
 router.route('/user/:userID?')
     .get((req, res) => {
         User.find({ _id: req.params.userID })
-            .populate("stores") 
+            .populate('stores') 
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);
@@ -57,7 +57,7 @@ router.route('/store/:storeID?')
         Store.find({
             _id: req.params.storeID
         })
-        .populate("menu")
+        .populate('menu')
         .exec((err, doc) => {
             if (err) {
                 console.log(err);
@@ -245,7 +245,7 @@ router.route('/order/:orderID?')
         Order.find({
             _id: req.params.orderID
         })
-        .populate("menu")
+        .populate('menu')
         .exec((err, doc) => {
             if (err) {
                 console.log(err);
@@ -306,7 +306,7 @@ router.route('/order/:orderID?')
 
 router.route('/useLater')
     .get((req, res) => {
-        console.log("get request");
+        console.log('get request');
         res.send('Get made to /api/useLater')
     })
     .post((req, res) => {
@@ -323,7 +323,7 @@ router.route('/useLater')
 // Login
 router.get('/dashboard', (req, res) => {
     res.status(200).json({
-        message: "You're authorized to see this secret message."
+        message: 'You're authorized to see this secret message.'
     });
 });
 module.exports = router;
