@@ -6,10 +6,10 @@ import StoreDescription from "./Shared/StoreDescription";
 // import OrderQueue from "./Seller/OrderQueue";
 import EditButton from "./Seller/EditButton";
 import StoreImage from "./Seller/StoreImage";
-// import StoreFront from "./Store/StoreFront.js";
 import AddMenuItemButton from "./Seller/AddMenuItemButton";
 import axios from "axios";
 import io from 'socket.io-client';
+import ToggleButton from 'react-toggle-button'
 
 let testObj = {
   sellerId: "1", //Same as Sellers.ID
@@ -62,7 +62,8 @@ class SellerAdmin extends Component {
       name: testObj.name,
       hours: testObj.hours,
       description: testObj.description,
-      storeimage: testObj.storeImage
+      storeimage: testObj.storeImage,
+      value: false
     };
 
     this.setEdit = this.setEdit.bind(this);
@@ -166,6 +167,7 @@ class SellerAdmin extends Component {
       <div>
         <h1 className="text-center">{ this.state.name }'s Admin Page <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ true } /></h1>
         { /*  <StoreTitle title={ this.state.title } edit={ false } updateState={ this.updateState } /> */ }
+       Store: <ToggleButton value={ this.state.value || false } onToggle={(value) => {this.setState({value: !value,})}} />
         <div className="text-center">
         </div>
         <div className="row sellerContainer">

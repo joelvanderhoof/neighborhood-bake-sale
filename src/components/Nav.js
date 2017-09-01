@@ -72,59 +72,6 @@ class Nav extends Component {
             </NavLink>
           </li>
           <li>
-            <div className="dropdown">
-              <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-                <i className="fa fa-flag-o" aria-hidden="true"></i>
-              </a>
-              <ul className="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
-                <div className="notification-heading">
-                  <h4 className="menu-title">Order Queue</h4>
-                </div>
-                <li className="divider"></li>
-                <div className="notifications-wrapper">
-                  <a className="content" href="#">
-                    <div className="notification-item">
-                      <h4 className="item-title">Pizza</h4>
-                      <p className="item-info">Frank</p>
-                    </div>
-                  </a>
-                  <a className="content" href="#">
-                    <div className="notification-item">
-                      <h4 className="item-title">Apple Pie</h4>
-                      <p className="item-info">Joey</p>
-                    </div>
-                  </a>
-                  <a className="content" href="#">
-                    <div className="notification-item">
-                      <h4 className="item-title">Chocolate Cake</h4>
-                      <p className="item-info">Rachael</p>
-                    </div>
-                  </a>
-                  <a className="content" href="#">
-                    <div className="notification-item">
-                      <h4 className="item-title">Chicken and Rice</h4>
-                      <p className="item-info">Chandler</p>
-                    </div>
-                  </a>
-                  <a className="content" href="#">
-                    <div className="notification-item">
-                      <h4 className="item-title">Sandwich</h4>
-                      <p className="item-info">Ross</p>
-                    </div>
-                  </a>
-                  <a className="content" href="#">
-                    <div className="notification-item">
-                      <h4 className="item-title">Smelly Cat</h4>
-                      <p className="item-info">Phoebe</p>
-                    </div>
-                  </a>
-                </div>
-                <li className="divider"></li>
-                <div className="notification-footer">Possible Footer?</div>
-              </ul>
-            </div>
-          </li>
-          <li>
             <Message messages={ this.state.messages } />
           </li>
         </ul>
