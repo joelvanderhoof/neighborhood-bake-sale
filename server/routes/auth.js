@@ -69,7 +69,6 @@ function validateLoginForm(payload) {
 
 router.post('/signup', (req,res,next) => {
     const validationResult = validateSignupForm(req.body);
-    console.log('Validation Results: ',validationResult, '\n');
     if (!validationResult.success) {
         return res.status(400).json({
             success: false,
@@ -77,10 +76,8 @@ router.post('/signup', (req,res,next) => {
             errors: validationResult.errors
         });
     }
-
     return passport.authenticate('local-signup',(err) => {
         if(err) {
-            console.log(err.message);
             if(err.name === 'MongoError' && err.code === 11000) {
                 // 11000 Mongo code is for dupliate email error
                 // 409 HTTP status code is for conflict error
@@ -92,14 +89,11 @@ router.post('/signup', (req,res,next) => {
                     }
                 });
             }
-
             return res.status(400).json({
                 success: false,
                 message: 'Could not process the form.'
             });
         }
-
-        console.log('Successfully registered! \n')
         return res.status(200).json({
             success: true,
             message: 'You have successfully signed up! Now you should be able to log in.'
@@ -108,7 +102,6 @@ router.post('/signup', (req,res,next) => {
 });
 
 router.post('/login', (req,res,next) => {
-    console.log(req.body);
     const validationResult = validateLoginForm(req.body);
     if(!validationResult.success) {
         return res.status(400).json({
@@ -131,11 +124,6 @@ router.post('/login', (req,res,next) => {
                 message: 'Could not process the form'
             });
         }
-        console.log('-------------------------------------------');
-        console.log('User has logged in with the following data:');
-        console.log('JSON Web Token',token);
-        console.log('userData', userData)
-        console.log('-------------------------------------------');
         return res.json({
             success: true,
             message: 'You have successfully logged in!',

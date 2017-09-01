@@ -3,6 +3,15 @@ import { NavLink } from 'react-router-dom'
 import Auth from './utils/Auth';
 
 class Nav extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
+  componentDidMount() {
+    console.log(Auth.isUserAuthenticated())
+  }
+
   render() {
     return (
       <nav className="nav navbar navbar-toggleable-md">
