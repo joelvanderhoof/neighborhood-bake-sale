@@ -12,7 +12,7 @@ import axios from "axios";
 import io from 'socket.io-client';
 
 let testObj = {
-  storeID: "1", //Same as Sellers.ID
+  sellerId: "1", //Same as Sellers.ID
   name: "John's Bistro",
   location: "Irvine, CA", // physical adress
   orders: [], // Array of orders
@@ -27,7 +27,7 @@ let testObj = {
 }
 
 let pizza = {
-  StoreID: String, //Same as Sellers.ID
+  sellerId: String, //Same as Sellers.ID
   name: "Large Pepperoni Pizza",
   description: "Gluten Free, Cheese from the rare hipster Cow, Pepperoni made from an Oak Tree",
   price: 1150,
