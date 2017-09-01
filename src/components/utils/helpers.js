@@ -12,7 +12,6 @@ let helpers = {
   },
 
   logIn(credentials) {
-    console.log('credentials',credentials);
     return axios.post('/auth/login',  {
         email: credentials.email,
         password: credentials.password

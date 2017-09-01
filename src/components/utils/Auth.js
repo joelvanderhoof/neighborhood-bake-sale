@@ -1,7 +1,8 @@
 class Auth {
   // Saves a token via local storage if authenticated
-  static authenticateUser(token) {
+  static authenticateUser(token, id) {
     localStorage.setItem('token',token);
+    localStorage.setItem('id', id)
   }
   // Checks if a token is stored in local storage
   static isUserAuthenticated() {
@@ -16,6 +17,11 @@ class Auth {
   // Get a token value
   static getToken() {
     return localStorage.getItem('token');
+  }
+
+  // Get user data
+  static getData() {
+    return localStorage.getItem('data');
   }
 }
 
