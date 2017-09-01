@@ -11,7 +11,7 @@ const Order = require('./../models/Order');
 // Basic api route structure
 router.route('/user/:userID?')
     .get((req, res) => {
-        User.find({ _id: req.body.userId })
+        User.find({ _id: req.params.userId })
             .populate("stores") 
             .exec((err, doc) => {
                 if (err) {
