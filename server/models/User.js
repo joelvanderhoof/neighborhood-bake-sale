@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const bcrypt = require('bcryptjs');
 const Schema = mongoose.Schema
 const UserSchema = new Schema({
@@ -37,16 +38,16 @@ const UserSchema = new Schema({
         type: String, //image URL
         default: null
     }, 
-    orders: [{
-        type: Schema.Types.ObjectId, 
-        ref: 'Order'}], // Array of orders
+    // orders: [{
+    //     type: Schema.Types.ObjectId, 
+    //     ref: 'Order'}], // Array of orders
     isSeller: {
         type: Boolean,
         default: 0
     }, // 
-    stores: [{
-        type: Schema.Types.ObjectId, 
-        ref: 'Store'}]
+    // stores: [{
+    //     type: Schema.Types.ObjectId, 
+    //     ref: 'Store'}]
 });
 
 // Compare the passed password with the vlue in the database
