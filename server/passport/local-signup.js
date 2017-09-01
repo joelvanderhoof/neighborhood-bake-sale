@@ -7,6 +7,9 @@ module.exports = new PassportLocalStrategy({
   session: false,
   passReqToCallback: true
 }, (req, email, password, done) => {
+  console.log('req',req.body)
+  console.log('email',email)
+  console.log('password',password)
   const userData = {
     email: email.trim(),
     password: password.trim(),
