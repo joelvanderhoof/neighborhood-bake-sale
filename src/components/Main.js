@@ -19,6 +19,7 @@ export default class Main extends Component {
     }
     render() {
         const { loggedIn } = this.state;
+        console.log(`Is the user logged in: ${loggedIn}`);
         return (
             <Router>
               <div className='main'>
