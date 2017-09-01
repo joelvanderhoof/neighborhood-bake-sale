@@ -9,6 +9,8 @@ import Store from './Store';
 import SellerAdmin from './SellerAdmin'
 import CustomerAdmin from './Customer/CustomerAdmin';
 import Auth from './utils/Auth';
+import Search from './Homepage/Search';
+
 
 export default class Main extends Component {
     render() {
@@ -25,6 +27,7 @@ export default class Main extends Component {
                     <Route path='/signup' component={ SignUp } />
                     <Route path='/login' component={ Login } />
                     <Route path='/logout' component={ Logout } />
+                    <Route path='/search' component={ Search } />
                     <Route render={ () => {
                                         return <p> Page Not Found</p>
                                     } } />

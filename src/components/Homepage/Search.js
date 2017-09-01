@@ -19,7 +19,7 @@ export default class Search extends Component {
             id="search-bar" 
             placeholder="Search Location..."/>
     
-    <a href="#" onClick={{}}><img className="search-icon" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Search-button.png" width="50" height="50"/></a>
+    <a href="#" onClick={{}}><img className="search-icon" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Search-button.png" width="27" height="27"/></a>
     </div>
     )
   }
