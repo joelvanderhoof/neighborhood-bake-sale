@@ -14,7 +14,7 @@ class Login extends Component {
   saveState (currentState) {
     helpers.logIn(currentState)
       .then( (response) => {
-        Auth.authenticateUser(response.data.token);
+        Auth.authenticateUser(response.data.token, response.data.user.id);
       });
   }
 
