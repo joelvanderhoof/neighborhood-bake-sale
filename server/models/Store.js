@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 const StoreSchema = new Schema({
@@ -8,14 +7,14 @@ const StoreSchema = new Schema({
         type: String,
         default: ''
     },
-    location: {
+    location: { // physical address
         type: String,
         default: ''
-    }, // physical address
-    orders: [{
+    }, 
+    orders: [{ // Array of orders
         type: Schema.Types.ObjectId, 
         ref: 'MenuItem'
-    }], // Array of orders
+    }], 
     hours: { // Array of hours
         type: Array,
         default: []
@@ -36,14 +35,18 @@ const StoreSchema = new Schema({
         type: Boolean,
         default: 0
     }, 
-    reviews: [{ // Array of review IDs
-        type: Schema.Types.ObjectId, 
-        ref: 'Review' 
-    }], 
+ 
     menuItems: [{ // Array of review IDs
         type: Schema.Types.ObjectId, 
         ref: 'MenuItem' 
     }], 
+    isOpen: { // Store open or closed
+        type: Boolean,
+        default: 0
+    }, 
+    reviews: [{ // Array of review IDs
+        type: Schema.Types.ObjectId, 
+        ref: 'Review' }], 
 });
 
 const Store = mongoose.model("Store", StoreSchema);
