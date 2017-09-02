@@ -32,8 +32,11 @@ let helpers = {
     return axios.get(`/api/user/${id}`, {
       headers: token
     });
-  }
+  },
 
+  saveStore(storeID, storeData) {
+    return axios.put("api/store/" + storeID, storeData)
+  }
 }
 
 // Export API Helper
