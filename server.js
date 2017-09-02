@@ -44,11 +44,14 @@ app.use(express.static(path.resolve(__dirname, 'build')));
 //Sets up express routes
 const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
+const secureRoutes = require('./server/routes/secure'); //future secure route
 // Pass the authenticaion checker middleware
 const authCheckMiddleware = require('./server/middleware/auth-check');
-app.use('/api', authCheckMiddleware);
+// app.use('/api', authCheckMiddleware);
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+app.use('/secure', authCheckMiddleware); //future secure route
+app.use('/secure', secureRoutes); //future secure route
 
 // Passport ------------------------------------------------------------------
 

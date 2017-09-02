@@ -11,13 +11,12 @@ const Order = require('./../models/Order');
 // Basic api route structure
 router.route('/user/:userID?')
     .get((req, res) => {
-        User.find({ _id: req.params.userID })
+        User.find({ _id: req.params.userId })
             .populate("stores") 
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log("get request")
                     res.send(doc);
                 }
             });
@@ -55,10 +54,11 @@ router.route('/user/:userID?')
 
 router.route('/store/:sellerId?')
     .get((req, res) => {
-        console.log("test");
         console.log(req.params.sellerId);
-        Store.find({
-            sellerId: req.params.sellerId
+        Store.findOneAndUpdate({
+            _id: req.params.sellerId
+        }, {
+            upsert: true
         })
         .populate('menu')
         .exec((err, doc) => {

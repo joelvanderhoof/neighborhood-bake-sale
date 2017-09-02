@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Menu from "./Seller/Menu";
-// import StoreTitle from "./Seller/StoreTitle";
 import StoreHours from "./Seller/StoreHours";
 import StoreDescription from "./Shared/StoreDescription";
-// import OrderQueue from "./Seller/OrderQueue";
 import EditButton from "./Seller/EditButton";
 import StoreImage from "./Seller/StoreImage";
 import AddMenuItemButton from "./Seller/AddMenuItemButton";
+import Auth from "./utils/Auth";
+import Helpers from "./utils/helpers";
 import axios from "axios";
 import io from 'socket.io-client';
 import ToggleButton from 'react-toggle-button'
@@ -58,11 +58,12 @@ class SellerAdmin extends Component {
     super(props);
     this.state = {
       edit: false,
-      menu: testMenu, //testObj.menu,
-      name: testObj.name,
-      hours: testObj.hours,
-      description: testObj.description,
-      storeimage: testObj.storeImage,
+      menu: [],
+      name: "",
+      location: "",
+      hours: [],
+      description: "",
+      storeimage: "",
       isOpen: false
     };
 
@@ -71,7 +72,26 @@ class SellerAdmin extends Component {
     this.updateState = this.updateState.bind(this);
     this.addToStateArray = this.addToStateArray.bind(this);
     this.removeFromStateArray = this.removeFromStateArray.bind(this);
+    this.queryStore = this.queryStore.bind(this);
 
+  }
+
+  queryStore() {
+    let userID = Auth.getUserId();
+    Helpers.getStore(userID).then((response)=>{
+      let storeInfo = response.data[0];
+      console.log(response);
+      console.log(storeInfo);
+      this.setState({
+        menu: storeInfo.menuItems,
+        name: storeInfo.name,
+        hours: storeInfo.hours,
+        isOpen: storeInfo.isOpen,
+        location: storeInfo.location,
+        storeimage: storeInfo.storeImage,
+        description: storeInfo.description
+      });
+    });
   }
 
   componentDidMount() {
@@ -80,6 +100,9 @@ class SellerAdmin extends Component {
       console.log(data);
       socket.emit('my other event', { my: 'data' });
     });
+
+    this.queryStore();
+
   }
   setEdit() {
     this.setState({

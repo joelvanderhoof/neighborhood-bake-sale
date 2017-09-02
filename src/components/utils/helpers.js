@@ -5,11 +5,7 @@ const Auth = require('./Auth');
 let helpers = {
 
   getStore(storeID) {
-    return axios.get('/store/', {
-      params: {
-        storeID: storeID
-      }
-    })
+    return axios.get('api/store/'+ storeID)
   },
 
   logIn(credentials) {

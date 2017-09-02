@@ -34,7 +34,6 @@ class Menu extends Component {
     return (
       <div>
         <h4>No Items</h4>
-        <AddMenuItemButton edit={ this.props.edit } addToStateArray={ this.props.addToStateArray } />
       </div>
       );
   }
