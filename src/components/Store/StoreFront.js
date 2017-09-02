@@ -87,26 +87,32 @@ class StoreFront extends Component {
 
         {/* Row */}
         <div className='row'>
-          <div className='col-lg-6 col-sm-12'>
+          <div className='col-12'>
             <StoreTitle title={this.state.title} storeTitleStyle='h1'/>
             <StoreDescription description={this.state.description} storeDescriptionStyle='h6'/>
+          </div>
+        </div>
+        {/* End Row */}
+        <hr />
+        {/* Row */}
+        <div className='row'>
+          <div className='col-lg-6 col-sm-12'>
             <img
                 className='img-fluid rounded mt-3 mb-3'
                 src='http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg'
                 alt='Italian Bistro'/> {/* To be replaced with StorePhoto */}
-            <StoreHours storeHoursStyle='list-unstyled' hours={['9:00AM-12:00PM', '1:00PM-6:00PM']}/>
-            <hr />
+          </div>
+          <div className='col-lg-6 col-sm-12'>
             <Rating ratingStyle='rating col-12 mb-3' rating='4' numReviews='751'/> {/* Need a field for rating and number of reviews*/}
-          </div>
-          <div className='col-lg-6 col-md-12 align-middle'>
             <div className='store-front-link border'>
-              <Link className='btn col-md-4 col-sm-12' to='/review'>
-                <div><span style={ {color: 'gold', textShadow:'1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' }}>★</span>{'\u00A0'} Write Review </div>
-              </Link>
-              <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12'/>
-              <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12'/>
+                <Link className='btn col-md-4 col-sm-12' to='/review'>
+                  <div><span style={ {color: 'gold', textShadow:'1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' }}>★</span>{'\u00A0'} Write Review </div>
+                </Link>
+                <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12'/>
+                <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12'/>
+              </div>
+              <StoreHours storeHoursStyle='list-unstyled mt-3' hours={['9:00AM-12:00PM', '1:00PM-6:00PM']}/>
             </div>
-          </div>
         </div>
         {/* End Row */}
         <hr />
@@ -125,6 +131,7 @@ class StoreFront extends Component {
           {/* End Right Column */}
         </div>
         {/* End Row */}
+        <hr />
         <div className='row'>
           <div className='col-12'>
             <Reviews />

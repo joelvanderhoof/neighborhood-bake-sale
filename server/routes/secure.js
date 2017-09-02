@@ -11,22 +11,19 @@ const Order = require('./../models/Order');
 // Basic api route structure
 router.route('/user/:userID?')
     .get((req, res) => {
-        User.find({
-            _id: req.params.userID
-        })
-            .populate("stores")
+        User.find({ _id: req.params.userId })
+            .populate("stores") 
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log("get request")
                     res.send(doc);
                 }
             });
     })
     .post((req, res) => {
         let newGuy = new User(req.body);
-        newGuy.save((err, doc) => {
+        newGuy.save((err, doc)=> {
             if (err) {
                 console.log(err);
             } else {
@@ -58,18 +55,20 @@ router.route('/user/:userID?')
 router.route('/store/:sellerId?')
     .get((req, res) => {
         console.log(req.params.sellerId);
-        Store.find({
-            sellerId: req.params.sellerId
+        Store.findOneAndUpdate({
+            _id: req.params.sellerId
+        }, {
+            upsert: true
         })
-            .populate('menu')
-            .exec((err, doc) => {
-                console.log(doc);
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.send(doc);
-                }
-            });
+        .populate('menu')
+        .exec((err, doc) => {
+            console.log(doc);
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(doc);
+            }
+        });
     })
     .post((req, res) => {
         let storeData = new Store(req.body);
@@ -99,26 +98,27 @@ router.route('/store/:sellerId?')
             }
         });
     })
+    // Send an array of objects in req.body.stores
     .put((req, res) => {
-        Store.update({
-            sellerId: req.params.sellerId
-        },
-            req.body,
+        req.body.users.forEach((storeData) => {
+            Store.update({
+                _id: storeData.id
+            }, 
+            storeData, 
             (err) => {
                 if (err) {
                     console.log(err);
-                } else {
-                    res.send("updated");
                 }
             });
+        })
     })
     .delete((req, res) => {
         Store.remove({
             _id: req.params.storeID
-        },
-            (err) => {
-                if (err) return handleError(err);
-            });
+        }, 
+        (err) => {
+            if (err) return handleError(err);
+        });
     });
 
 router.route('/menu/:menuitemID?')
@@ -163,36 +163,36 @@ router.route('/menu/:menuitemID?')
     .put((req, res) => {
         req.body.menuItems.forEach((menuItemData) => {
             MenuItem.update({
-                _id: menuItemData.id
-            },
+                    _id: menuItemData.id
+                }, 
                 menuItemData, (err) => {
                     if (err) {
                         console.log(err);
                     }
-                });
+            });
         })
     })
     .delete((req, res) => {
         MenuItem.remove({
             _id: req.params.menuitemID
-        },
-            (err) => {
-                if (err) return handleError(err);
-            });
+        }, 
+        (err) => {
+            if (err) return handleError(err);
+        });
     });
 
 router.route('/review/:reviewID?')
     .get((req, res) => {
         Review.find({
-            _id: req.params.reviewID
-        },
+                _id: req.params.reviewID
+            }, 
             (err, doc) => {
                 if (err) {
                     console.log(err);
                 } else {
                     res.send(doc);
                 }
-            })
+        })
     })
     .post((req, res) => {
         let reviewData = new Review(req.body);
@@ -226,14 +226,14 @@ router.route('/review/:reviewID?')
     .put((req, res) => {
         req.body.reviews.forEach((reviewData) => {
             Review.update({
-                _id: reviewData.id
-            },
-                reviewData,
+                    _id: reviewData.id
+                }, 
+                reviewData, 
                 (err) => {
                     if (err) {
                         console.log(err);
                     }
-                });
+            });
         })
     })
     .delete((req, res) => {
@@ -249,17 +249,17 @@ router.route('/order/:orderID?')
         Order.find({
             _id: req.params.orderID
         })
-            .populate('menu')
-            .exec((err, doc) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.send(doc);
-                }
-            });
+        .populate('menu')
+        .exec((err, doc) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(doc);
+            }
+        });
     })
     .post((req, res) => {
-        let orderData = new Order(req.body);
+       let orderData = new Order(req.body);
         orderData.save((err, doc) => {
             if (err) {
                 console.log(err);
@@ -290,22 +290,22 @@ router.route('/order/:orderID?')
         req.body.orders.forEach((orderData) => {
             Order.update({
                 _id: orderData.id
-            },
-                orderData,
-                (err) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                });
+            }, 
+            orderData, 
+            (err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
         })
     })
     .delete((req, res) => {
         Order.remove({
             _id: req.params.orderID
-        },
-            (err) => {
-                if (err) return handleError(err);
-            });
+        }, 
+        (err) => {
+            if (err) return handleError(err);
+        });
     });
 
 router.route('/useLater')

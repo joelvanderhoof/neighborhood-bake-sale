@@ -8,16 +8,9 @@ class EditButton extends Component {
     }
 
     render() {
-        if (this.props.edit) {
-            return (
-                <button type="button" className="btn btn-info" onClick={ () => this.props.saveFunc() }>
-                  Save
-                </button>
-                );
-        }
         return (
-            <button type="button" className="btn btn-danger" onClick={ () => this.props.editFunc() }>
-              Edit
+            <button type="button" className="btn btn-info" onClick={ () => this.props.saveFunc() }>
+              Save
             </button>
             );
     }
