@@ -4,6 +4,8 @@ import StoreHours from "./Seller/StoreHours";
 import StoreDescription from "./Shared/StoreDescription";
 import EditButton from "./Seller/EditButton";
 import StoreImage from "./Seller/StoreImage";
+import StoreName from "./Seller/StoreName";
+import StoreLocation from "./Seller/StoreLocation";
 import AddMenuItemButton from "./Seller/AddMenuItemButton";
 import Auth from "./utils/Auth";
 import Helpers from "./utils/helpers";
@@ -78,7 +80,7 @@ class SellerAdmin extends Component {
 
   queryStore() {
     let userID = Auth.getUserId();
-    Helpers.getStore(userID).then((response)=>{
+    Helpers.getStore(userID).then((response) => {
       let storeInfo = response.data[0];
       console.log(response);
       console.log(storeInfo);
@@ -96,9 +98,11 @@ class SellerAdmin extends Component {
 
   componentDidMount() {
     var socket = io.connect('http://localhost:8080');
-    socket.on('news', function (data) {
+    socket.on('news', function(data) {
       console.log(data);
-      socket.emit('my other event', { my: 'data' });
+      socket.emit('my other event', {
+        my: 'data'
+      });
     });
 
     this.queryStore();
@@ -189,8 +193,8 @@ class SellerAdmin extends Component {
     return (
       <div>
         <h1 className="text-center">{ this.state.name }'s Admin Page <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ true } /></h1>
-        { /*  <StoreTitle title={ this.state.title } edit={ false } updateState={ this.updateState } /> */ }
-        Store: <ToggleButton value={ this.state.isOpen } onToggle={(value) => {this.setState({isOpen: !value,})}}  inactiveLabel="Off" activeLabel="On" />
+        Store:
+        <ToggleButton value={ this.state.isOpen } onToggle={ (value) => {this.setState({ isOpen: !value,})} } inactiveLabel="Off" activeLabel="On" />
         <div className="text-center">
         </div>
         <div className="row sellerContainer">
@@ -202,6 +206,7 @@ class SellerAdmin extends Component {
               <div className="col-xl-6 col-md-12 col-sm-12">
                 <StoreImage storeImage={ this.state.storeimage } edit={ false } />
                 <StoreHours hours={ this.state.hours } edit={ false } updateState={ this.updateState } />
+                <StoreLocation location={ this.state.location } edit={ false } updateState={ this.updateState } />
               </div>
               <div className="col-xl-6 col-md-12 col-sm-12">
                 <Menu menu={ this.state.menu } edit={ false } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
@@ -210,10 +215,11 @@ class SellerAdmin extends Component {
             </div>
           </div>
           <div className="col-md-6 border sellerRight pre-scrollable">
-            { /*   <StoreTitle title={ this.state.title } edit={ true } updateState={ this.updateState } /> */ }
+            <StoreName name={ this.state.name } edit={ true } updateState={ this.updateState } />
             <StoreImage storeImage={ this.state.storeimage } edit={ true } updateState={ this.updateState } />
             <StoreHours hours={ this.state.hours } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
             />
+            <StoreLocation location={ this.state.location } edit={ true } updateState={ this.updateState } />
             <StoreDescription description={ this.state.description } edit={ true } updateState={ this.updateState } />
             <h4 className="text-center">Inventory <AddMenuItemButton edit={ true } addToStateArray={ this.addToStateArray } /> </h4>
             <Menu menu={ this.state.menu } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
