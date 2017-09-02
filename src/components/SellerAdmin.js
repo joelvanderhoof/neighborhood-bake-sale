@@ -63,7 +63,7 @@ class SellerAdmin extends Component {
       hours: testObj.hours,
       description: testObj.description,
       storeimage: testObj.storeImage,
-      value: false
+      isOpen: false
     };
 
     this.setEdit = this.setEdit.bind(this);
@@ -167,7 +167,7 @@ class SellerAdmin extends Component {
       <div>
         <h1 className="text-center">{ this.state.name }'s Admin Page <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ true } /></h1>
         { /*  <StoreTitle title={ this.state.title } edit={ false } updateState={ this.updateState } /> */ }
-       Store: <ToggleButton value={ this.state.value || false } onToggle={(value) => {this.setState({value: !value,})}} />
+        Store: <ToggleButton value={ this.state.isOpen } onToggle={(value) => {this.setState({isOpen: !value,})}}  inactiveLabel="Off" activeLabel="On" />
         <div className="text-center">
         </div>
         <div className="row sellerContainer">

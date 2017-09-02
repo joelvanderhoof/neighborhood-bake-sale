@@ -35,6 +35,10 @@ const StoreSchema = new Schema({
         type: Boolean,
         default: 0
     }, 
+    isOpen: { // Store open or closed
+        type: Boolean,
+        default: 0
+    }, 
     reviews: [{
                 type: Schema.Types.ObjectId, 
                 ref: 'Review' }], // Array of review IDs
