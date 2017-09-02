@@ -9,7 +9,6 @@ import StoreLocation from "./Seller/StoreLocation";
 import AddMenuItemButton from "./Seller/AddMenuItemButton";
 import Auth from "./utils/Auth";
 import Helpers from "./utils/helpers";
-import axios from "axios";
 import io from 'socket.io-client';
 import ToggleButton from 'react-toggle-button'
 
@@ -115,13 +114,10 @@ class SellerAdmin extends Component {
   }
 
   setSave() {
-    // this.setState({
-    //   edit: !this.state.edit
-    // });
-
-    console.log(this.state);
-    return axios.get("api/useLater").then((data) => {
-      console.log(data);
+    let storeData = this.state;
+    let userID = Auth.getUserId();
+    Helpers.saveStore(userID, storeData).then(()=>{
+      this.queryStore(userID);
     });
   }
 
@@ -192,7 +188,7 @@ class SellerAdmin extends Component {
   render() {
     return (
       <div>
-        <h1 className="text-center">{ this.state.name }'s Admin Page <EditButton editFunc={ this.setEdit } saveFunc={ this.setSave } edit={ true } /></h1>
+        <h1 className="text-center">{ this.state.name }'s Admin Page <EditButton saveFunc={ this.setSave }/></h1>
         Store:
         <ToggleButton value={ this.state.isOpen } onToggle={ (value) => {this.setState({ isOpen: !value,})} } inactiveLabel="Off" activeLabel="On" />
         <div className="text-center">
