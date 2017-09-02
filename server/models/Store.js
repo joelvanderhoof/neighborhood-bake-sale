@@ -14,7 +14,8 @@ const StoreSchema = new Schema({
     }, // physical address
     orders: [{
         type: Schema.Types.ObjectId, 
-        ref: 'MenuItem' }], // Array of orders
+        ref: 'MenuItem'
+    }], // Array of orders
     hours: { // Array of hours
         type: Array,
         default: []
@@ -35,9 +36,14 @@ const StoreSchema = new Schema({
         type: Boolean,
         default: 0
     }, 
-    reviews: [{
-                type: Schema.Types.ObjectId, 
-                ref: 'Review' }], // Array of review IDs
+    reviews: [{ // Array of review IDs
+        type: Schema.Types.ObjectId, 
+        ref: 'Review' 
+    }], 
+    menuItems: [{ // Array of review IDs
+        type: Schema.Types.ObjectId, 
+        ref: 'MenuItem' 
+    }], 
 });
 
 const Store = mongoose.model("Store", StoreSchema);

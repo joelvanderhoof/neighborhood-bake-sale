@@ -1,4 +1,5 @@
 const User = require('mongoose').model('User');
+const Store = require('mongoose').model('Store');
 const PassportLocalStrategy = require('passport-local').Strategy;
 
 module.exports = new PassportLocalStrategy({
@@ -7,9 +8,6 @@ module.exports = new PassportLocalStrategy({
   session: false,
   passReqToCallback: true
 }, (req, email, password, done) => {
-  console.log('req',req.body)
-  console.log('email',email)
-  console.log('password',password)
   const userData = {
     email: email.trim(),
     password: password.trim(),
@@ -23,5 +21,14 @@ module.exports = new PassportLocalStrategy({
       return done(err);
     }
     return done(null);
-  });
+  }).then(()=>{
+    User.findOne({
+      email: userData.email
+    }, (err, user) => {
+      if(err) {
+        return console.log('error: ', err);
+      }
+      Store.create({sellerId: user._id})
+    }
+  )});
 });
