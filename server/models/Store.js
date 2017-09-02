@@ -5,7 +5,7 @@ const StoreSchema = new Schema({
     sellerId: String,  // from local storage
     name: {
         type: String,
-        default: ''
+        default: 'My Dream Restaurant'
     },
     location: { // physical address
         type: String,
@@ -17,15 +17,15 @@ const StoreSchema = new Schema({
     }], 
     hours: { // Array of hours
         type: Array,
-        default: []
+        default: ["8:00AM-9:00PM","8:00AM-9:00PM","8:00AM-9:00PM","8:00AM-9:00PM","8:00AM-9:00PM","8:00AM-9:00PM","8:00AM-9:00PM",]
     }, 
     description: {
         type: String,
-        default: ''
+        default: 'Enter your store description'
     },
     storeImage: {
         type: String,
-        default: ''
+        default: 'https://static.pexels.com/photos/8717/food-pot-kitchen-cooking.jpg'
     },
     photos: { // Array of image URLs
         type: Array,
