@@ -52,13 +52,17 @@ router.route('/user/:userID?')
         });
     });
 
-router.route('/store/:storeID?')
+router.route('/store/:sellerId?')
     .get((req, res) => {
-        Store.find({
-            _id: req.params.storeID
+        console.log(req.params.sellerId);
+        Store.findOneAndUpdate({
+            _id: req.params.sellerId
+        }, {
+            upsert: true
         })
         .populate('menu')
         .exec((err, doc) => {
+            console.log(doc);
             if (err) {
                 console.log(err);
             } else {
