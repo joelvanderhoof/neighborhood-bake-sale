@@ -27,7 +27,7 @@ export default class Main extends Component {
                 <div className='container-fluid'>
                   <Switch>
                     <Route exact path='/' component={ Home }  />
-                    <Route path='/store' component={ Store } />
+                    <Route path='/store/:sellerId' component={ Store } />
                     <Route path='/selleradmin' render={ () => (
                         loggedIn ? (
                             <SellerAdmin/>
