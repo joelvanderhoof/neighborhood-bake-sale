@@ -57,7 +57,7 @@ class Nav extends Component {
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName='active' to='/store'>
+            <NavLink activeClassName='active' to='/store/59ab34d106e8a23b58e70560'>
               Store
             </NavLink>
           </li>

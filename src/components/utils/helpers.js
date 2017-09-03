@@ -8,6 +8,10 @@ let helpers = {
     return axios.get('api/store/'+ storeID)
   },
 
+  getPublicStore(storeID) {
+    return axios.get('./../api/store/'+ storeID)
+  },
+
   logIn(credentials) {
     return axios.post('/auth/login',  {
         email: credentials.email,

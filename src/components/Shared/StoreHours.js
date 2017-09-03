@@ -7,24 +7,21 @@ class StoreHours extends Component {
     this.state = {
 
     };
-
   }
 
   listHours() {
     let day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    let timeList;
-    timeList = this.props.hours.map((time, i) => {
-      return <StoreHoursItems day={day[i]} key={ i } index={ i } time={ time } edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray }
-             />
+    return this.props.hours.map((time, i) => {
+      return <StoreHoursItems day={day[i]} key={ i } index={ i } time={ time } />
     });
-    return timeList;
   }
 
   render() {
     return (
-      <div className="border">
+      <div className={this.props.storeHoursStyle}>
         <h4 className="text-center" style={{"borderBottom": "4px red solid"}}>Hours of Operation</h4>
         { this.listHours() }
+        {console.log('storehours component: ', this.props.hours)}
       </div>
       );
   }

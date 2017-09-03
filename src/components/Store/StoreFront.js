@@ -46,7 +46,18 @@ class StoreFront extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      customerOrder: []
+      customerOrder: [],
+      storeId: '',
+      sellerId: '',
+      name: '',
+      location: '',
+      menu: [],
+      hours: [],
+      description: '',
+      storeImage: '',
+      reviews: [],
+      isOpen: false,
+
     }
 
     this.addToOrder = this.addToOrder.bind(this);
@@ -54,9 +65,8 @@ class StoreFront extends Component {
 
   componentDidMount() {
     // randy@test.com  sellerId is 59ab34d106e8a23b58e70560// password123 -> storeId is 59ab34d106e8a23b58e70561
-    console.log(this.props.location.pathname);
-    let sellerId = '59ab34d106e8a23b58e70560'
-    helpers.getStore(sellerId)
+    let sellerId = this.props.location.pathname.split('/')[2]
+    helpers.getPublicStore(sellerId)
       .then((response) => {
         let storeData = response.data[0];
         this.setState({
@@ -67,32 +77,13 @@ class StoreFront extends Component {
           menu: storeData.menuItems,
           hours: storeData.hours,
           description: storeData.description,
-          storeimage: storeData.storeImage,
+          storeImage: storeData.storeImage,
           reviews: storeData.reviews,
           isOpen: storeData.isOpen,
         });
-        console.log(this.state);
+        console.log('store front -Current State: ',this.state);
+        console.log('store front - hours: ', this.state.hours);
     })
-
-  //   this.setState({
-  //     // this is a dummy response object until the API routes are fully functional
-  //     storeID: '1',
-  //     sellerID: '111', // there are 2 store IDs? need to ask Joel, I'm guessing this is sellerID
-  //     title: 'John\'s Bistro', // missing store name, need to ask Joel
-  //     location: 'Irvine, CA', // this is needed for the maps component
-  //     menu: testMenu,
-  //     hours: [
-  //       '9:00AM-12:00PM', '1:00PM-6:00PM'
-  //     ],
-  //     description: 'Neighborhood Italian Spot',
-  //     photos: ['http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs' +
-  //     '04.jpg'],
-  //     reviews: [
-  //       {
-  //         ref: '321' // some object id that is auto generated, this is needed for the reviews component
-  //       }
-  //     ]
-  //   });
   }
 
   addToOrder(order) {
@@ -116,9 +107,10 @@ class StoreFront extends Component {
         { /* Row */ }
         <div className='row'>
           <div className='col-lg-6 col-sm-12'>
-            <img className='img-fluid rounded mt-3 mb-3' src={`"${this.state.storeimage}"`} alt='Store' />
+            <img className='img-fluid rounded mt-3 mb-3' src={this.state.storeImage} alt='Store' />
           </div>
           <div className='col-lg-6 col-sm-12'>
+            <div className='row mb-3'>
             <Rating ratingStyle='rating col-12 mb-3' rating='4' numReviews='751' />
             { /* Need a field for rating and number of reviews*/ }
             <div className='store-front-link border'>
@@ -129,7 +121,11 @@ class StoreFront extends Component {
               <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12' />
               <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12' />
             </div>
-            {/* <StoreHours storeHoursStyle='list-unstyled mt-3' hours={ this.state.hours} /> */}
+            </div>
+            <div className='row'> 
+              <StoreHours hours={this.state.hours} storeHoursStyle='border col-12 mb-3' />
+            </div>
+            
           </div>
         </div>
         { /* End Row */ }
