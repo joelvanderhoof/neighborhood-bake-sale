@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from './Homepage/Search';
 import Image from './Homepage/Image';
+import MapSearch from './MapSearch';
 
 class Home extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class Home extends Component {
             fontFamily: "Lobster Two, cursive",
             fontSize: 200}}>Foodies</h1>
         {/* Name of the App- still being decided "Foodies" */}
-      <Search />
+      {/* <MapSearch /> */}
       <Image />
       </div>
     );

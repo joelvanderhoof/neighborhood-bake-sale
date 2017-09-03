@@ -45,6 +45,9 @@ const UserSchema = new Schema({
         type: Boolean,
         default: 0
     }, // 
+    reviews: [{
+        type: Schema.Types.ObjectId, 
+        ref: 'Review'}],
     stores: [{
         type: Schema.Types.ObjectId, 
         ref: 'Store'}]

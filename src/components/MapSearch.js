@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MapSearchForm from './MapSearch/MapSearchForm';
-import GoogleMaps from '.MapSearch/GoogleMaps';
+import GoogleMaps from './MapSearch/GoogleMaps';
 import helpers from './utils/helpers';
 
 class MapSearch extends Component {
