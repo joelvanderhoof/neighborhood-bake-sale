@@ -36,10 +36,10 @@ const StoreSchema = new Schema({
         default: 0
     }, 
  
-    menuItems: [{ // Array of review IDs
-        type: Schema.Types.ObjectId, 
-        ref: 'MenuItem' 
-    }], 
+    menuItems: { // Array of review IDs
+        type: Array, 
+        default: []
+    }, 
     isOpen: { // Store open or closed
         type: Boolean,
         default: 0

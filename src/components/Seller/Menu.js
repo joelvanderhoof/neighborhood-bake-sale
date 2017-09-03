@@ -14,15 +14,15 @@ class Menu extends Component {
 
   createMenuItems() {
     let menuList;
-    menuList = this.props.menu.map((menuItem, i) => {
-      return <MenuItem key={ i } index={ i } item={ menuItem.name } description={ menuItem.description } price={ menuItem.price } availability={ menuItem.availability }
+    menuList = this.props.menuItems.map((menuItem, i) => {
+      return <MenuItem key={ i } index={ i } item={ menuItem.name } description={ menuItem.description } price={ menuItem.price } availability={ menuItem.inStock }
                img={ menuItem.image } edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray } />
     });
     return menuList;
   }
 
   render() {
-    if (this.props.menu.length > 0) {
+    if (this.props.menuItems.length > 0) {
       return (
         <div className="col-lg-12">
           <div>
