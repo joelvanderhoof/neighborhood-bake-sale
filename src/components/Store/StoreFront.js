@@ -12,6 +12,7 @@ import Reviews from '../Shared/Reviews';
 import Rating from '../Shared/Rating';
 import Menu from '../Shared/Menu';
 import helpers from '../utils/helpers'
+import Auth from '../utils/Auth';
 
 class StoreFront extends Component {
   constructor(props) {
@@ -28,10 +29,11 @@ class StoreFront extends Component {
       storeImage: '',
       reviews: [],
       isOpen: false,
-
+      orderTotal: 0
     }
 
     this.addToOrder = this.addToOrder.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   componentDidMount() {
@@ -57,8 +59,23 @@ class StoreFront extends Component {
 
   addToOrder(order) {
     this.setState({
-      customerOrder: this.state.customerOrder.concat(order)
-    })
+      customerOrder: this.state.customerOrder.concat(order),
+    });
+
+    let orderTotal = 0;
+    this.state.customerOrder.map( (orderItem) => {orderTotal += orderItem.price});
+    this.setState({
+      orderTotal: orderTotal
+    });
+
+    console.log('orderTotal',`$ ${parseFloat(orderTotal/100).toFixed(2)}`);
+  }
+
+  placeOrder() {
+    console.log('userId', Auth.getUserId());
+    console.log('storeId', this.state.storeId);
+    console.log('order:',this.state.customerOrder);
+    console.log('orderTotal',`$ ${parseFloat(this.state.orderTotal/100).toFixed(2)}`);
   }
 
   render() {
@@ -80,10 +97,7 @@ class StoreFront extends Component {
               <Rating ratingStyle='rating col-12 mb-3' rating='4' numReviews='751' />
               { /* Need a field for rating and number of reviews*/ }
               <div className='store-front-link border'>
-                <Link className='btn col-md-4 col-sm-12' to={`/review/${this.state.sellerId}`}>
-                <div><span style={ { color: 'gold', textShadow: '1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' } }>★</span>
-                  { '\u00A0' } Write Review </div>
-                </Link>
+                <Link className='btn col-md-4 col-sm-12' to={`/review/${this.state.sellerId}`}><span style={ { color: 'gold', textShadow: '1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' } }>★</span> { '\u00A0' } Write Review</Link>
                 <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12' />
                 <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12' />
               </div>
@@ -99,13 +113,13 @@ class StoreFront extends Component {
             <Menu menu={ this.state.menu } addToOrder={ this.addToOrder } menuStyle='border justify-content-center store-front-menu mt-3 p-3' />
           </div>
           <div className='col-md-6 col-sm-12'>
-            <Order customerOrder={ this.state.customerOrder } orderStyle='border mt-3 order' />
+            <Order customerOrder={ this.state.customerOrder } placeOrder={this.placeOrder} orderTotal={this.state.orderTotal} orderStyle='border mt-3 order' />
           </div>
         </div>
         <hr />
         <div className='row'>
           <div className='col-12'>
-            <Reviews reviews={this.state.reviews} />
+            <Reviews reviews={this.state.reviews} />    
           </div>
           <div className='col-12'>
             <StoreMap storeMapStyle='border d-flex flex-column align-items-center justify-content-center store-map mt-3' location={ this.state.location } />
