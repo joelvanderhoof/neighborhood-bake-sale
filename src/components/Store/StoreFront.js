@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import StoreMap from './StoreFront/StoreMap';
 import AddPhoto from './StoreFront/AddPhoto';
@@ -11,9 +11,9 @@ import StoreHours from '../Shared/StoreHours';
 import StoreDescription from '../Shared//StoreDescription';
 import Reviews from '../Shared/Reviews';
 import Rating from '../Shared/Rating';
-
-// Currently using for testing
 import Menu from '../Shared/Menu';
+// Currently using for testing
+import helpers from '../utils/helpers'
 
 let pizza = {
   name: 'Large Pepperoni Pizza',
@@ -53,91 +53,108 @@ class StoreFront extends Component {
   }
 
   componentDidMount() {
-    // helpers.getStore(storeID) .then((response) =>{   this.setState({ store:
-    // response.data}) })
+    // randy@test.com  sellerId is 59ab34d106e8a23b58e70560// password123 -> storeId is 59ab34d106e8a23b58e70561
+    console.log(this.props.location.pathname);
+    let sellerId = '59ab34d106e8a23b58e70560'
+    helpers.getStore(sellerId)
+      .then((response) => {
+        let storeData = response.data[0];
+        this.setState({
+          storeId: storeData._id,
+          sellerId: storeData.sellerId,
+          name: storeData.name,
+          location: storeData.location,
+          menu: storeData.menuItems,
+          hours: storeData.hours,
+          description: storeData.description,
+          storeimage: storeData.storeImage,
+          reviews: storeData.reviews,
+          isOpen: storeData.isOpen,
+        });
+        console.log(this.state);
+    })
 
-    this.setState({
-      // this is a dummy response object until the API routes are fully functional
-      storeID: '1',
-      sellerID: '111', // there are 2 store IDs? need to ask Joel, I'm guessing this is sellerID
-      title: 'John\'s Bistro', // missing store name, need to ask Joel
-      location: 'Irvine, CA', // this is needed for the maps component
-      menu: testMenu,
-      hours: [
-        '9:00AM-12:00PM', '1:00PM-6:00PM'
-      ],
-      description: 'Neighborhood Italian Spot',
-      photos: ['http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs' +
-          '04.jpg'],
-      reviews: [
-        {
-          ref: '321' // some object id that is auto generated, this is needed for the reviews component
-        }
-      ]
-    });
+  //   this.setState({
+  //     // this is a dummy response object until the API routes are fully functional
+  //     storeID: '1',
+  //     sellerID: '111', // there are 2 store IDs? need to ask Joel, I'm guessing this is sellerID
+  //     title: 'John\'s Bistro', // missing store name, need to ask Joel
+  //     location: 'Irvine, CA', // this is needed for the maps component
+  //     menu: testMenu,
+  //     hours: [
+  //       '9:00AM-12:00PM', '1:00PM-6:00PM'
+  //     ],
+  //     description: 'Neighborhood Italian Spot',
+  //     photos: ['http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs' +
+  //     '04.jpg'],
+  //     reviews: [
+  //       {
+  //         ref: '321' // some object id that is auto generated, this is needed for the reviews component
+  //       }
+  //     ]
+  //   });
   }
 
   addToOrder(order) {
-    this.setState({ customerOrder: this.state.customerOrder.concat(order) })
+    this.setState({
+      customerOrder: this.state.customerOrder.concat(order)
+    })
   }
 
   render() {
     return (
       <div className='container-store'>
-
-        {/* Row */}
+        { /* Row */ }
         <div className='row'>
           <div className='col-12'>
-            <StoreTitle title={this.state.title} storeTitleStyle='h1'/>
-            <StoreDescription description={this.state.description} storeDescriptionStyle='h6'/>
+            <StoreTitle title={ this.state.name } storeTitleStyle='h1' />
+            <StoreDescription description={ this.state.description } storeDescriptionStyle='h6' />
           </div>
         </div>
-        {/* End Row */}
+        { /* End Row */ }
         <hr />
-        {/* Row */}
+        { /* Row */ }
         <div className='row'>
           <div className='col-lg-6 col-sm-12'>
-            <img
-                className='img-fluid rounded mt-3 mb-3'
-                src='http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg'
-                alt='Italian Bistro'/> {/* To be replaced with StorePhoto */}
+            <img className='img-fluid rounded mt-3 mb-3' src={`"${this.state.storeimage}"`} alt='Store' />
           </div>
           <div className='col-lg-6 col-sm-12'>
-            <Rating ratingStyle='rating col-12 mb-3' rating='4' numReviews='751'/> {/* Need a field for rating and number of reviews*/}
+            <Rating ratingStyle='rating col-12 mb-3' rating='4' numReviews='751' />
+            { /* Need a field for rating and number of reviews*/ }
             <div className='store-front-link border'>
-                <Link className='btn col-md-4 col-sm-12' to='/review'>
-                  <div><span style={ {color: 'gold', textShadow:'1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' }}>★</span>{'\u00A0'} Write Review </div>
-                </Link>
-                <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12'/>
-                <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12'/>
-              </div>
-              <StoreHours storeHoursStyle='list-unstyled mt-3' hours={['9:00AM-12:00PM', '1:00PM-6:00PM']}/>
+              <Link className='btn col-md-4 col-sm-12' to='/review'>
+              <div><span style={ { color: 'gold', textShadow: '1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' } }>★</span>
+                { '\u00A0' } Write Review </div>
+              </Link>
+              <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12' />
+              <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12' />
             </div>
+            {/* <StoreHours storeHoursStyle='list-unstyled mt-3' hours={ this.state.hours} /> */}
+          </div>
         </div>
-        {/* End Row */}
+        { /* End Row */ }
         <hr />
-        {/* Row */}
+        { /* Row */ }
         <div className='row justify-content-between'>
-          {/* Left Column */}
+          { /* Left Column */ }
           <div className='col-md-6 col-sm-12'>
-            
             <Menu menu={ this.state.menu } addToOrder={ this.addToOrder } menuStyle='border justify-content-center store-front-menu mt-3 p-3' />
           </div>
-          {/* End Left Column */}
-          {/* Right Column */}
+          { /* End Left Column */ }
+          { /* Right Column */ }
           <div className='col-md-6 col-sm-12'>
-              <Order customerOrder={this.state.customerOrder} orderStyle='border mt-3 order' />
+            <Order customerOrder={ this.state.customerOrder } orderStyle='border mt-3 order' />
           </div>
-          {/* End Right Column */}
+          { /* End Right Column */ }
         </div>
-        {/* End Row */}
+        { /* End Row */ }
         <hr />
         <div className='row'>
           <div className='col-12'>
-            <Reviews />
+            {/* {this.state.reviews.length > 0 && <Reviews reviews={this.state.reviews} />} */}
           </div>
           <div className='col-12'>
-            <StoreMap storeMapStyle='border d-flex flex-column align-items-center justify-content-center store-map mt-3' location={this.state.location}/>
+            <StoreMap storeMapStyle='border d-flex flex-column align-items-center justify-content-center store-map mt-3' location={ this.state.location } />
           </div>
         </div>
       </div>
