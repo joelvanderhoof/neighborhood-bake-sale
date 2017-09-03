@@ -5,52 +5,14 @@ import Helpers from './utils/helpers';
 import Auth from './utils/Auth';
 
 
-/***********TEST DATA*************************************/
-
-var testProfile = {
-    id: 1,
-    userName: "Glen",
-    imageSrc: "",
-    quote: "I love to eat.. and kill zombies"
-}
-
-var bakerys = {
-    id: 1,
-    comments: "The restaurant was delicious"
-}
-
-var sushis = {
-    id: 2,
-    comments: "Sushi was just right"
-}
-
-var testReviews = [bakerys, sushis];
-
-
-var order1 = {
-    id: 1,
-    food: "sweet bread",
-    price: "$10.00"
-}
-
-var order2 = {
-    id: 2,
-    food: "omakase",
-    price: "$100.00"
-}
-
-var testOrders =  [order1, order2];
-
-/*********************************************************/
-
 class CustomerAdmin extends Component {
     constructor(props){
         super(props);
         this.state = {
             profilename: "",
-            quote: testProfile.quote,
-            orders: testOrders,
-            reviews: testReviews
+            profilephoto: "",
+            orders: [],
+            reviews: []
         };
         this.getProfile = this.getProfile.bind(this);
         this.renderReviews = this.renderReviews.bind(this);
@@ -58,16 +20,23 @@ class CustomerAdmin extends Component {
     }
 
     getProfile() {
+        console.log('Get profile method is fired');
         let userID = Auth.getUserId();
         let token = Auth.getToken();
         console.log("The userID is: ", userID);
         console.log("The token is: ", token);
-        Helpers.getUser(userID, token).then((response) => {
-          let userInfo = response.data[0];
-          console.log("Response from api for userID: ", response);
-          console.log(userInfo);    
+        Helpers.getUser(userID).then((response) => {
+          let firstName = response.data[0].firstName;
+          let lastName = response.data[0].lastName;
+          let userPhoto = response.data[0].photo;
+          let userOrders = response.data[0].orders;
+          let userReviews = response.data[0].reviews;
+          console.log("Response from api for getUser: ", response);  
           this.setState({
-            profilename: userID 
+            profilename: firstName + " " +lastName,
+            profilephoto: userPhoto,
+            orders: userOrders
+            //reviews: userReviews
           });
         }); 
     }
@@ -84,7 +53,7 @@ class CustomerAdmin extends Component {
     renderReviews() {
         //get reviews function
         const reviewsList = this.state.reviews;
-        console.log(reviewsList);
+        console.log('Review list', reviewsList);
         return reviewsList.map(item => (
             <CustomerReviews key={item.id}>
                 {item.comments}
@@ -95,7 +64,7 @@ class CustomerAdmin extends Component {
     renderOrders() {
         //get orders function
         const ordersList = this.state.orders;
-        console.log(ordersList);
+        console.log('Order list', ordersList);
         return ordersList.map(item => (
             <CustomerOrders key={item.id}>
                 {item.food}
@@ -113,7 +82,7 @@ class CustomerAdmin extends Component {
                             <img className="card-img-top" src="" alt="Card cap"/>
                             <div className="card-body">
                                 <h4 className="card-title">{this.state.profilename}</h4>
-                                <p className="card-text">{this.state.quote}</p>
+                                <p className="card-text">Hello world</p>
                                 <button type="submit" className="btn btn-primary">Edit</button>
                             </div>
                         </div>
