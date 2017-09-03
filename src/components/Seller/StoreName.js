@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class StoreTitle extends Component {
+class StoreName extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +13,7 @@ class StoreTitle extends Component {
   }
 
   handleChange(e) {
-    this.props.updateState("title", e.target.value);
+    this.props.updateState("name", e.target.value);
   }
 
   render() {
@@ -23,16 +23,16 @@ class StoreTitle extends Component {
           <h4 className="text-center">Store Name</h4>
           <div className="row">
             <div className="col-lg-8 offset-lg-2">
-              <input className="form-control" name="title" type="text" onChange={ this.handleChange } defaultValue={ this.props.title } id="storeTitle" />
+              <input className="form-control" name="name" type="text" onChange={ this.handleChange } value={ this.props.name } id="storeName" />
             </div>
           </div>
         </div>
         );
     }
     return (
-      <h1 className="text-center">{ this.props.title }</h1>
+      <h1 className="text-center">{ this.props.name }</h1>
       );
   }
 }
 
-export default StoreTitle;
+export default StoreName;

@@ -18,7 +18,7 @@ class Store extends Component {
       <Router>
         <div className='container border container-store'>
           <Switch>
-            <Route exact path='/store' component={ StoreFront } store={ this.state.store } />
+            <Route path='/store/:sellerId' component={ StoreFront } store={ this.state.store } />
             <Route path='/review' component={ WriteReview } />
             <Route render={ () => { return <p> Page Not Found</p>} } /> {/* To be replaced with a 404 error page */}
           </ Switch>

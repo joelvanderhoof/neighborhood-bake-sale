@@ -19,13 +19,13 @@ class MenuItem extends Component {
   }
 
   availability() {
-    if (this.props.availability === "Sold Out!") {
+    if (this.props.availability) {
       return (
-        <p className="stamp border text-center" style={ { color: 'red' } }><strong>{ this.props.availability }</strong></p>
+        <p className="stamp border text-center" style={ { color: 'red' } }><strong>Sold out!</strong></p>
         );
     } else {
       return (
-        <p style={ { color: 'green' } }><strong>{ this.props.availability }</strong></p>
+        <p style={ { color: 'green' } }><strong>In Stock!</strong></p>
         );
     }
   }
@@ -54,7 +54,7 @@ class MenuItem extends Component {
             <div className="row">
               <input className="form-control col-lg-4" type="text" onChange={ (e) => this.handleChange(e, "name") } value={ this.props.item } placeholder="name" />
               <input className="form-control col-lg-4" type="number" onChange={ (e) => this.handleChange(e, "price") } value={ this.props.price } placeholder="price" />
-              <select className="form-control col-lg-4" onChange={ (e) => this.handleChange(e, "availability") } value={ this.props.availability }>
+              <select className="form-control col-lg-4" onChange={ (e) => this.handleChange(e, "inStock") } value={ this.props.availability }>
                 <option>In Stock!</option>
                 <option>Sold Out!</option>
               </select>
@@ -63,7 +63,7 @@ class MenuItem extends Component {
               <textarea className="form-control" type="text" onChange={ (e) => this.handleChange(e, "description") } value={ this.props.description } placeholder="description" />
             </div>
             <div className="row">
-              <input className="form-control" type="text" onChange={ (e) => this.handleChange(e, "img") } value={ this.props.img } placeholder="img url" />
+              <input className="form-control" type="text" onChange={ (e) => this.handleChange(e, "image") } value={ this.props.img } placeholder="img url" />
             </div>
             <div className="row">
               <button className="btn btn-danger col-lg-12" onClick={ () => this.props.removeFromStateArray("menu", this.props.index) }>Delete Menu Item</button>
@@ -74,18 +74,18 @@ class MenuItem extends Component {
     } else {
       return (
         <div className="row border m-1 pt-3 pb-3">
-          <div className="col-lg-4">
+          <div className="col-md-4 col-sm-12">
             <img className="img-fluid border" src={ this.props.img } alt='menu item' />
+
+            { "$" + parseFloat(this.props.price / 100).toFixed(2) }
+
           </div>
-          <div className="col-lg-8">
+          <div className="col-md-8 col-sm-12">
             <div className="row">
-              <span className="col-lg-8"><strong>{ this.props.item }</strong></span>
-              <p className="col-lg-4">
-                { "$" + parseFloat(this.props.price / 100).toFixed(2) }
-              </p>
+              <span className="col-md-8"><strong>{ this.props.item }</strong></span>
             </div>
             <div className="row">
-              <p className="col-lg-12">
+              <p className="col-md-12">
                 { this.props.description }
               </p>
             </div>
