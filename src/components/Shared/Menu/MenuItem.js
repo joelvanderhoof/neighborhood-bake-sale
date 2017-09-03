@@ -19,13 +19,13 @@ class MenuItem extends Component {
   }
 
   availability() {
-    if (this.props.availability === "Sold Out!") {
+    if (this.props.availability) {
       return (
-        <p className="stamp border text-center" style={ { color: 'red' } }><strong>{ this.props.availability }</strong></p>
+        <p className="stamp border text-center" style={ { color: 'red' } }><strong>Sold out!</strong></p>
         );
     } else {
       return (
-        <p style={ { color: 'green' } }><strong>{ this.props.availability }</strong></p>
+        <p style={ { color: 'green' } }><strong>In Stock!</strong></p>
         );
     }
   }
@@ -54,7 +54,7 @@ class MenuItem extends Component {
             <div className="row">
               <input className="form-control col-lg-4" type="text" onChange={ (e) => this.handleChange(e, "name") } value={ this.props.item } placeholder="name" />
               <input className="form-control col-lg-4" type="number" onChange={ (e) => this.handleChange(e, "price") } value={ this.props.price } placeholder="price" />
-              <select className="form-control col-lg-4" onChange={ (e) => this.handleChange(e, "availability") } value={ this.props.availability }>
+              <select className="form-control col-lg-4" onChange={ (e) => this.handleChange(e, "inStock") } value={ this.props.availability }>
                 <option>In Stock!</option>
                 <option>Sold Out!</option>
               </select>

@@ -215,7 +215,7 @@ class SellerAdmin extends Component {
           </div>
           <div className="col-md-6 border sellerRight pre-scrollable">
             <StoreName name={ this.state.name } edit={ true } updateState={ this.updateState } />
-            IStoreImageIstoreImage={ this.state.storeImage } edit={ true } updateState={ this.updateState } />
+            <StoreImage storeImage={ this.state.storeImage } edit={ true } updateState={ this.updateState } />
             <StoreHours hours={ this.state.hours } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
             />
             <StoreLocation location={ this.state.location } edit={ true } updateState={ this.updateState } />

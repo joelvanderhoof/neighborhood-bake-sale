@@ -11,7 +11,7 @@ class StoreImage extends Component {
       }
     
       handleChange(e) {
-        this.props.updateState("storeimage", e.target.value);
+        this.props.updateState("storeImage", e.target.value);
       }
 
     render() {
