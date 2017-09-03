@@ -35,7 +35,6 @@ const StoreSchema = new Schema({
         type: Boolean,
         default: 0
     }, 
- 
     menuItems: [{ // Array of review IDs
         type: Schema.Types.ObjectId, 
         ref: 'MenuItem' 

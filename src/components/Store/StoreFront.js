@@ -58,10 +58,20 @@ class StoreFront extends Component {
     let sellerId = '59ab34d106e8a23b58e70560'
     helpers.getStore(sellerId)
       .then((response) => {
-        console.log(response.data[0]);
+        let storeData = response.data[0];
         this.setState({
-          store: response.data[0]
+          storeId: storeData._id,
+          sellerId: storeData.sellerId,
+          name: storeData.name,
+          location: storeData.location,
+          menu: storeData.menuItems,
+          hours: storeData.hours,
+          description: storeData.description,
+          storeimage: storeData.storeImage,
+          reviews: storeData.reviews,
+          isOpen: storeData.isOpen,
         });
+        console.log(this.state);
     })
 
   //   this.setState({
@@ -97,7 +107,7 @@ class StoreFront extends Component {
         { /* Row */ }
         <div className='row'>
           <div className='col-12'>
-            <StoreTitle title={ this.state.title } storeTitleStyle='h1' />
+            <StoreTitle title={ this.state.name } storeTitleStyle='h1' />
             <StoreDescription description={ this.state.description } storeDescriptionStyle='h6' />
           </div>
         </div>
@@ -106,8 +116,7 @@ class StoreFront extends Component {
         { /* Row */ }
         <div className='row'>
           <div className='col-lg-6 col-sm-12'>
-            <img className='img-fluid rounded mt-3 mb-3' src='http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg' alt='Italian Bistro' />
-            { /* To be replaced with StorePhoto */ }
+            <img className='img-fluid rounded mt-3 mb-3' src={`"${this.state.storeimage}"`} alt='Store' />
           </div>
           <div className='col-lg-6 col-sm-12'>
             <Rating ratingStyle='rating col-12 mb-3' rating='4' numReviews='751' />
@@ -120,7 +129,7 @@ class StoreFront extends Component {
               <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12' />
               <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12' />
             </div>
-            <StoreHours storeHoursStyle='list-unstyled mt-3' hours={ ['9:00AM-12:00PM', '1:00PM-6:00PM'] } />
+            {/* <StoreHours storeHoursStyle='list-unstyled mt-3' hours={ this.state.hours} /> */}
           </div>
         </div>
         { /* End Row */ }
@@ -142,7 +151,7 @@ class StoreFront extends Component {
         <hr />
         <div className='row'>
           <div className='col-12'>
-            <Reviews />
+            {/* {this.state.reviews.length > 0 && <Reviews reviews={this.state.reviews} />} */}
           </div>
           <div className='col-12'>
             <StoreMap storeMapStyle='border d-flex flex-column align-items-center justify-content-center store-map mt-3' location={ this.state.location } />

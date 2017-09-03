@@ -2,20 +2,20 @@ import React, {Component} from 'react';
 import ReviewItem from './Reviews/ReviewItem';
 
 // Dummy review data
-let reviews = [
-  {
-    rating: '5',
-    reviewText: 'This place is amazing!'
-  },
-  {
-    rating: '4',
-    reviewText: 'The Pizza was so crispy!'
-  },
-  {
-    rating: '1',
-    reviewText: 'I got food poisoning :('
-  }
-]
+// let reviews = [
+//   {
+//     rating: '5',
+//     reviewText: 'This place is amazing!'
+//   },
+//   {
+//     rating: '4',
+//     reviewText: 'The Pizza was so crispy!'
+//   },
+//   {
+//     rating: '1',
+//     reviewText: 'I got food poisoning :('
+//   }
+// ]
 
 class Reviews extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Reviews extends Component {
 
 
   mapReviews () {
-    let showReviews = reviews.map( (reviewItem,i) => {
+    let showReviews = this.props.reviews.map( (reviewItem,i) => {
       return <ReviewItem key={ i } rating={reviewItem.rating} reviewText={reviewItem.reviewText}/>
     })
 
