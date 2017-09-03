@@ -1,11 +1,34 @@
 import React, { Component } from 'react';
 import MessageItems from "./MessageItems";
+import Auth from "../utils/Auth";
+import Helpers from "../utils/helpers";
+import io from 'socket.io-client';
 
 class Message extends Component {
     constructor(props) {
         super(props);
         this.state = {};
 
+    }
+
+
+    monitorStore() {
+      let userID = Auth.getUserId();
+      let socket = io.connect('http://localhost:8080');
+      socket.on(userID, function(data) {
+        console.log(data);
+        //query menu DB
+
+      // socket.emit('my other event', {
+      //   my: 'data'
+      // });
+      });
+    
+  }
+
+
+    componentDidMount() {
+      monitorStore();
     }
 
     render() {

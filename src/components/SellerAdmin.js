@@ -12,48 +12,6 @@ import Helpers from "./utils/helpers";
 import io from 'socket.io-client';
 import ToggleButton from 'react-toggle-button'
 
-let testObj = {
-  sellerId: "1", //Same as Sellers.ID
-  name: "John's Bistro",
-  location: "Irvine, CA", // physical adress
-  orders: [], // Array of orders
-  hours: [
-    "9:00AM-12:00PM", "1:00PM-6:00PM", "1:00PM-6:00PM", "1:00PM-6:00PM", "1:00PM-6:00PM", "1:00PM-6:00PM", "1:00PM-6:00PM"
-  ], // Array of objects for each day
-  description: "Neighborhood Italian Spot",
-  storeImage: "http://www.grappaitalianbistro.com/uploads/files/images/grappa-italian-bistro-hs04.jpg",
-  photos: [], // Array of image URL
-  certified: false, // Store passes inspection
-  review: [], // Array of reviews IDs
-}
-
-let pizza = {
-  sellerId: String, //Same as Sellers.ID
-  name: "Large Pepperoni Pizza",
-  description: "Gluten Free, Cheese from the rare hipster Cow, Pepperoni made from an Oak Tree",
-  price: 1150,
-  image: "http://cdn.schwans.com/media/images/products/56720-1-1540.jpg",
-  availability: "In Stock!" //current inventory
-};
-
-let sandwich = {
-  name: "Cardboard",
-  description: "Made with no Peanuts",
-  price: 200,
-  image: "https://static.pexels.com/photos/236834/pexels-photo-236834.jpeg",
-  availability: "Sold Out!" //current inventory
-};
-
-let drink = {
-  name: "Fat Free Burger",
-  description: "0 Calories",
-  price: 100,
-  image: "https://static.pexels.com/photos/8996/pexels-photo.jpg",
-  availability: "Sold Out!" //current inventory
-};
-
-let testMenu = [pizza, sandwich, drink];
-
 class SellerAdmin extends Component {
   constructor(props) {
     super(props);
@@ -76,7 +34,7 @@ class SellerAdmin extends Component {
     this.queryStore = this.queryStore.bind(this);
 
   }
-
+  // query DB with store info
   queryStore() {
     let userID = Auth.getUserId();
     Helpers.getStore(userID).then((response) => {
@@ -96,30 +54,42 @@ class SellerAdmin extends Component {
   }
 
   componentDidMount() {
-    var socket = io.connect('http://localhost:8080');
-    socket.on('news', function(data) {
-      console.log(data);
-      socket.emit('my other event', {
-        my: 'data'
-      });
-    });
-
+    // let socket = io.connect('http://localhost:8080');
+    // socket.on('news', function(data) {
+    //   console.log(data);
+    //   socket.emit('my other event', {
+    //     my: 'data'
+    //   });
+    // });
     this.queryStore();
-
   }
+
+  //edit function - currently not in use
   setEdit() {
     this.setState({
       edit: !this.state.edit
     });
   }
 
+  //socket advises all customers store updated
+  notifyCustomers() {
+    let userID = Auth.getUserId();
+    let socket = io.connect('http://localhost:8080');
+
+    socket.emit("users", {
+      storeID: userID,
+      message: "store updated"
+    });
+  }
+  
+  //save button - updates DB and sends out socket notification
   setSave() {
     let storeData = this.state;
     let userID = Auth.getUserId();
-    Helpers.saveStore(userID, storeData).then(()=>{
+    Helpers.saveStore(userID, storeData).then(() => {
       this.queryStore(userID);
     });
-    console.log(this.state);
+    this.notifyCustomers();
   }
 
   //add slot in hours or menu array
@@ -167,7 +137,8 @@ class SellerAdmin extends Component {
       });
     }
   }
-
+ 
+  //updates state - function passed down to inputs
   updateState(key, value, index, type) {
     //no index - not an array
     if (index === undefined) {
@@ -188,12 +159,12 @@ class SellerAdmin extends Component {
       this.setState(stateObj);
     }
   }
+
   render() {
     return (
       <div>
-        <h1 className="text-center">{ this.state.name }'s Admin Page <EditButton saveFunc={ this.setSave }/></h1>
-        Store:
-        <ToggleButton value={ this.state.isOpen } onToggle={ (value) => {this.setState({ isOpen: !value,})} } inactiveLabel="Off" activeLabel="On" />
+        <h1 className="text-center">{ this.state.name }'s Admin Page <EditButton saveFunc={ this.setSave }/></h1> Store:
+        <ToggleButton value={ this.state.isOpen } onToggle={ (value) => {this.setState({isOpen: !value,})} } inactiveLabel="Off" activeLabel="On" />
         <div className="text-center">
         </div>
         <div className="row sellerContainer">

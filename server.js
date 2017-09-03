@@ -85,10 +85,16 @@ server.listen(PORT,()=>{
     console.log(`The server is listening on port ${PORT}`);
 });
 
+
+//Socket IO
 io.on('connection', function (socket) {
     console.log("socket connection made");
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
+    // socket.emit('news', { hello: 'world' });
+    socket.on('users', function (data) {
       console.log(data);
+      //tells everyone on the store page to requery store
+      if(data.message == "store updated"){
+          socket.emit(data.storeID, {message: "requery"})
+      }
     });
   });
