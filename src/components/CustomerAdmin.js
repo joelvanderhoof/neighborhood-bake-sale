@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import CustomerReviews from './CustomerReviews';
-import CustomerOrders from './CustomerOrders';
-// import helpers from '../utils/helpers';
+import CustomerReviews from './Customer/CustomerReviews';
+import CustomerOrders from './Customer/CustomerOrders';
+import Helpers from './utils/helpers';
+import Auth from './utils/Auth';
+
 
 /***********TEST DATA*************************************/
 
@@ -42,20 +44,37 @@ var testOrders =  [order1, order2];
 /*********************************************************/
 
 class CustomerAdmin extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            profilename: testProfile.userName,
+            profilename: "",
             quote: testProfile.quote,
             orders: testOrders,
             reviews: testReviews
         };
+        this.getProfile = this.getProfile.bind(this);
         this.renderReviews = this.renderReviews.bind(this);
         this.renderOrders = this.renderOrders.bind(this);
     }
 
     getProfile() {
-        
+        let userID = Auth.getUserId();
+        let token = Auth.getToken();
+        console.log("The userID is: ", userID);
+        console.log("The token is: ", token);
+        Helpers.getUser(userID, token).then((response) => {
+          let userInfo = response.data[0];
+          console.log("Response from api for userID: ", response);
+          console.log(userInfo);    
+          this.setState({
+            profilename: userID 
+          });
+        }); 
+    }
+
+    componentDidMount() {
+        console.log('Component Did Mount');
+        this.getProfile();
     }
 
     renderMessages() {
@@ -95,6 +114,7 @@ class CustomerAdmin extends Component {
                             <div className="card-body">
                                 <h4 className="card-title">{this.state.profilename}</h4>
                                 <p className="card-text">{this.state.quote}</p>
+                                <button type="submit" className="btn btn-primary">Edit</button>
                             </div>
                         </div>
                     </div>

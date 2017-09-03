@@ -7,7 +7,7 @@ import SignUp from './SignUp';
 import Home from './Home';
 import Store from './Store';
 import SellerAdmin from './SellerAdmin'
-import CustomerAdmin from './Customer/CustomerAdmin';
+import CustomerAdmin from './CustomerAdmin';
 import Auth from './utils/Auth';
 
 export default class Main extends Component {
