@@ -21,7 +21,6 @@ let helpers = {
   },
 
   signup(credentials) {
-    console.log('credentials',credentials);
     return axios.post('/auth/signup',  {
         firstName: credentials.firstName,
         lastName: credentials.lastName,

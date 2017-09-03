@@ -1,22 +1,6 @@
 import React, {Component} from 'react';
 import ReviewItem from './Reviews/ReviewItem';
 
-// Dummy review data
-// let reviews = [
-//   {
-//     rating: '5',
-//     reviewText: 'This place is amazing!'
-//   },
-//   {
-//     rating: '4',
-//     reviewText: 'The Pizza was so crispy!'
-//   },
-//   {
-//     rating: '1',
-//     reviewText: 'I got food poisoning :('
-//   }
-// ]
-
 class Reviews extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +22,7 @@ class Reviews extends Component {
     return (
       <ul className='list-unstyled mt-3'>
         <strong>Current Reviews: </strong>
-        {this.mapReviews()}
+        {this.props.reviews.length > 0 ? this.mapReviews() : <li className='container-store border'><h6><strong>No Reviews Found </strong></h6></li>}
       </ul>
     )
   }

@@ -57,14 +57,12 @@ router.route('/user/:userID?')
 
 router.route('/store/:sellerId?')
     .get((req, res) => {
-        console.log(req.params.sellerId);
         Store.find({
             sellerId: req.params.sellerId
         })
             .populate('menu')
             .populate('reviews')
             .exec((err, doc) => {
-                console.log(doc);
                 if (err) {
                     console.log(err);
                 } else {

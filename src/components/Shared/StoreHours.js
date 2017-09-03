@@ -21,7 +21,6 @@ class StoreHours extends Component {
       <div className={this.props.storeHoursStyle}>
         <h4 className="text-center" style={{"borderBottom": "4px red solid"}}>Hours of Operation</h4>
         { this.listHours() }
-        {console.log('storehours component: ', this.props.hours)}
       </div>
       );
   }

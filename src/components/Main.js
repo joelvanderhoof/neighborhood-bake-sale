@@ -10,16 +10,12 @@ import SellerAdmin from './SellerAdmin'
 import CustomerAdmin from './Customer/CustomerAdmin';
 import Auth from './utils/Auth';
 
-//const loggedIn = false;
-
-
 export default class Main extends Component {
     componentWillMount() {
         this.setState({ loggedIn: Auth.isUserAuthenticated() });
     }
     render() {
         const { loggedIn } = this.state;
-        console.log(`Is the user logged in: ${loggedIn}`);
         return (
             <Router>
               <div className='main'>
@@ -28,33 +24,12 @@ export default class Main extends Component {
                   <Switch>
                     <Route exact path='/' component={ Home }  />
                     <Route path='/store/:sellerId' component={ Store } />
-                    <Route path='/selleradmin' render={ () => (
-                        loggedIn ? (
-                            <SellerAdmin/>
-                        ) : (
-                            <Redirect to="/login"/>
-                        )
-                        )} />
-                    <Route path='/customeradmin' render={ () => (
-                        loggedIn ? (
-                            <CustomerAdmin/>
-                        ) : (
-                            <Redirect to="/login"/>
-                        )
-                        )} />
+                    <Route path='/selleradmin' render={ () => (loggedIn ? (<SellerAdmin/>) : (<Redirect to="/login"/>))} />
+                    <Route path='/customeradmin' render={ () => (loggedIn ? (<CustomerAdmin/>) : (<Redirect to="/login"/>))} />
                     <Route path='/signup' component={ SignUp } />
-                    <Route path='/login' render={ () => (
-                        loggedIn ? (
-                            <Redirect to="/"/>
-                        ) : (
-                            <Login />
-                        )
-                        )} />
+                    <Route path='/login' render={ () => (loggedIn ? (<Redirect to="/"/>) : (<Login />))} />
                     <Route path='/logout' component={ Logout } />
-                    <Route render={ () => {
-                                        return <p> Page Not Found</p>
-                                    } } />
-                    { /* To be replaced with a 404 error page */ }
+                    <Route render={ () => {return <h1> Page Not Found</h1>} } /> { /* To be replaced with an error page */ }
                     </ Switch>
                 </div>
               </div>
