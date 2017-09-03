@@ -18,8 +18,8 @@ class MenuItem extends Component {
     this.props.updateState("menu", event.target.value, this.props.index, type);
   }
 
-  availability() {
-    if (this.props.availability) {
+  inStock() {
+    if (this.props.inStock) {
       return (
         <p className="stamp border text-center" style={ { color: 'red' } }><strong>Sold out!</strong></p>
         );
@@ -54,7 +54,7 @@ class MenuItem extends Component {
             <div className="row">
               <input className="form-control col-lg-4" type="text" onChange={ (e) => this.handleChange(e, "name") } value={ this.props.item } placeholder="name" />
               <input className="form-control col-lg-4" type="number" onChange={ (e) => this.handleChange(e, "price") } value={ this.props.price } placeholder="price" />
-              <select className="form-control col-lg-4" onChange={ (e) => this.handleChange(e, "inStock") } value={ this.props.availability }>
+              <select className="form-control col-lg-4" onChange={ (e) => this.handleChange(e, "inStock") } value={ this.props.inStock }>
                 <option>In Stock!</option>
                 <option>Sold Out!</option>
               </select>
@@ -90,9 +90,9 @@ class MenuItem extends Component {
               </p>
             </div>
             <div className="stamp-container">
-              { this.availability() }
+              { this.inStock() }
             </div>
-            { this.props.availability !== 'Sold Out!' && this.addToOrderButton() }
+            { this.props.inStock !== 'Sold Out!' && this.addToOrderButton() }
           </div>
         </div>
         );
