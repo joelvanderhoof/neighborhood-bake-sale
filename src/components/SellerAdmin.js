@@ -59,12 +59,12 @@ class SellerAdmin extends Component {
     super(props);
     this.state = {
       edit: false,
-      menu: [],
+      menuItems: [],
       name: "",
       location: "",
       hours: [],
       description: "",
-      storeimage: "",
+      storeImage: "",
       isOpen: false
     };
 
@@ -84,12 +84,12 @@ class SellerAdmin extends Component {
       console.log(response);
       console.log(storeInfo);
       this.setState({
-        menu: storeInfo.menuItems,
+        menuItems: storeInfo.menuItems,
         name: storeInfo.name,
         hours: storeInfo.hours,
         isOpen: storeInfo.isOpen,
         location: storeInfo.location,
-        storeimage: storeInfo.storeImage,
+        storeImage: storeInfo.storeImage,
         description: storeInfo.description
       });
     });
@@ -119,23 +119,26 @@ class SellerAdmin extends Component {
     Helpers.saveStore(userID, storeData).then(()=>{
       this.queryStore(userID);
     });
+    console.log(this.state);
   }
 
   //add slot in hours or menu array
   addToStateArray(value) {
+    let userID = Auth.getUserId();
     if (value === "menu") {
-      let currentMenu = this.state.menu;
+      let currentMenu = this.state.menuItems;
       let emptyMenuItem = {
+        sellerId: userID,
         name: "Menu Name",
+        image: "https://static.pexels.com/photos/563067/pexels-photo-563067.jpeg",
         description: "Menu Description",
         price: 0,
-        image: "https://static.pexels.com/photos/563067/pexels-photo-563067.jpeg",
-        availability: "Sold Out!" //current inventory
+        inStock: false //current inventory
       };
 
       currentMenu.push(emptyMenuItem);
       this.setState({
-        menu: currentMenu
+        menuItems: currentMenu
       });
     }
     if (value === "hours") {
@@ -150,10 +153,10 @@ class SellerAdmin extends Component {
   //removes from hour or menu array
   removeFromStateArray(value, index) {
     if (value === "menu") {
-      let currentMenu = this.state.menu;
+      let currentMenu = this.state.menuItems;
       currentMenu.splice(index, 1);
       this.setState({
-        menu: currentMenu
+        menuItems: currentMenu
       });
     }
     if (value === "hours") {
@@ -172,7 +175,7 @@ class SellerAdmin extends Component {
       stateObj[key] = value;
       this.setState(stateObj);
     } else if (key === "menu") { //array menu
-      let tempMenu = this.state.menu;
+      let tempMenu = this.state.menuItems;
       let stateObj = {};
       tempMenu[index][type] = value;
       stateObj[key] = tempMenu;
@@ -200,25 +203,25 @@ class SellerAdmin extends Component {
             </div>
             <div className="row">
               <div className="col-xl-6 col-md-12 col-sm-12">
-                <StoreImage storeImage={ this.state.storeimage } edit={ false } />
+                <StoreImage storeImage={ this.state.storeImage } edit={ false } />
                 <StoreHours hours={ this.state.hours } edit={ false } updateState={ this.updateState } />
                 <StoreLocation location={ this.state.location } edit={ false } updateState={ this.updateState } />
               </div>
               <div className="col-xl-6 col-md-12 col-sm-12">
-                <Menu menu={ this.state.menu } edit={ false } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
+                <Menu menuItems={ this.state.menuItems } edit={ false } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
                 />
               </div>
             </div>
           </div>
           <div className="col-md-6 border sellerRight pre-scrollable">
             <StoreName name={ this.state.name } edit={ true } updateState={ this.updateState } />
-            <StoreImage storeImage={ this.state.storeimage } edit={ true } updateState={ this.updateState } />
+            IStoreImageIstoreImage={ this.state.storeImage } edit={ true } updateState={ this.updateState } />
             <StoreHours hours={ this.state.hours } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
             />
             <StoreLocation location={ this.state.location } edit={ true } updateState={ this.updateState } />
             <StoreDescription description={ this.state.description } edit={ true } updateState={ this.updateState } />
             <h4 className="text-center">Inventory <AddMenuItemButton edit={ true } addToStateArray={ this.addToStateArray } /> </h4>
-            <Menu menu={ this.state.menu } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
+            <Menu menuItems={ this.state.menuItems } edit={ true } updateState={ this.updateState } addToStateArray={ this.addToStateArray } removeFromStateArray={ this.removeFromStateArray }
             />
           </div>
         </div>
