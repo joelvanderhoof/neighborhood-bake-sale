@@ -5,7 +5,6 @@ import StoreMap from './StoreFront/StoreMap';
 import AddPhoto from './StoreFront/AddPhoto';
 import Bookmark from './StoreFront/Bookmark';
 import Order from './StoreFront/Order';
-
 import StoreTitle from '../Shared/StoreTitle';
 import StoreHours from '../Shared/StoreHours';
 import StoreDescription from '../Shared//StoreDescription';
@@ -81,7 +80,7 @@ class StoreFront extends Component {
               <Rating ratingStyle='rating col-12 mb-3' rating='4' numReviews='751' />
               { /* Need a field for rating and number of reviews*/ }
               <div className='store-front-link border'>
-                <Link className='btn col-md-4 col-sm-12' to='/review'>
+                <Link className='btn col-md-4 col-sm-12' to={`/review/${this.state.sellerId}`}>
                 <div><span style={ { color: 'gold', textShadow: '1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' } }>★</span>
                   { '\u00A0' } Write Review </div>
                 </Link>

@@ -180,10 +180,10 @@ router.route('/menu/:menuitemID?')
             });
     });
 
-router.route('/review/:reviewID?')
+router.route('/review/:sellerId?')
     .get((req, res) => {
         Review.find({
-            _id: req.params.reviewID
+            _id: req.params.sellerId
         },
             (err, doc) => {
                 if (err) {
@@ -201,7 +201,7 @@ router.route('/review/:reviewID?')
             } else {
                 Store.findOneAndUpdate(
                     {
-                        _id: req.body.StoreID
+                        _id: req.body.sellerId
                     },
                     {
                         $push: {
