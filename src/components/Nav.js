@@ -71,9 +71,10 @@ class Nav extends Component {
               Customer Admin
             </NavLink>
           </li>
-          <li>
-            <Message messages={ this.state.messages } />
-          </li>
+          { Auth.isUserAuthenticated() &&
+            <li>
+              <Message messages={ this.state.messages } />
+            </li> }
         </ul>
         <ul className='navbar-nav'>
           { Auth.isUserAuthenticated() ?
