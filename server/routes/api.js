@@ -57,14 +57,12 @@ router.route('/user/:userID?')
 
 router.route('/store/:sellerId?')
     .get((req, res) => {
-        console.log(req.params.sellerId);
         Store.find({
             sellerId: req.params.sellerId
         })
             .populate('menu')
             .populate('reviews')
             .exec((err, doc) => {
-                console.log(doc);
                 if (err) {
                     console.log(err);
                 } else {
@@ -182,10 +180,10 @@ router.route('/menu/:menuitemID?')
             });
     });
 
-router.route('/review/:reviewID?')
+router.route('/review/:sellerId?')
     .get((req, res) => {
         Review.find({
-            _id: req.params.reviewID
+            _id: req.params.sellerId
         },
             (err, doc) => {
                 if (err) {
@@ -203,7 +201,7 @@ router.route('/review/:reviewID?')
             } else {
                 Store.findOneAndUpdate(
                     {
-                        _id: req.body.StoreID
+                        _id: req.body.sellerId
                     },
                     {
                         $push: {

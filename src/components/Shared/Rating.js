@@ -10,7 +10,6 @@ class Rating extends Component {
   }
 
   handleClick (event) {
-    console.log(event.target)
     this.setState({
       rating: event.target.id
     });

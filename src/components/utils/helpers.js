@@ -8,8 +8,12 @@ let helpers = {
     return axios.get('api/store/'+ storeID)
   },
 
-  getPublicStore(storeID) {
-    return axios.get('./../api/store/'+ storeID)
+  getPublicStore(sellerId) {
+    return axios.get('./../api/store/'+ sellerId)
+  },
+
+  getPublicReview(sellerId) {
+    return axios.get('./../api/review/'+ sellerId)
   },
 
   logIn(credentials) {
@@ -21,7 +25,6 @@ let helpers = {
   },
 
   signup(credentials) {
-    console.log('credentials',credentials);
     return axios.post('/auth/signup',  {
         firstName: credentials.firstName,
         lastName: credentials.lastName,
