@@ -10,7 +10,7 @@ class CustomerAdmin extends Component {
         super(props);
         this.state = {
             profilename: "",
-            profilephoto: "",
+            profilephoto: "http://clipartist.net/Holidays/Chinese_New_Year/Snake/bamibal_chinese_smiley_chinese_new_year_year_of_the_dragon_art_sheet_page_black_white_line_art-555px.png",
             orders: [],
             reviews: []
         };
@@ -79,11 +79,11 @@ class CustomerAdmin extends Component {
                 <div className="row">
                     <div className="col-4">
                         <div className="card" style={{width: '20rem'}}>
-                            <img className="card-img-top" src="" alt="Card cap"/>
+                            <img className="card-img-top" src='http://clipartist.net/Holidays/Chinese_New_Year/Snake/bamibal_chinese_smiley_chinese_new_year_year_of_the_dragon_art_sheet_page_black_white_line_art-555px.png' alt="Card cap"/>
                             <div className="card-body">
                                 <h4 className="card-title">{this.state.profilename}</h4>
                                 <p className="card-text">Hello world</p>
-                                <button type="submit" className="btn btn-primary">Edit</button>
+                                <a href="#" className="btn btn-primary">Edit</a>
                             </div>
                         </div>
                     </div>

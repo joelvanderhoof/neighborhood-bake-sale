@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import helpers from '/../utils/helpers';
+import helpers from './../utils/helpers';
 
 class LoginForm extends Component {
   constructor(props) {

@@ -199,9 +199,30 @@ router.route('/review/:sellerId?')
             if (err) {
                 console.log(err);
             } else {
+                // Add review ID to the store
                 Store.findOneAndUpdate(
                     {
-                        _id: req.body.sellerId
+                        _id: req.body.storeId
+                    },
+                    {
+                        $push: {
+                            'reviews': doc._id
+                        }
+                    },
+                    {
+                        new: true
+                    },
+                    (error, doc) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            //res.send(doc);
+                        }
+                    })
+                //Add review ID to the customer/user
+                User.findOneAndUpdate(
+                    {
+                        _id: req.body.customerId
                     },
                     {
                         $push: {
