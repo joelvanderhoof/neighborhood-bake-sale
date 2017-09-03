@@ -62,6 +62,7 @@ router.route('/store/:sellerId?')
             sellerId: req.params.sellerId
         })
             .populate('menu')
+            .populate('reviews')
             .exec((err, doc) => {
                 console.log(doc);
                 if (err) {

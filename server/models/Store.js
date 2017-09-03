@@ -35,11 +35,11 @@ const StoreSchema = new Schema({
         type: Boolean,
         default: 0
     }, 
- 
     menuItems: { // Array of review IDs
         type: Array, 
         default: []
     }, 
+
     isOpen: { // Store open or closed
         type: Boolean,
         default: 0
