@@ -11,6 +11,7 @@
     "express-session": "^1.15.5",
     "google-maps-react": "^1.1.0",
     "jsonwebtoken": "^7.4.3",
+    "loadjs": "^3.5.1",
     "mongoose": "^4.11.8",
     "morgan": "^1.8.2",
     "passport": "^0.4.0",
