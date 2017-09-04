@@ -15,8 +15,8 @@ class Menu extends Component {
   createMenuItems() {
     let menuList;
     menuList = this.props.menuItems.map((menuItem, i) => {
-      return <MenuItem key={ i } index={ i } item={ menuItem.name } description={ menuItem.description } price={ menuItem.price } availability={ menuItem.inStock }
-               img={ menuItem.image } edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray } />
+      return <MenuItem key={ i } index={ i } item={ menuItem.name } description={ menuItem.description } price={ menuItem.price } inStock={ menuItem.inStock }
+               image={ menuItem.image } edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray } />
     });
     return menuList;
   }

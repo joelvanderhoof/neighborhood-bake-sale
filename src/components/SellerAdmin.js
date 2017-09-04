@@ -39,8 +39,6 @@ class SellerAdmin extends Component {
     let userID = Auth.getUserId();
     Helpers.getStore(userID).then((response) => {
       let storeInfo = response.data[0];
-      console.log(response);
-      console.log(storeInfo);
       this.setState({
         menuItems: storeInfo.menuItems,
         name: storeInfo.name,
@@ -80,6 +78,24 @@ class SellerAdmin extends Component {
       storeID: userID,
       message: "store updated"
     });
+  }
+
+  addToOrder(order) {
+    this.setState({
+      customerOrder: this.state.customerOrder.concat(order),
+    });
+
+    let orderTotal = 0
+    this.state.customerOrder.map( (orderItem) => {orderTotal += orderItem.price});
+    this.state.customerOrder.map((orderItem)=>{
+      orderTotal += orderItem.price
+    }
+  )
+    this.setState({
+      orderTotal: orderTotal
+    });
+
+    // console.log('orderTotal',$ ${parseFloat(orderTotal/100).toFixed(2)});
   }
   
   //save button - updates DB and sends out socket notification
@@ -140,6 +156,12 @@ class SellerAdmin extends Component {
  
   //updates state - function passed down to inputs
   updateState(key, value, index, type) {
+    if(value === "In Stock!") {
+      value = true;
+    }
+    if(value === "Sold Out!") {
+      value = false;
+    }
     //no index - not an array
     if (index === undefined) {
       let stateObj = {};
