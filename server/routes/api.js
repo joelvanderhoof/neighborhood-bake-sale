@@ -243,13 +243,13 @@ router.route('/review/:sellerId?')
         });
     });
 
-router.route('/order/:orderID?')
+router.route('/order/:storeId?')
     .get((req, res) => {
         Order.find({
-            _id: req.params.orderID
+            storeId: req.params.storeId
         })
-            .populate('menu')
             .exec((err, doc) => {
+                console.log(doc);
                 if (err) {
                     console.log(err);
                 } else {
@@ -258,6 +258,7 @@ router.route('/order/:orderID?')
             });
     })
     .post((req, res) => {
+        console.log('req body', req.body)
         let orderData = new Order(req.body);
         orderData.save((err, doc) => {
             if (err) {
@@ -265,7 +266,7 @@ router.route('/order/:orderID?')
             } else {
                 User.findOneAndUpdate(
                     {
-                        _id: req.body.userID
+                        _id: req.body.customerId
                     },
                     {
                         $push: {
@@ -276,6 +277,7 @@ router.route('/order/:orderID?')
                         new: true
                     },
                     function(error, doc) {
+                        console.log(doc);
                         if (err) {
                             console.log(err);
                         } else {

@@ -72,9 +72,17 @@ class StoreFront extends Component {
   }
 
   placeOrder() {
-    console.log('userId', Auth.getUserId());
-    console.log('storeId', this.state.storeId);
-    console.log('order:',this.state.customerOrder);
+    const token = Auth.getToken();
+    const storeId = this.state.storeId;
+    const orders = {
+      customerId: Auth.getUserId(), // Buyer/Customer's userId
+      sellerId: this.state.sellerId, // Seller's userId
+      storeId: this.state.storeId,
+      items: this.state.customerOrder, // Array of Menu item Objects with name and price
+    };
+
+    console.log('orders',orders);
+    helpers.placeOrder(storeId, orders, token);
     console.log('orderTotal',`$ ${parseFloat(this.state.orderTotal/100).toFixed(2)}`);
   }
 

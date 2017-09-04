@@ -11,8 +11,10 @@ const Order = require('./../models/Order');
 // Basic api route structure
 router.route('/user/:userID?')
     .get((req, res) => {
-        User.find({ _id: req.params.userId })
-            .populate("stores") 
+        User.find({
+            _id: req.params.userId
+        })
+            .populate("stores")
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);
@@ -23,7 +25,7 @@ router.route('/user/:userID?')
     })
     .post((req, res) => {
         let newGuy = new User(req.body);
-        newGuy.save((err, doc)=> {
+        newGuy.save((err, doc) => {
             if (err) {
                 console.log(err);
             } else {
@@ -60,15 +62,15 @@ router.route('/store/:sellerId?')
         }, {
             upsert: true
         })
-        .populate('menu')
-        .exec((err, doc) => {
-            console.log(doc);
-            if (err) {
-                console.log(err);
-            } else {
-                res.send(doc);
-            }
-        });
+            .populate('menu')
+            .exec((err, doc) => {
+                console.log(doc);
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.send(doc);
+                }
+            });
     })
     .post((req, res) => {
         let storeData = new Store(req.body);
@@ -103,22 +105,22 @@ router.route('/store/:sellerId?')
         req.body.users.forEach((storeData) => {
             Store.update({
                 _id: storeData.id
-            }, 
-            storeData, 
-            (err) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
+            },
+                storeData,
+                (err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
         })
     })
     .delete((req, res) => {
         Store.remove({
             _id: req.params.storeID
-        }, 
-        (err) => {
-            if (err) return handleError(err);
-        });
+        },
+            (err) => {
+                if (err) return handleError(err);
+            });
     });
 
 router.route('/menu/:menuitemID?')
@@ -163,36 +165,36 @@ router.route('/menu/:menuitemID?')
     .put((req, res) => {
         req.body.menuItems.forEach((menuItemData) => {
             MenuItem.update({
-                    _id: menuItemData.id
-                }, 
+                _id: menuItemData.id
+            },
                 menuItemData, (err) => {
                     if (err) {
                         console.log(err);
                     }
-            });
+                });
         })
     })
     .delete((req, res) => {
         MenuItem.remove({
             _id: req.params.menuitemID
-        }, 
-        (err) => {
-            if (err) return handleError(err);
-        });
+        },
+            (err) => {
+                if (err) return handleError(err);
+            });
     });
 
 router.route('/review/:reviewID?')
     .get((req, res) => {
         Review.find({
-                _id: req.params.reviewID
-            }, 
+            _id: req.params.reviewID
+        },
             (err, doc) => {
                 if (err) {
                     console.log(err);
                 } else {
                     res.send(doc);
                 }
-        })
+            })
     })
     .post((req, res) => {
         let reviewData = new Review(req.body);
@@ -226,14 +228,14 @@ router.route('/review/:reviewID?')
     .put((req, res) => {
         req.body.reviews.forEach((reviewData) => {
             Review.update({
-                    _id: reviewData.id
-                }, 
-                reviewData, 
+                _id: reviewData.id
+            },
+                reviewData,
                 (err) => {
                     if (err) {
                         console.log(err);
                     }
-            });
+                });
         })
     })
     .delete((req, res) => {
@@ -244,39 +246,38 @@ router.route('/review/:reviewID?')
         });
     });
 
-router.route('/order/:orderID?')
+router.route('/order/:storeId?')
     .get((req, res) => {
         Order.find({
-            _id: req.params.orderID
+            storeId: req.params.storeId
         })
-        .populate('menu')
-        .exec((err, doc) => {
-            if (err) {
-                console.log(err);
-            } else {
-                res.send(doc);
-            }
-        });
+            .exec((err, doc) => {
+                console.log(doc);
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.send(doc);
+                }
+            });
     })
     .post((req, res) => {
-       let orderData = new Order(req.body);
+        console.log('req body', req.body)
+        let orderData = new Order(req.body);
         orderData.save((err, doc) => {
             if (err) {
                 console.log(err);
             } else {
-                User.findOneAndUpdate(
-                    {
-                        _id: req.body.userID
-                    },
-                    {
-                        $push: {
-                            'orders': doc._id
-                        }
-                    },
-                    {
-                        new: true
-                    },
+                User.findOneAndUpdate({
+                    _id: req.body.customerId
+                }, {
+                    $push: {
+                        'orders': doc._id
+                    }
+                }, {
+                    new: true
+                },
                     function(error, doc) {
+                        console.log(doc);
                         if (err) {
                             console.log(err);
                         } else {
@@ -290,22 +291,22 @@ router.route('/order/:orderID?')
         req.body.orders.forEach((orderData) => {
             Order.update({
                 _id: orderData.id
-            }, 
-            orderData, 
-            (err) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
+            },
+                orderData,
+                (err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
         })
     })
     .delete((req, res) => {
         Order.remove({
             _id: req.params.orderID
-        }, 
-        (err) => {
-            if (err) return handleError(err);
-        });
+        },
+            (err) => {
+                if (err) return handleError(err);
+            });
     });
 
 router.route('/useLater')
