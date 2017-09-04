@@ -5,45 +5,59 @@ const Auth = require('./Auth');
 let helpers = {
 
   getStore(storeID) {
-    return axios.get('api/store/'+ storeID)
+    return axios.get('api/store/' + storeID)
   },
 
   getPublicStore(sellerId) {
-    return axios.get('./../api/store/'+ sellerId)
+    return axios.get('./../api/store/' + sellerId)
   },
 
   getPublicReview(sellerId) {
-    return axios.get('./../api/review/'+ sellerId)
+    return axios.get('./../api/review/' + sellerId)
   },
 
   logIn(credentials) {
-    return axios.post('/auth/login',  {
-        email: credentials.email,
-        password: credentials.password
-      }
+    return axios.post('/auth/login', {
+      email: credentials.email,
+      password: credentials.password
+    }
     )
   },
 
   signup(credentials) {
-    return axios.post('/auth/signup',  {
-        firstName: credentials.firstName,
-        lastName: credentials.lastName,
-        email: credentials.email,
-        password: credentials.password
-      }
+    return axios.post('/auth/signup', {
+      firstName: credentials.firstName,
+      lastName: credentials.lastName,
+      email: credentials.email,
+      password: credentials.password
+    }
     )
   },
 
-  // getUser is an untested function
   getUser(id, token) {
     return axios.get(`/api/user/${id}`, {
-      headers: token
+      headers: {
+        authorization: token
+      }
     });
   },
 
   saveStore(storeID, storeData) {
     return axios.put("api/store/" + storeID, storeData)
-  }
+  },
+
+  placeOrder(storeId, order, token) {
+    return axios.post(`./../secure/order/${storeId}`, {
+      customerId: order.customerId, //same as the ID from the Customer model
+      sellerId: order.sellerId, //same as the ID from the Seller collection
+      storeId: order.storeId,
+      items: order.items,
+    }, {
+      headers: {
+        authorization: token
+      }
+    })
+  },
 }
 
 // Export API Helper
