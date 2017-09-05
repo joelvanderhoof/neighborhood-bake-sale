@@ -26,17 +26,25 @@ class Message extends Component {
 
   }
 
+  listMenuItems(){
+    let allMessages;
+    allMessages = this.props.messages.map((message) => {
+      if (message.status !== "Declined") {
+        return <MessageItems customerName={ message.buyerFirstName + " " + message.buyerLastName } seller={ "Bob" } order={ message.items } orderTotal={ message.orderTotal } />
+      }
+    })
+    return allMessages;
+  }
+
+  updateOrderStatus() {
+    //helper function - pass params to update status to declined or accepted - add picked up here or in another function
+  }
 
   componentDidMount() {
     this.monitorStore();
   }
 
   render() {
-    let allMessages;
-
-    allMessages = this.props.messages.map((message) => {
-      return <MessageItems customerName={ "Frank" } seller={"Bob"} order={ message.items } orderTotal={message.orderTotal}/>
-    })
     return (
       <div className="dropdown">
         <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
@@ -48,7 +56,7 @@ class Message extends Component {
           </div>
           <li className="divider"></li>
           <div className="notifications-wrapper">
-            { allMessages }
+            { this.listMenuItems() }
           </div>
           <li className="divider"></li>
           <div className="notification-footer">Possible Footer?</div>
