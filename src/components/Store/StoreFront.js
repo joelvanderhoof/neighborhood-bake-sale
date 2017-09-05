@@ -30,7 +30,12 @@ class StoreFront extends Component {
       reviews: [],
       isOpen: false,
       orderTotal: 0,
-      bookmarked: true
+      bookmarked: false,
+      buyerFirstName: '',
+      buyerLastName: '',
+      bookmarks: [],
+      sellerFirstName: '',
+      sellerLastName: ''
     }
 
     this.addToOrder = this.addToOrder.bind(this);
@@ -39,8 +44,9 @@ class StoreFront extends Component {
   }
 
   componentDidMount() {
-    // randy@test.com  sellerId is 59ab34d106e8a23b58e70560// password123 -> storeId is 59ab34d106e8a23b58e70561
     let sellerId = this.props.location.pathname.split('/')[2]
+    const token = Auth.getToken();
+    const customerId = Auth.getUserId()
     helpers.getPublicStore(sellerId)
       .then((response) => {
         let storeData = response.data[0];
@@ -55,17 +61,28 @@ class StoreFront extends Component {
           storeImage: storeData.storeImage,
           reviews: storeData.reviews,
           isOpen: storeData.isOpen,
+          sellerFirstName: storeData.firstName,
+          sellerLastName: storeData.lastName
         });
+      })
+
+    helpers.getUser(customerId,token)
+      .then((response) => {
+        let userData = response.data[0];
+        this.setState({
+          buyerFirstName: userData.firstName,
+          buyerLastName: userData.lastName,
+          bookmarks: userData.bookmarks
+        })
       })
   }
 
   addToOrder(order) {
-    let newTotal = this.state.orderTotal += order.price;
+    let newTotal = this.state.orderTotal += parseInt(order.price);
     this.setState({
       customerOrder: this.state.customerOrder.concat(order),
       orderTotal: newTotal
     });
-    console.log('order total:',this.state.orderTotal)
   }
 
   placeOrder() {
@@ -76,14 +93,16 @@ class StoreFront extends Component {
       sellerId: this.state.sellerId, // Seller's userId
       storeId: this.state.storeId,
       items: this.state.customerOrder, // Array of Menu item Objects with name and price
-      orderTotal: this.state.orderTotal
+      orderTotal: this.state.orderTotal,
+      buyerFirstName: this.state.buyerFirstName,
+      buyerLastName: this.state.buyerLastName,
+      sellerFirstName: this.state.sellerFirstName,
+      sellerLastName: this.state.sellerLastName
     };
-    console.log('order total',this.state.orderTotal)
     helpers.placeOrder(storeId, orders, token);
   }
 
   bookmark(status){
-    console.log('clicked',status);
     this.setState({
       bookmarked: status
     })

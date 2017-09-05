@@ -22,6 +22,22 @@ const OrderSchema = new Schema({
     pickedUp: {
         type: Boolean,
         default: 0
+    },
+    buyerFirstName:{
+        type: String,
+        default: ''
+    },
+    buyerLastName: {
+        type: String,
+        default: ''
+    },
+    sellerFirstName: {
+        type: String,
+        default: ''
+    },
+    sellerLastName: {
+        type: String,
+        default: ''
     }
 });
 
