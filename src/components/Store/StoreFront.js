@@ -58,24 +58,24 @@ class StoreFront extends Component {
   }
 
   addToOrder(order) {
+    let newTotal = this.state.orderTotal += order.price;
     this.setState({
       customerOrder: this.state.customerOrder.concat(order),
+      orderTotal: newTotal
     });
-
-    let orderTotal = 0;
-    this.state.customerOrder.map( (orderItem) => {orderTotal += orderItem.price});
-    this.setState({
-      orderTotal: orderTotal
-    });
-
-    console.log('orderTotal',`$ ${parseFloat(orderTotal/100).toFixed(2)}`);
   }
 
   placeOrder() {
-    console.log('userId', Auth.getUserId());
-    console.log('storeId', this.state.storeId);
-    console.log('order:',this.state.customerOrder);
-    console.log('orderTotal',`$ ${parseFloat(this.state.orderTotal/100).toFixed(2)}`);
+    const token = Auth.getToken();
+    const storeId = this.state.storeId;
+    const orders = {
+      customerId: Auth.getUserId(), // Buyer/Customer's userId
+      sellerId: this.state.sellerId, // Seller's userId
+      storeId: this.state.storeId,
+      items: this.state.customerOrder, // Array of Menu item Objects with name and price
+      orderTotal: this.state.orderTotal
+    };
+    helpers.placeOrder(storeId, orders, token);
   }
 
   render() {
@@ -88,9 +88,9 @@ class StoreFront extends Component {
           </div>
         </div>
         <hr />
-        <div className='row'>
+        <div className='row justify-content-between'>
           <div className='col-lg-6 col-sm-12'>
-            <img className='img-fluid rounded mt-3 mb-3' src={ this.state.storeImage } alt='Store' />
+            <img className='img-fluid rounded mt-3 mb-3 p-3' src={ this.state.storeImage } alt='Store' />
           </div>
           <div className='col-lg-6 col-sm-12'>
             <div className='row mb-3'>

@@ -13,13 +13,11 @@ class MenuItem extends Component {
   }
 
   handleChange(event, type) {
-    console.log(event.target.value);
-    console.log(type);
     this.props.updateState("menu", event.target.value, this.props.index, type);
   }
 
   inStock() {
-    if (this.props.inStock) {
+    if (!this.props.inStock) {
       return (
         <p className="stamp border text-center" style={ { color: 'red' } }><strong>Sold out!</strong></p>
         );
@@ -46,6 +44,14 @@ class MenuItem extends Component {
     this.props.addToOrder(order);
   }
 
+  inStockForm(){
+    if(this.props.inStock) {
+      return "In Stock!"
+    } else {
+      return "Sold Out!"
+    }
+  }
+
   render() {
     if (this.props.edit) {
       return (
@@ -54,7 +60,7 @@ class MenuItem extends Component {
             <div className="row">
               <input className="form-control col-lg-4" type="text" onChange={ (e) => this.handleChange(e, "name") } value={ this.props.item } placeholder="name" />
               <input className="form-control col-lg-4" type="number" onChange={ (e) => this.handleChange(e, "price") } value={ this.props.price } placeholder="price" />
-              <select className="form-control col-lg-4" onChange={ (e) => this.handleChange(e, "inStock") } value={ this.props.inStock }>
+              <select className="form-control col-lg-4" onChange={ (e) => this.handleChange(e, "inStock") } value={ this.inStockForm() }>
                 <option>In Stock!</option>
                 <option>Sold Out!</option>
               </select>
@@ -63,7 +69,7 @@ class MenuItem extends Component {
               <textarea className="form-control" type="text" onChange={ (e) => this.handleChange(e, "description") } value={ this.props.description } placeholder="description" />
             </div>
             <div className="row">
-              <input className="form-control" type="text" onChange={ (e) => this.handleChange(e, "image") } value={ this.props.img } placeholder="img url" />
+              <input className="form-control" type="text" onChange={ (e) => this.handleChange(e, "image") } value={ this.props.image } placeholder="img url" />
             </div>
             <div className="row">
               <button className="btn btn-danger col-lg-12" onClick={ () => this.props.removeFromStateArray("menu", this.props.index) }>Delete Menu Item</button>
@@ -92,7 +98,7 @@ class MenuItem extends Component {
             <div className="stamp-container">
               { this.inStock() }
             </div>
-            { this.props.inStock !== 'Sold Out!' && this.addToOrderButton() }
+            { this.props.inStock && this.addToOrderButton() }
           </div>
         </div>
         );

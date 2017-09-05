@@ -47,6 +47,11 @@ class Nav extends Component {
   // this.setSave = this.setSave.bind(this);
   }
 
+  handleClick() {
+    Auth.deauthenticateUser();
+    window.location.href = '/';
+  }
+
   render() {
     return (
       <nav className="nav navbar navbar-toggleable-md">
@@ -79,9 +84,10 @@ class Nav extends Component {
         <ul className='navbar-nav'>
           { Auth.isUserAuthenticated() ?
             <li>
-              <NavLink className='mr-3' activeClassName='active' to='/logout'>
+              {/* <NavLink className='mr-3' activeClassName='active' to='/logout'>
                 Log Out
-              </NavLink>
+              </NavLink> */}
+              <button className='btn btn-secondary' onClick={this.handleClick}> Log Out </button>
             </li>
             :
             <li>

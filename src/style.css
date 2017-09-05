@@ -32,7 +32,6 @@ a, a:hover, a:active, a:link, a:visited {
 }
 
 /* General commonly used styles */
-
 .border {
   border-width: 1px;
   border-style: solid;
@@ -126,8 +125,9 @@ a, a:hover, a:active, a:link, a:visited {
 
 
 /* Customer Admin styles */
-
-
+.card {
+  margin-bottom: 5px;
+}
 
 .store-map {
   width: 100%;
@@ -140,13 +140,10 @@ a, a:hover, a:active, a:link, a:visited {
   height: 200px;
 }
 
-
 /* Order */
-
 .order {
   min-height: 400px;
 }
-
 
 /* Seller Admin */
 
