@@ -84,7 +84,10 @@ class StoreFront extends Component {
 
   bookmark(status){
     console.log('clicked',status);
-    this.state.bookmarked = status
+    this.setState({
+      bookmarked: status
+    })
+    
   }
 
   render() {
