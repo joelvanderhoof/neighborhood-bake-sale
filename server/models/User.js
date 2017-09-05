@@ -50,6 +50,10 @@ const UserSchema = new Schema({
         ref: 'Review'}],
     stores: [{
         type: Schema.Types.ObjectId, 
+        ref: 'Store'}],
+    bookmarkedStores: [{
+        type: Schema.Types.ObjectId,
+        unique: true,        
         ref: 'Store'}]
 });
 

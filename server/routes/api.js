@@ -330,6 +330,27 @@ router.route('/order/:storeId?')
             });
     });
 
+router.route('/bookmark')
+    .put((req, res) => {
+        User.findOneAndUpdate(
+            {
+            _id: req.body.userId
+            }, 
+            {
+            $push: {
+                'bookmarkedStores': req.body.storeId
+            }
+        },
+        function(err, doc) {
+            console.log(doc);
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(doc);
+            }
+        })
+    })
+
 router.route('/useLater')
     .get((req, res) => {
         console.log('get request');
