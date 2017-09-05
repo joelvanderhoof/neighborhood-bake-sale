@@ -59,6 +59,9 @@ let helpers = {
       }
     })
   },
+  getOrders(sellerID) {
+    return axios.get('api/order/' + sellerID);
+  }
 }
 
 // Export API Helper
