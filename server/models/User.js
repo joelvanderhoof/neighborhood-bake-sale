@@ -34,30 +34,36 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    photo: { 
-        type: String, //image URL
+    photo: { //image URL
+        type: String, 
         default: null
     }, 
-    orders: [{
+    orders: [{ // Array of orders
         type: Schema.Types.ObjectId, 
-        ref: 'Order'}], // Array of orders
+        ref: 'Order'
+    }], 
     isSeller: {
         type: Boolean,
         default: 0
     }, // 
     reviews: [{
         type: Schema.Types.ObjectId, 
-        ref: 'Review'}],
+        ref: 'Review'
+    }],
     stores: [{
         type: Schema.Types.ObjectId, 
         ref: 'Store'}],
 
-    bookmarks: Array, // Array of storeIds
+    bookmarks: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Bookmarks'
+    }],
 
     bookmarkedStores: [{
         type: Schema.Types.ObjectId,
         unique: true,        
-        ref: 'Store'}]
+        ref: 'Store'
+    }]
 
 });
 
