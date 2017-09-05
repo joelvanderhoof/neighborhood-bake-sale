@@ -52,6 +52,7 @@ let helpers = {
       sellerId: order.sellerId, //same as the ID from the Seller collection
       storeId: order.storeId,
       items: order.items,
+      orderTotal: order.orderTotal
     }, {
       headers: {
         authorization: token

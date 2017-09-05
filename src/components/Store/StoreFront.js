@@ -29,11 +29,13 @@ class StoreFront extends Component {
       storeImage: '',
       reviews: [],
       isOpen: false,
-      orderTotal: 0
+      orderTotal: 0,
+      bookmarked: true
     }
 
     this.addToOrder = this.addToOrder.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.bookmark = this.bookmark.bind(this);
   }
 
   componentDidMount() {
@@ -63,6 +65,7 @@ class StoreFront extends Component {
       customerOrder: this.state.customerOrder.concat(order),
       orderTotal: newTotal
     });
+    console.log('order total:',this.state.orderTotal)
   }
 
   placeOrder() {
@@ -75,7 +78,13 @@ class StoreFront extends Component {
       items: this.state.customerOrder, // Array of Menu item Objects with name and price
       orderTotal: this.state.orderTotal
     };
+    console.log('order total',this.state.orderTotal)
     helpers.placeOrder(storeId, orders, token);
+  }
+
+  bookmark(status){
+    console.log('clicked',status);
+    this.state.bookmarked = status
   }
 
   render() {
@@ -99,7 +108,7 @@ class StoreFront extends Component {
               <div className='store-front-link border'>
                 <Link className='btn col-md-4 col-sm-12' to={`/review/${this.state.sellerId}`}><span style={ { color: 'gold', textShadow: '1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' } }>★</span> { '\u00A0' } Write Review</Link>
                 <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12' />
-                <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12' />
+                <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12' bookmarked={this.state.bookmarked} bookmark={this.bookmark}/> {/*  hard coding in bookmark until we determine what model will use it */}
               </div>
             </div>
             <div className='row'>
