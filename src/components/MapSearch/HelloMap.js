@@ -29,9 +29,8 @@ class HelloMap extends Component {
     }
 
     initMap() {
-        console.log(this.state);
         const map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: this.state.latLng.lat, lng: this.state.latLng.lng },
+            center: this.state.latLng,
             zoom: 15
         });
     }
