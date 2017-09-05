@@ -18,6 +18,10 @@ const OrderSchema = new Schema({
     orderTotal: {
         type: Number,
         default: 0
+    },
+    pickedUp: {
+        type: Boolean,
+        default: 0
     }
 });
 
