@@ -5,27 +5,34 @@ class HelloMap extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            latLng: {lat: 34.0500534, lng: -118.2475034}
+        };
+
+        this.initMap = this.initMap.bind(this);
+        this.loadJS = this.loadJS.bind(this);
         
     }
-
+    
     // Loads the google maps script to the component
     loadJS(src) {
-        let script = window.document.createElement('script');
         let ref = window.document.getElementsByTagName('script')[0];
+        let script = window.document.createElement('script');
         script.src = src;
         script.async = true;
         ref.parentNode.insertBefore(script, ref);
     };
 
-    componentWillMount() {
+    componentDidMount() {
         window.initMap = this.initMap;
         this.loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyBEF9CrZfS_ucE-Tj08YB4SH56v9Ni6sso&callback=initMap');
     }
 
     initMap() {
+        console.log(this.state);
         const map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
-            zoom: 8
+            center: { lat: this.state.latLng.lat, lng: this.state.latLng.lng },
+            zoom: 15
         });
     }
 
