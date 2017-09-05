@@ -35,7 +35,7 @@ class Message extends Component {
     let allMessages;
 
     allMessages = this.props.messages.map((message) => {
-      return <MessageItems customerName={ message.customerName } storeName={ message.storeName } order={ message.order } />
+      return <MessageItems customerName={ "Frank" } seller={"Bob"} order={ message.items } orderTotal={message.orderTotal}/>
     })
     return (
       <div className="dropdown">

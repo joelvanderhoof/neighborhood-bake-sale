@@ -267,7 +267,7 @@ router.route('/review/:sellerId?')
 router.route('/order/:storeId?')
     .get((req, res) => {
         Order.find({
-            storeId: req.params.storeId
+            sellerId: req.params.storeId
         })
             .exec((err, doc) => {
                 console.log(doc);
