@@ -267,7 +267,7 @@ router.route('/review/:sellerId?')
 router.route('/order/:storeId?')
     .get((req, res) => {
         Order.find({
-            storeId: req.params.storeId
+            sellerId: req.params.storeId
         })
             .exec((err, doc) => {
                 console.log(doc);
@@ -328,6 +328,27 @@ router.route('/order/:storeId?')
                 if (err) return handleError(err);
             });
     });
+
+router.route('/bookmark')
+    .put((req, res) => {
+        User.findOneAndUpdate(
+            {
+            _id: req.body.userId
+            }, 
+            {
+            $push: {
+                'bookmarkedStores': req.body.storeId
+            }
+        },
+        function(err, doc) {
+            console.log(doc);
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(doc);
+            }
+        })
+    })
 
 router.route('/useLater')
     .get((req, res) => {

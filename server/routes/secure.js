@@ -309,9 +309,9 @@ router.route('/order/:storeId?')
             });
     });
 
+
 router.route('/useLater')
     .get((req, res) => {
-        console.log('get request');
         res.send('Get made to /api/useLater')
     })
     .post((req, res) => {
