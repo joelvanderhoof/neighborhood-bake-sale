@@ -28,7 +28,11 @@ module.exports = new PassportLocalStrategy({
       if(err) {
         return console.log('error: ', err);
       }
-      Store.create({sellerId: user._id})
+      Store.create({
+        sellerId: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName
+      })
     }
   )});
 });

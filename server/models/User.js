@@ -50,7 +50,8 @@ const UserSchema = new Schema({
         ref: 'Review'}],
     stores: [{
         type: Schema.Types.ObjectId, 
-        ref: 'Store'}]
+        ref: 'Store'}],
+    bookmarks: Array, // Array of storeIds
 });
 
 // Compare the passed password with the vlue in the database
