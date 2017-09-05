@@ -1,5 +1,6 @@
 // Axios dependencies for GET/POST requests
 const axios = require('axios');
+const Auth = require('./Auth');
 
 let helpers = {
 
@@ -12,7 +13,6 @@ let helpers = {
   },
 
   logIn(credentials) {
-    console.log('credentials',credentials);
     return axios.post('/auth/login',  {
         email: credentials.email,
         password: credentials.password
@@ -29,6 +29,13 @@ let helpers = {
         password: credentials.password
       }
     )
+  },
+
+  // getUser is an untested function
+  getUser(id, token) {
+    return axios.get(`/api/user/${id}`, {
+      headers: token
+    });
   }
 
 }
