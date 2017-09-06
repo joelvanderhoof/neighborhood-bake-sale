@@ -61,6 +61,9 @@ let helpers = {
   },
   getOrders(sellerID) {
     return axios.get('api/order/' + sellerID);
+  },
+  updateOrderStatus(sellerID, newOrder){
+    return axios.put('api/order/' + sellerID, newOrder);
   }
 }
 
