@@ -92,9 +92,9 @@ class CustomerAdmin extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-lg-4 col-md-4 col-sm-12">
                         <div className="card" style={{width: '20rem'}}>
-                            <img className="card-img-top" src='https://i.pinimg.com/736x/66/91/2b/66912bb1f678136f6603b637dd61a8de--asian-celebrities-celebs.jpg' alt="Card cap"/>
+                            <img className="card-img-top" src={this.state.profilephoto} alt="Card cap"/>
                             <div className="card-body">
                                 <h4 className="card-title">{this.state.profilename}</h4>
                                 <p className="card-text">Hello world</p>
@@ -102,7 +102,7 @@ class CustomerAdmin extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-8">
+                    <div className="col-lg-8 col-md-8 col-sm-12">
                         <div className="tab-content" id="nav-tabContent">
                             <div className="tab-pane fade show active" id="list-messages" role="tabpanel">future development</div>
                             <div className="tab-pane fade" id="list-reviews" role="tabpanel">{this.renderReviews()}</div>
@@ -112,7 +112,7 @@ class CustomerAdmin extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-lg-4 col-md-4 col-sm-12">
                         <div className="list-group" style={{width: '20rem'}} id="list-tab" role="tablist">
                             <a className="list-group-item list-group-item-action active" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
                             <a className="list-group-item list-group-item-action" id="list-reviews-list" data-toggle="list" href="#list-reviews" role="tab" aria-controls="reviews">Reviews</a>
