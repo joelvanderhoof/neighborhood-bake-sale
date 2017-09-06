@@ -56,7 +56,6 @@ router.route('/user/:userID?')
 
 router.route('/store/:sellerId?')
     .get((req, res) => {
-        console.log(req.params.sellerId);
         Store.findOneAndUpdate({
             _id: req.params.sellerId
         }, {
@@ -324,11 +323,20 @@ router.route('/useLater')
         res.send('Delete made to /api/useLater')
     });
 
+// Randy's secure routes
+router.route('/bookmark')
+    .post((req,res)=>{
+        console.log('Bookmark: ',req.body);
+    })
+
 
 // Login
 router.get('/dashboard', (req, res) => {
     res.status(200).json({
         message: 'You\'re authorized to see this secret message.'
     });
+
 });
 module.exports = router;
+
+

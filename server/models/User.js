@@ -52,18 +52,19 @@ const UserSchema = new Schema({
     }],
     stores: [{
         type: Schema.Types.ObjectId, 
-        ref: 'Store'}],
+        ref: 'Store'
+    }],
 
     bookmarks: [{
         type: Schema.Types.ObjectId,
         ref: 'Bookmarks'
     }],
 
-    bookmarkedStores: [{
-        type: Schema.Types.ObjectId,
-        unique: true,        
-        ref: 'Store'
-    }]
+    // bookmarkedStores: [{
+    //     type: Schema.Types.ObjectId,
+    //     unique: true,        
+    //     ref: 'Store'
+    // }]
 
 });
 
