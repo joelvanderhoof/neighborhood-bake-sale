@@ -9,17 +9,16 @@ const Review = require('./../models/Review');
 const Order = require('./../models/Order');
 
 // Basic api route structure
-router.route('/user/:userID?')
+router.route('/user/:userId?')
     .get((req, res) => {
         User.find({
-            _id: req.params.userID
+            _id: req.params.userId
         })
             .populate("stores")
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log("get request")
                     res.send(doc);
                 }
             });
@@ -63,6 +62,7 @@ router.route('/store/:sellerId?')
             .populate('menu')
             .populate('reviews')
             .exec((err, doc) => {
+                console.log(doc)
                 if (err) {
                     console.log(err);
                 } else {
@@ -267,7 +267,7 @@ router.route('/review/:sellerId?')
 router.route('/order/:storeId?')
     .get((req, res) => {
         Order.find({
-            storeId: req.params.storeId
+            sellerId: req.params.storeId
         })
             .exec((err, doc) => {
                 console.log(doc);
@@ -279,7 +279,6 @@ router.route('/order/:storeId?')
             });
     })
     .post((req, res) => {
-        console.log('req body', req.body)
         let orderData = new Order(req.body);
         orderData.save((err, doc) => {
             if (err) {
@@ -329,6 +328,27 @@ router.route('/order/:storeId?')
                 if (err) return handleError(err);
             });
     });
+
+router.route('/bookmark')
+    .put((req, res) => {
+        User.findOneAndUpdate(
+            {
+            _id: req.body.userId
+            }, 
+            {
+            $push: {
+                'bookmarkedStores': req.body.storeId
+            }
+        },
+        function(err, doc) {
+            console.log(doc);
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(doc);
+            }
+        })
+    })
 
 router.route('/useLater')
     .get((req, res) => {

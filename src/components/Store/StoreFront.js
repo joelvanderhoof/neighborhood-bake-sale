@@ -29,16 +29,24 @@ class StoreFront extends Component {
       storeImage: '',
       reviews: [],
       isOpen: false,
-      orderTotal: 0
+      orderTotal: 0,
+      bookmarked: false,
+      buyerFirstName: '',
+      buyerLastName: '',
+      bookmarks: [],
+      sellerFirstName: '',
+      sellerLastName: ''
     }
 
     this.addToOrder = this.addToOrder.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.bookmark = this.bookmark.bind(this);
   }
 
   componentDidMount() {
-    // randy@test.com  sellerId is 59ab34d106e8a23b58e70560// password123 -> storeId is 59ab34d106e8a23b58e70561
     let sellerId = this.props.location.pathname.split('/')[2]
+    const token = Auth.getToken();
+    const customerId = Auth.getUserId()
     helpers.getPublicStore(sellerId)
       .then((response) => {
         let storeData = response.data[0];
@@ -53,12 +61,24 @@ class StoreFront extends Component {
           storeImage: storeData.storeImage,
           reviews: storeData.reviews,
           isOpen: storeData.isOpen,
+          sellerFirstName: storeData.firstName,
+          sellerLastName: storeData.lastName
         });
+      })
+
+    helpers.getUser(customerId,token)
+      .then((response) => {
+        let userData = response.data[0];
+        this.setState({
+          buyerFirstName: userData.firstName,
+          buyerLastName: userData.lastName,
+          bookmarks: userData.bookmarks
+        })
       })
   }
 
   addToOrder(order) {
-    let newTotal = this.state.orderTotal += order.price;
+    let newTotal = this.state.orderTotal += parseInt(order.price);
     this.setState({
       customerOrder: this.state.customerOrder.concat(order),
       orderTotal: newTotal
@@ -73,9 +93,20 @@ class StoreFront extends Component {
       sellerId: this.state.sellerId, // Seller's userId
       storeId: this.state.storeId,
       items: this.state.customerOrder, // Array of Menu item Objects with name and price
-      orderTotal: this.state.orderTotal
+      orderTotal: this.state.orderTotal,
+      buyerFirstName: this.state.buyerFirstName,
+      buyerLastName: this.state.buyerLastName,
+      sellerFirstName: this.state.sellerFirstName,
+      sellerLastName: this.state.sellerLastName
     };
     helpers.placeOrder(storeId, orders, token);
+  }
+
+  bookmark(status){
+    this.setState({
+      bookmarked: status
+    })
+    
   }
 
   render() {
@@ -99,7 +130,7 @@ class StoreFront extends Component {
               <div className='store-front-link border'>
                 <Link className='btn col-md-4 col-sm-12' to={`/review/${this.state.sellerId}`}><span style={ { color: 'gold', textShadow: '1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' } }>★</span> { '\u00A0' } Write Review</Link>
                 <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12' />
-                <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12' />
+                <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12' bookmarked={this.state.bookmarked} bookmark={this.bookmark}/> {/*  hard coding in bookmark until we determine what model will use it */}
               </div>
             </div>
             <div className='row'>

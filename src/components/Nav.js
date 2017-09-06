@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import Auth from './utils/Auth';
 import Message from './Nav/Message';
+import Helpers from "./utils/helpers";
 
 let tempOrders = [
   {
@@ -40,16 +41,32 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: tempOrders
+      messages: []
     };
 
-  // this.setEdit = this.setEdit.bind(this);
+  this.queryOrders = this.queryOrders.bind(this);
   // this.setSave = this.setSave.bind(this);
   }
+
+  componentDidMount(){
+    this.queryOrders();
+  }
+
+  // componentDidUpdate(){
+  //   this.queryOrders();
+  // }
 
   handleClick() {
     Auth.deauthenticateUser();
     window.location.href = '/';
+  }
+
+  queryOrders() {
+    Helpers.getOrders("59ae424b9247f74518bff01d").then((response)=>{
+      console.log(response);
+      this.setState({messages: response.data})
+    });
+   
   }
 
   render() {
@@ -62,7 +79,7 @@ class Nav extends Component {
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName='active' to='/store/59ab34d106e8a23b58e70560'>
+            <NavLink activeClassName='active' to='/store/59ae424b9247f74518bff01d'>
               Store
             </NavLink>
           </li>
