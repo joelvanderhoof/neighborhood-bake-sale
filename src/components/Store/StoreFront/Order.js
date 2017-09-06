@@ -19,7 +19,7 @@ class Order extends Component {
   }
 
   handleClick () {
-    
+    this.props.placeOrder()
   }
 
   render() {
@@ -28,7 +28,8 @@ class Order extends Component {
         <div className={this.props.orderStyle}>
         {this.mapOrder()}
         </div>
-        <button className='btn btn-secondary float-right mt-1' onClick={this.handleClick}>Place order</button>
+        <button className='btn btn-secondary float-left mt-1' onClick={this.handleClick}>Place order</button>
+        {this.props.orderTotal > 0 ? <span className='float-right'>Total: ${parseFloat(this.props.orderTotal/100).toFixed(2)}</span> : <span className='float-right'>Total: $0.00</span>}
       </div>
     )
   }

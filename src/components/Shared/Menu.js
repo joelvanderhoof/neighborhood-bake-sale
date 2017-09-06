@@ -3,19 +3,10 @@ import MenuItem from "./Menu/MenuItem";
 import AddMenuItemButton from "../Seller/AddMenuItemButton";
 
 class Menu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
-
-  }
-
   createMenuItems() {
     let menuList;
     menuList = this.props.menu.map((menuItem, i) => {
-      return <MenuItem key={ i } index={ i } addToOrder={ this.props.addToOrder } item={ menuItem.name } description={ menuItem.description } price={ menuItem.price } availability={ menuItem.availability }
-               img={ menuItem.img } edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray } />
+      return <MenuItem key={ i } index={ i } addToOrder={ this.props.addToOrder } item={ menuItem.name } description={ menuItem.description } price={ menuItem.price } inStock={ menuItem.inStock } image={ menuItem.image } edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray } />
     });
     return menuList;
   }

@@ -1,0 +1,4 @@
+{
+  "dbUri": "mongodb://tiger-foodie:benColeIsAwesome1@ds119578.mlab.com:19578/heroku_hlgv59g4",
+  "jwtSecret": "benColeIsAwesome1"
+}

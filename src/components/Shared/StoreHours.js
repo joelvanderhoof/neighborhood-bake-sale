@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import StoreHoursItems from "./StoreHours/StoreHoursItems";
-import AddHourItemButton from "../Seller/AddHourItemButton";
 
 class StoreHours extends Component {
   constructor(props) {
@@ -8,22 +7,19 @@ class StoreHours extends Component {
     this.state = {
 
     };
-
   }
 
   listHours() {
-    let timeList;
-    timeList = this.props.hours.map((time, i) => {
-      return <StoreHoursItems key={ i } index={ i } time={ time } edit={ this.props.edit } updateState={ this.props.updateState } removeFromStateArray={ this.props.removeFromStateArray }
-             />
+    let day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    return this.props.hours.map((time, i) => {
+      return <StoreHoursItems day={day[i]} key={ i } index={ i } time={ time } />
     });
-    return timeList;
   }
 
   render() {
     return (
-      <div className={ this.props.storeHoursStyle }>
-        <h4>Hours of Operation <AddHourItemButton edit={ this.props.edit } addToStateArray={ this.props.addToStateArray }/> </h4>
+      <div className={this.props.storeHoursStyle}>
+        <h4 className="text-center" style={{"borderBottom": "4px red solid"}}>Hours of Operation</h4>
         { this.listHours() }
       </div>
       );
