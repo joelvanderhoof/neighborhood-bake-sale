@@ -31,6 +31,7 @@ class Home extends Component {
         {/* Name of the App- still being decided "Foodies" */}
       {/* <MapSearch /> */}
       <Image />
+      <Search />
       </div>
     );
   }

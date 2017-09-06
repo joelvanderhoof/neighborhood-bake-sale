@@ -18,7 +18,7 @@ export default class Search extends Component {
             type="text" 
             id="search-bar" 
             placeholder="Search Location..."/>
-    <a href="#"><img className="search-icon" src="http://laoblogger.com/images/clipart-search-icon-10.jpg" width="50" height="50"/></a>
+    <a href="#"><img className="search-icon" src="http://findicons.com/files/icons/1254/flurry_system/256/search.png" width="35" height="35"/></a>
     </div>
     )
   }
