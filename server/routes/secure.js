@@ -10,16 +10,20 @@ const Order = require('./../models/Order');
 const Bookmarks = require('./../models/Bookmarks');
 
 // Basic api route structure
-router.route('/user/:userID?')
+router.route('/user/:userId?')
     .get((req, res) => {
         User.find({
                 _id: req.params.userId
             })
-            .populate("stores")
+            .populate('stores')
+            .populate('bookmarks')
+            .populate('reviews')
+            .populate('bookmarks')
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);
                 } else {
+                    console.log('userData', doc)
                     res.send(doc);
                 }
             });
@@ -321,7 +325,7 @@ router.route('/bookmark')
         let bookmark = new Bookmarks(req.body);
         bookmark.save((err, doc) => {
             if (err) {
-                console.log(err);
+                console.log(err.message);
             } else {
                 User.findOneAndUpdate({_id: req.body.userId}, 
                     { $push: {'bookmarks': doc._id} },
@@ -364,7 +368,6 @@ router.route('/bookmark')
                         })
                     }
                 })
-
             } else {
                 console.log('No Bookmark record found.')
             }

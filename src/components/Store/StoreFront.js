@@ -70,27 +70,31 @@ class StoreFront extends Component {
         });
       })
 
-    helpers.getUser(customerId,token)
-      .then((response) => {
-        let userData = response.data[0];
-
-        let isBookmarked = () => {
-          userData.bookmarks.forEach((bookmark)=>{
-            if (bookmark.sellerId === this.state.sellerId) {
-              return true
-            } else {
-              return false
-            }
+      if(Auth.isUserAuthenticated) {
+        console.log('customer id secure',customerId);
+        helpers.getUserSecure(customerId,token)
+        .then((response) => {
+          let userData = response.data[0];
+  
+          let isBookmarked = () => {
+            userData.bookmarks.forEach((bookmark)=>{
+              if (bookmark.sellerId === this.state.sellerId) {
+                return true
+              } else {
+                return false
+              }
+            })
+          };
+          console.log('userData: ', userData)
+          this.setState({
+            buyerFirstName: userData.firstName,
+            buyerLastName: userData.lastName,
+            bookmarks: userData.bookmarks,
+            bookmarked: isBookmarked() // returns true or false
           })
-        };
-
-        this.setState({
-          buyerFirstName: userData.firstName,
-          buyerLastName: userData.lastName,
-          bookmarks: userData.bookmarks,
-          bookmarked: isBookmarked() // returns true or false
         })
-      })
+      }
+    
   }
 
   addToOrder(order) {
