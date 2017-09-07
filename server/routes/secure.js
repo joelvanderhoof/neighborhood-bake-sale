@@ -7,6 +7,7 @@ const Store = require('./../models/Store');
 const MenuItem = require('./../models/MenuItem');
 const Review = require('./../models/Review');
 const Order = require('./../models/Order');
+const Bookmarks = require('./../models/Bookmarks');
 
 // Basic api route structure
 router.route('/user/:userID?')
@@ -327,6 +328,43 @@ router.route('/useLater')
 router.route('/bookmark')
     .post((req,res)=>{
         console.log('Bookmark: ',req.body);
+        let bookmark = new Bookmarks(req.body);
+        bookmark.save((err, doc) => {
+            if (err) {
+                console.log(err);
+            } else {
+                User.findOneAndUpdate({
+                    _id: req.body.userId
+                }, {
+                    $push: {
+                        'bookmarks': doc._id
+                    }
+                }, {
+                    new: true
+                },
+                    function(error, doc) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.send(doc);
+                        }
+                    })
+            }
+        });
+    })
+    .delete((req,res) => {
+        console.log('Remove Bookmark: ',req.body);
+        Bookmarks.find({
+            sellerId: req.body.sellerID,
+            userId: req.body.userId
+        }, (err,doc )=>{
+            console.log(doc)
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(doc);
+            }
+        })
     })
 
 

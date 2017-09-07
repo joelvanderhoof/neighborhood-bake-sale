@@ -125,6 +125,7 @@ class StoreFront extends Component {
 
     const token = Auth.getToken();    
     let data = {
+      userId: Auth.getUserId(),
       userFirstName: this.state.buyerFirstName,
       userLastName: this.state.buyerLastName,
       storeId: this.state.storeId,
@@ -133,7 +134,19 @@ class StoreFront extends Component {
       storeLocation: this.state.storeLocation,
     }
 
-    helpers.bookmarkStore(data, token);
+    let deleteData = {
+      userId: Auth.getUserId(),
+      storeId: this.state.storeId,
+      sellerId: this.state.sellerId,
+    }
+
+    if(status) {
+      helpers.bookmarkStore(data, token);
+    } else if (!status) {
+      helpers.removeBookmark(deleteData,token)
+      // helpers delete bookmark function
+    }
+    
   }
 
   render() {
