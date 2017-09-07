@@ -7,6 +7,7 @@ const Store = require('./../models/Store');
 const MenuItem = require('./../models/MenuItem');
 const Review = require('./../models/Review');
 const Order = require('./../models/Order');
+const Bookmarks = require('./../models/Bookmarks');
 
 // Basic api route structure
 router.route('/user/:userID?')
@@ -56,7 +57,6 @@ router.route('/user/:userID?')
 
 router.route('/store/:sellerId?')
     .get((req, res) => {
-        console.log(req.params.sellerId);
         Store.findOneAndUpdate({
             _id: req.params.sellerId
         }, {
@@ -324,11 +324,57 @@ router.route('/useLater')
         res.send('Delete made to /api/useLater')
     });
 
+// Randy's secure routes
+router.route('/bookmark')
+    .post((req,res)=>{
+        console.log('Bookmark: ',req.body);
+        let bookmark = new Bookmarks(req.body);
+        bookmark.save((err, doc) => {
+            if (err) {
+                console.log(err);
+            } else {
+                User.findOneAndUpdate({
+                    _id: req.body.userId
+                }, {
+                    $push: {
+                        'bookmarks': doc._id
+                    }
+                }, {
+                    new: true
+                },
+                    function(error, doc) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.send(doc);
+                        }
+                    })
+            }
+        });
+    })
+    .delete((req,res) => {
+        console.log('Remove Bookmark: ',req.body);
+        Bookmarks.find({
+            sellerId: req.body.sellerID,
+            userId: req.body.userId
+        }, (err,doc )=>{
+            console.log(doc)
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(doc);
+            }
+        })
+    })
+
 
 // Login
 router.get('/dashboard', (req, res) => {
     res.status(200).json({
         message: 'You\'re authorized to see this secret message.'
     });
+
 });
 module.exports = router;
+
+

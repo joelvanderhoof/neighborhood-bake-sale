@@ -8,9 +8,7 @@ let helpers = {
     return axios.get('api/store/' + storeID)
   },
 
-  getPublicStore(sellerId) {
-    return axios.get('./../api/store/' + sellerId)
-  },
+
 
   getPublicReview(sellerId) {
     return axios.get('./../api/review/' + sellerId)
@@ -46,6 +44,7 @@ let helpers = {
     return axios.put("api/store/" + storeID, storeData)
   },
 
+  // Randy's routes
   placeOrder(storeId, order, token) {
     return axios.post(`./../secure/order/${storeId}`, {
       customerId: order.customerId, //same as the ID from the Customer model
@@ -63,6 +62,42 @@ let helpers = {
       }
     })
   },
+
+  bookmarkStore(storeData, token) {
+    return axios.post(`./../secure/bookmark/`, {
+      userId: storeData.userId,
+      userFirstName: storeData.userFirstName,
+      userLastName: storeData.userLastName,
+      storeId: storeData.storeId,
+      sellerId: storeData.sellerId,
+      storeName: storeData.storeName,
+      storeLocation: storeData.storeLocation,
+    }, {
+      headers: {
+        authorization: token
+      }
+    })
+  },
+
+  removeBookmark(storeData, token) {
+    return axios({
+      method: 'delete',
+      url: `./../secure/bookmark/`,
+      data: {
+        userId: storeData.userId,
+        storeId: storeData.storeId,
+        sellerId: storeData.sellerId,
+      },
+      headers: {
+        authorization: token
+      }
+    });
+  },
+
+  getPublicStore(sellerId) {
+    return axios.get('./../api/store/' + sellerId)
+  },
+
   getOrders(sellerID) {
     return axios.get('api/order/' + sellerID);
   }

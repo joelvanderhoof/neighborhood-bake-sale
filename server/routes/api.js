@@ -7,6 +7,7 @@ const Store = require('./../models/Store');
 const MenuItem = require('./../models/MenuItem');
 const Review = require('./../models/Review');
 const Order = require('./../models/Order');
+const Bookmarks = require('./../models/Bookmarks');
 
 // Basic api route structure
 router.route('/user/:userId?')
@@ -15,6 +16,7 @@ router.route('/user/:userId?')
             _id: req.params.userId
         })
             .populate("stores")
+            .populate('bookmarks')
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);
@@ -23,6 +25,8 @@ router.route('/user/:userId?')
                 }
             });
     })
+
+    // Post most likely will not be used here
     .post((req, res) => {
         let newGuy = new User(req.body);
         newGuy.save((err, doc) => {
@@ -62,7 +66,6 @@ router.route('/store/:sellerId?')
             .populate('menu')
             .populate('reviews')
             .exec((err, doc) => {
-                console.log(doc)
                 if (err) {
                     console.log(err);
                 } else {
@@ -270,7 +273,6 @@ router.route('/order/:storeId?')
             sellerId: req.params.storeId
         })
             .exec((err, doc) => {
-                console.log(doc);
                 if (err) {
                     console.log(err);
                 } else {
@@ -297,7 +299,6 @@ router.route('/order/:storeId?')
                         new: true
                     },
                     function(error, doc) {
-                        console.log(doc);
                         if (err) {
                             console.log(err);
                         } else {
@@ -341,7 +342,6 @@ router.route('/bookmark')
             }
         },
         function(err, doc) {
-            console.log(doc);
             if (err) {
                 console.log(err);
             } else {

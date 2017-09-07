@@ -33,9 +33,11 @@ class StoreFront extends Component {
       bookmarked: false,
       buyerFirstName: '',
       buyerLastName: '',
-      bookmarks: [],
+      bookmarks: [], // Might not need
       sellerFirstName: '',
-      sellerLastName: ''
+      sellerLastName: '',
+      storeName: '',
+      storeLocation: '',
     }
 
     this.addToOrder = this.addToOrder.bind(this);
@@ -62,17 +64,31 @@ class StoreFront extends Component {
           reviews: storeData.reviews,
           isOpen: storeData.isOpen,
           sellerFirstName: storeData.firstName,
-          sellerLastName: storeData.lastName
+          sellerLastName: storeData.lastName,
+          storeName: storeData.name,
+          storeLocation: storeData.location
         });
       })
 
     helpers.getUser(customerId,token)
       .then((response) => {
         let userData = response.data[0];
+
+        let isBookmarked = () => {
+          userData.bookmarks.forEach((bookmark)=>{
+            if (bookmark.sellerId === this.state.sellerId) {
+              return true
+            } else {
+              return false
+            }
+          })
+        };
+
         this.setState({
           buyerFirstName: userData.firstName,
           buyerLastName: userData.lastName,
-          bookmarks: userData.bookmarks
+          bookmarks: userData.bookmarks,
+          bookmarked: isBookmarked() // returns true or false
         })
       })
   }
@@ -106,6 +122,30 @@ class StoreFront extends Component {
     this.setState({
       bookmarked: status
     })
+
+    const token = Auth.getToken();    
+    let data = {
+      userId: Auth.getUserId(),
+      userFirstName: this.state.buyerFirstName,
+      userLastName: this.state.buyerLastName,
+      storeId: this.state.storeId,
+      sellerId: this.state.sellerId,
+      storeName: this.state.storeName,
+      storeLocation: this.state.storeLocation,
+    }
+
+    let deleteData = {
+      userId: Auth.getUserId(),
+      storeId: this.state.storeId,
+      sellerId: this.state.sellerId,
+    }
+
+    if(status) {
+      helpers.bookmarkStore(data, token);
+    } else if (!status) {
+      helpers.removeBookmark(deleteData,token)
+      // helpers delete bookmark function
+    }
     
   }
 

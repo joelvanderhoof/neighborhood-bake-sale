@@ -11,6 +11,10 @@ var BookmarksSchema = new Schema({
     type: String,
     default: ''
   },
+  userId: {
+    type: String,
+    default: ''
+  },
   storeId: {
     type: String,
     default: ''
