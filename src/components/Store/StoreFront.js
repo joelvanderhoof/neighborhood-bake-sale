@@ -33,7 +33,7 @@ class StoreFront extends Component {
       bookmarked: false,
       buyerFirstName: '',
       buyerLastName: '',
-      bookmarks: [], // Might not need
+      bookmarks: [],
       sellerFirstName: '',
       sellerLastName: '',
       storeName: '',
@@ -70,22 +70,25 @@ class StoreFront extends Component {
         });
       })
 
-      if(Auth.isUserAuthenticated) {
-        console.log('customer id secure',customerId);
+      if(Auth.isUserAuthenticated()) {
         helpers.getUserSecure(customerId,token)
         .then((response) => {
           let userData = response.data[0];
-  
+          let bookmarks = response.data[0].bookmarks;
           let isBookmarked = () => {
-            userData.bookmarks.forEach((bookmark)=>{
-              if (bookmark.sellerId === this.state.sellerId) {
-                return true
-              } else {
-                return false
+            if(bookmarks.length>0){
+              // Cannot use forEach here because forEach returns undefined
+              for(let i=0; i<bookmarks.length; i++) {
+                if(bookmarks[i].sellerId === this.state.sellerId) {
+                  return true;
+                } else {
+                  return false;
+                }
               }
-            })
+            } else {
+              return false;
+            }
           };
-          console.log('userData: ', userData)
           this.setState({
             buyerFirstName: userData.firstName,
             buyerLastName: userData.lastName,
