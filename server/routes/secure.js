@@ -323,30 +323,15 @@ router.route('/bookmark')
             if (err) {
                 console.log(err);
             } else {
-                User.findOneAndUpdate({
-                        _id: req.body.userId
-                    }, {
-                        $push: {
-                            'bookmarks': {
-                                _id: doc._id
-                            }
-                        }
-                    }, {
-                        new: true
-                    },
-                    (error, doc) => {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            console.log('Store was bookmarked')
-                            res.send(doc);
-                        }
-                    })
+                User.findOneAndUpdate({_id: req.body.userId}, 
+                    { $push: {'bookmarks': doc._id} },
+                        () => {
+                            console.log('Store was bookmarked');
+                        })
             }
         });
     })
     .delete((req, res) => {
-        // console.log('Remove Bookmark: ',req.body);
         Bookmarks.findOne({
             sellerId: req.body.sellerId,
             userId: req.body.userId
@@ -373,7 +358,7 @@ router.route('/bookmark')
                             if (err) {
                                 console.log(err);
                             } else {
-                                console.log('Store was removed from User')
+                                console.log('Store was removed from User') // This is not true until the bookmark object Id is added to the User
                                 res.send(doc);
                             }
                         })
@@ -384,14 +369,5 @@ router.route('/bookmark')
                 console.log('No Bookmark record found.')
             }
         })
-    })
-
-
-// Login
-router.get('/dashboard', (req, res) => {
-    res.status(200).json({
-        message: 'You\'re authorized to see this secret message.'
     });
-
-});
 module.exports = router;
