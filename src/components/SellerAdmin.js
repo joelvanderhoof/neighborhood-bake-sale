@@ -80,24 +80,6 @@ class SellerAdmin extends Component {
     });
   }
 
-  addToOrder(order) {
-    this.setState({
-      customerOrder: this.state.customerOrder.concat(order),
-    });
-
-    let orderTotal = 0
-    this.state.customerOrder.map( (orderItem) => {orderTotal += orderItem.price});
-    this.state.customerOrder.map((orderItem)=>{
-      orderTotal += orderItem.price
-    }
-  )
-    this.setState({
-      orderTotal: orderTotal
-    });
-
-    // console.log('orderTotal',$ ${parseFloat(orderTotal/100).toFixed(2)});
-  }
-  
   //save button - updates DB and sends out socket notification
   setSave() {
     let storeData = this.state;
@@ -153,13 +135,13 @@ class SellerAdmin extends Component {
       });
     }
   }
- 
+
   //updates state - function passed down to inputs
   updateState(key, value, index, type) {
-    if(value === "In Stock!") {
+    if (value === "In Stock!") {
       value = true;
     }
-    if(value === "Sold Out!") {
+    if (value === "Sold Out!") {
       value = false;
     }
     //no index - not an array
@@ -186,7 +168,11 @@ class SellerAdmin extends Component {
     return (
       <div>
         <h1 className="text-center">{ this.state.name }'s Admin Page <EditButton saveFunc={ this.setSave }/></h1> Store:
-        <ToggleButton value={ this.state.isOpen } onToggle={ (value) => {this.setState({isOpen: !value,})} } inactiveLabel="Off" activeLabel="On" />
+        <ToggleButton value={ this.state.isOpen } onToggle={ (value) => {
+                                                               this.setState({
+                                                                 isOpen: !value,
+                                                               })
+                                                             } } inactiveLabel="Off" activeLabel="On" />
         <div className="text-center">
         </div>
         <div className="row sellerContainer">

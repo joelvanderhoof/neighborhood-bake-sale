@@ -29,10 +29,17 @@ class Nav extends Component {
   }
 
   queryOrders() {
+    console.log("query orders");
     let userID = Auth.getUserId();
+    let activeOrders = [];
     Helpers.getOrders(userID).then((response)=>{
       console.log(response);
-      this.setState({messages: response.data})
+      response.data.map((orders)=>{
+        if(!orders.pickedUp){
+          activeOrders.push(orders);
+        }
+      })
+      this.setState({messages: activeOrders})
     });
    
   }
@@ -63,7 +70,7 @@ class Nav extends Component {
           </li>
           { Auth.isUserAuthenticated() &&
             <li>
-              <Message messages={ this.state.messages } />
+              <Message requery={this.queryOrders} messages={ this.state.messages } />
             </li> }
         </ul>
         <ul className='navbar-nav'>

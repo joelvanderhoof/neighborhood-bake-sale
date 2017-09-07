@@ -24,7 +24,7 @@ class MessageItems extends Component {
         let currentOrder = this.props.entire;
         currentOrder.status = "Accepted";
         Helpers.updateOrderStatus(currentOrder._id, currentOrder).then((response) => {
-            //call passed down function to requery
+            this.props.requery();
         });
     }
 
@@ -32,9 +32,17 @@ class MessageItems extends Component {
         let currentOrder = this.props.entire;
         currentOrder.status = "Declined";
         Helpers.updateOrderStatus(currentOrder._id, currentOrder).then((response) => {
-            //call passed down function to requery
+            this.props.requery();
         });
     }
+
+    markPickedUp() {
+      let currentOrder = this.props.entire;
+      currentOrder.pickedUp = true;
+      Helpers.updateOrderStatus(currentOrder._id, currentOrder).then((response) => {
+          this.props.requery();
+      });
+  }
 
     render() {
         if (this.props.customer) { //if customer
@@ -53,7 +61,7 @@ class MessageItems extends Component {
                 </div>
                 );
         }
-        if (this.props.status == "Pending") {
+        if (this.props.status === "Pending") {
             return (
                 <div className="content" href="#">
                   <div className="notification-item">
@@ -64,8 +72,8 @@ class MessageItems extends Component {
                       </ul>
                     </p>
                     <h4>Total: { "$" + parseFloat(this.props.orderTotal / 100).toFixed(2) }</h4>
-                    <button className="btn btn-primary">Accept</button>
-                    <button className="btn btn-danger">Decline</button>
+                    <button className="btn btn-primary" onClick={()=>{this.markAccepted()}}>Accept</button>
+                    <button className="btn btn-danger" onClick={()=>{this.markDeclined()}}>Decline</button>
                   </div>
                 </div>
                 );
@@ -80,7 +88,7 @@ class MessageItems extends Component {
                   </ul>
                 </p>
                 <h4>Total: { "$" + parseFloat(this.props.orderTotal / 100).toFixed(2) }</h4>
-                <button className="btn btn-success">Customer Picked Up</button>
+                <button className="btn btn-success" onClick={()=>{this.markPickedUp()}}>Customer Picked Up</button>
               </div>
             </div>
             );
