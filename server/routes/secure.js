@@ -13,8 +13,8 @@ const Bookmarks = require('./../models/Bookmarks');
 router.route('/user/:userID?')
     .get((req, res) => {
         User.find({
-            _id: req.params.userId
-        })
+                _id: req.params.userId
+            })
             .populate("stores")
             .exec((err, doc) => {
                 if (err) {
@@ -50,7 +50,7 @@ router.route('/user/:userID?')
     .delete((req, res) => {
         User.remove({
             _id: req.params.userID
-        }, function(err) {
+        }, function (err) {
             if (err) return handleError(err);
         });
     });
@@ -58,10 +58,10 @@ router.route('/user/:userID?')
 router.route('/store/:sellerId?')
     .get((req, res) => {
         Store.findOneAndUpdate({
-            _id: req.params.sellerId
-        }, {
-            upsert: true
-        })
+                _id: req.params.sellerId
+            }, {
+                upsert: true
+            })
             .populate('menu')
             .exec((err, doc) => {
                 console.log(doc);
@@ -78,19 +78,16 @@ router.route('/store/:sellerId?')
             if (err) {
                 console.log(err);
             } else {
-                User.findOneAndUpdate(
-                    {
+                User.findOneAndUpdate({
                         _id: req.body.sellerID
-                    },
-                    {
+                    }, {
                         $push: {
                             'stores': doc._id
                         }
-                    },
-                    {
+                    }, {
                         new: true
                     },
-                    function(error, doc) {
+                    function (error, doc) {
                         if (err) {
                             console.log(err);
                         } else {
@@ -104,8 +101,8 @@ router.route('/store/:sellerId?')
     .put((req, res) => {
         req.body.users.forEach((storeData) => {
             Store.update({
-                _id: storeData.id
-            },
+                    _id: storeData.id
+                },
                 storeData,
                 (err) => {
                     if (err) {
@@ -116,8 +113,8 @@ router.route('/store/:sellerId?')
     })
     .delete((req, res) => {
         Store.remove({
-            _id: req.params.storeID
-        },
+                _id: req.params.storeID
+            },
             (err) => {
                 if (err) return handleError(err);
             });
@@ -139,19 +136,16 @@ router.route('/menu/:menuitemID?')
             if (err) {
                 console.log(err);
             } else {
-                Store.findOneAndUpdate(
-                    {
+                Store.findOneAndUpdate({
                         _id: req.body.StoreID
-                    },
-                    {
+                    }, {
                         $push: {
                             'menu': doc._id
                         }
-                    },
-                    {
+                    }, {
                         new: true
                     },
-                    function(error, doc) {
+                    function (error, doc) {
                         if (err) {
                             console.log(err);
                         } else {
@@ -165,8 +159,8 @@ router.route('/menu/:menuitemID?')
     .put((req, res) => {
         req.body.menuItems.forEach((menuItemData) => {
             MenuItem.update({
-                _id: menuItemData.id
-            },
+                    _id: menuItemData.id
+                },
                 menuItemData, (err) => {
                     if (err) {
                         console.log(err);
@@ -176,8 +170,8 @@ router.route('/menu/:menuitemID?')
     })
     .delete((req, res) => {
         MenuItem.remove({
-            _id: req.params.menuitemID
-        },
+                _id: req.params.menuitemID
+            },
             (err) => {
                 if (err) return handleError(err);
             });
@@ -186,8 +180,8 @@ router.route('/menu/:menuitemID?')
 router.route('/review/:reviewID?')
     .get((req, res) => {
         Review.find({
-            _id: req.params.reviewID
-        },
+                _id: req.params.reviewID
+            },
             (err, doc) => {
                 if (err) {
                     console.log(err);
@@ -202,16 +196,13 @@ router.route('/review/:reviewID?')
             if (err) {
                 console.log(err);
             } else {
-                Store.findOneAndUpdate(
-                    {
+                Store.findOneAndUpdate({
                         _id: req.body.StoreID
-                    },
-                    {
+                    }, {
                         $push: {
                             'reviews': doc._id
                         }
-                    },
-                    {
+                    }, {
                         new: true
                     },
                     (error, doc) => {
@@ -228,8 +219,8 @@ router.route('/review/:reviewID?')
     .put((req, res) => {
         req.body.reviews.forEach((reviewData) => {
             Review.update({
-                _id: reviewData.id
-            },
+                    _id: reviewData.id
+                },
                 reviewData,
                 (err) => {
                     if (err) {
@@ -249,8 +240,8 @@ router.route('/review/:reviewID?')
 router.route('/order/:storeId?')
     .get((req, res) => {
         Order.find({
-            storeId: req.params.storeId
-        })
+                storeId: req.params.storeId
+            })
             .exec((err, doc) => {
                 console.log(doc);
                 if (err) {
@@ -268,15 +259,15 @@ router.route('/order/:storeId?')
                 console.log(err);
             } else {
                 User.findOneAndUpdate({
-                    _id: req.body.customerId
-                }, {
-                    $push: {
-                        'orders': doc._id
-                    }
-                }, {
-                    new: true
-                },
-                    function(error, doc) {
+                        _id: req.body.customerId
+                    }, {
+                        $push: {
+                            'orders': doc._id
+                        }
+                    }, {
+                        new: true
+                    },
+                    function (error, doc) {
                         console.log(doc);
                         if (err) {
                             console.log(err);
@@ -290,8 +281,8 @@ router.route('/order/:storeId?')
     .put((req, res) => {
         req.body.orders.forEach((orderData) => {
             Order.update({
-                _id: orderData.id
-            },
+                    _id: orderData.id
+                },
                 orderData,
                 (err) => {
                     if (err) {
@@ -302,8 +293,8 @@ router.route('/order/:storeId?')
     })
     .delete((req, res) => {
         Order.remove({
-            _id: req.params.orderID
-        },
+                _id: req.params.orderID
+            },
             (err) => {
                 if (err) return handleError(err);
             });
@@ -326,43 +317,71 @@ router.route('/useLater')
 
 // Randy's secure routes
 router.route('/bookmark')
-    .post((req,res)=>{
-        console.log('Bookmark: ',req.body);
+    .post((req, res) => {
         let bookmark = new Bookmarks(req.body);
         bookmark.save((err, doc) => {
             if (err) {
                 console.log(err);
             } else {
                 User.findOneAndUpdate({
-                    _id: req.body.userId
-                }, {
-                    $push: {
-                        'bookmarks': doc._id
-                    }
-                }, {
-                    new: true
-                },
-                    function(error, doc) {
+                        _id: req.body.userId
+                    }, {
+                        $push: {
+                            'bookmarks': {
+                                _id: doc._id
+                            }
+                        }
+                    }, {
+                        new: true
+                    },
+                    (error, doc) => {
                         if (err) {
                             console.log(err);
                         } else {
+                            console.log('Store was bookmarked')
                             res.send(doc);
                         }
                     })
             }
         });
     })
-    .delete((req,res) => {
-        console.log('Remove Bookmark: ',req.body);
-        Bookmarks.find({
-            sellerId: req.body.sellerID,
+    .delete((req, res) => {
+        // console.log('Remove Bookmark: ',req.body);
+        Bookmarks.findOne({
+            sellerId: req.body.sellerId,
             userId: req.body.userId
-        }, (err,doc )=>{
-            console.log(doc)
-            if (err) {
-                console.log(err);
+        }, (err, doc) => {
+            if (doc) {
+                let bookmarkId = doc._id;
+                Bookmarks.remove({
+                    _id: bookmarkId
+                }, (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('Bookmark was deleted.');
+                        User.findOneAndUpdate({
+                            _id: req.body.userId
+                        }, {
+                            $pull: {
+                                'bookmarks': doc._id
+                            }
+                        }, {
+                            multi: true
+                        },
+                        (error, doc) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log('Store was removed from User')
+                                res.send(doc);
+                            }
+                        })
+                    }
+                })
+
             } else {
-                res.send(doc);
+                console.log('No Bookmark record found.')
             }
         })
     })
@@ -376,5 +395,3 @@ router.get('/dashboard', (req, res) => {
 
 });
 module.exports = router;
-
-
