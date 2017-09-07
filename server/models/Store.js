@@ -46,7 +46,8 @@ const StoreSchema = new Schema({
     }, 
     reviews: [{ // Array of review IDs
         type: Schema.Types.ObjectId, 
-        ref: 'Review' }],
+        ref: 'Review' 
+    }],
     firstName: {
         type: String,
         default: ''
