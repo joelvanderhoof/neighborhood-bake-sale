@@ -13,6 +13,8 @@ import Rating from '../Shared/Rating';
 import Menu from '../Shared/Menu';
 import helpers from '../utils/helpers'
 import Auth from '../utils/Auth';
+import io from 'socket.io-client';
+
 
 class StoreFront extends Component {
   constructor(props) {
@@ -167,7 +169,7 @@ class StoreFront extends Component {
 
     socket.on(this.state.sellerId, function(data) {
       if (data.message === "Store Updated") {
-        helpers.getPublicStore(sellerId)
+        helpers.getPublicStore(this.state.sellerId)
           .then((response) => {
             let storeData = response.data[0];
             this.setState({
@@ -189,17 +191,6 @@ class StoreFront extends Component {
             });
           })
       }
-    });
-  }
-
-  //socket advises all customers store updated
-  notifyCustomers() {
-    let userID = Auth.getUserId();
-    let socket = io.connect('http://localhost:8080');
-
-    socket.emit("users", {
-      storeID: userID,
-      message: "store updated"
     });
   }
 
