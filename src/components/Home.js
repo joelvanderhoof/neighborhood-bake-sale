@@ -17,12 +17,7 @@ class Home extends Component {
 
   render () {
     return (
-      <div className="img-fluid rounded"
-        style={{backgroundImage:"url('https://s-media-cache-ak0.pinimg.com/originals/36/62/29/366229e72efbb7aadf3c8361864d6c5a.jpg')",
-                width: "100%",
-                height: "600px",
-                backgroundPosition: "center", 
-                backgroundSize: "cover"}} alt="Home Image"> 
+      <div className="img-fluid rounded" çalt="Home"> 
 
         <h1 className="text-center" 
             style={{color:"white",
