@@ -11,7 +11,7 @@ const CustomerOrders = (props) => {
     return (
         <li className="list-group-item">
             <h4>Seller: {sellerFirstName + sellerLastName}</h4>
-            <p></p>
+            <p>{}</p>
         </li>
     );
 };
