@@ -14,6 +14,7 @@ import Menu from '../Shared/Menu';
 import helpers from '../utils/helpers'
 import Auth from '../utils/Auth';
 import io from 'socket.io-client';
+let socket = io.connect('http://localhost:8080');
 
 
 class StoreFront extends Component {
@@ -51,26 +52,26 @@ class StoreFront extends Component {
 
   updateStoreState(sellerId) {
     helpers.getPublicStore(sellerId)
-    .then((response) => {
-      let storeData = response.data[0];
-      this.setState({
-        storeId: storeData._id,
-        storeRating: storeData.storeRating,
-        sellerId: storeData.sellerId,
-        name: storeData.name,
-        location: storeData.location,
-        menu: storeData.menuItems,
-        hours: storeData.hours,
-        description: storeData.description,
-        storeImage: storeData.storeImage,
-        reviews: storeData.reviews,
-        isOpen: storeData.isOpen,
-        sellerFirstName: storeData.firstName,
-        sellerLastName: storeData.lastName,
-        storeName: storeData.name,
-        storeLocation: storeData.location
-      });
-    })
+      .then((response) => {
+        let storeData = response.data[0];
+        this.setState({
+          storeId: storeData._id,
+          storeRating: storeData.storeRating,
+          sellerId: storeData.sellerId,
+          name: storeData.name,
+          location: storeData.location,
+          menu: storeData.menuItems,
+          hours: storeData.hours,
+          description: storeData.description,
+          storeImage: storeData.storeImage,
+          reviews: storeData.reviews,
+          isOpen: storeData.isOpen,
+          sellerFirstName: storeData.firstName,
+          sellerLastName: storeData.lastName,
+          storeName: storeData.name,
+          storeLocation: storeData.location
+        });
+      })
   }
 
   componentDidMount() {
@@ -133,7 +134,16 @@ class StoreFront extends Component {
       sellerFirstName: this.state.sellerFirstName,
       sellerLastName: this.state.sellerLastName
     };
-    helpers.placeOrder(storeId, orders, token);
+    helpers.placeOrder(storeId, orders, token).then((response) => {
+      socket.emit("users", {
+        customerID: this.state.sellerId,
+        message: "Orders Updated"
+      });
+      socket.emit("users", {
+        customerID: Auth.getUserId(),
+        message: "Orders Updated"
+      });
+    });
   }
 
   bookmark(status) {
@@ -172,7 +182,6 @@ class StoreFront extends Component {
     let userID = Auth.getUserId();
     let socket = io.connect('http://localhost:8080');
     let sellerID = this.props.location.pathname.split('/')[2];
-    console.log(sellerID);
     socket.on(sellerID, function(data) {
       console.log(data);
       if (data.message === "Store Updated") {

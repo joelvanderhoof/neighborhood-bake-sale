@@ -271,9 +271,10 @@ router.route('/review/:sellerId?')
 
 router.route('/order/:storeId?')
     .get((req, res) => {
-        Order.find({
-            sellerId: req.params.storeId
-        })
+        Order.find({$or: [
+            {sellerId: req.params.storeId},
+            {customerId: req.params.storeId}
+        ]})
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);
