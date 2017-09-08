@@ -40,7 +40,7 @@ class StoreFront extends Component {
       storeLocation: '',
       storeRating: 5,
     }
-
+    this.listenToStore = this.listenToStore.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
     this.bookmark = this.bookmark.bind(this);
@@ -72,16 +72,16 @@ class StoreFront extends Component {
         });
       })
 
-      if(Auth.isUserAuthenticated()) {
-        helpers.getUserSecure(customerId,token)
+    if (Auth.isUserAuthenticated()) {
+      helpers.getUserSecure(customerId, token)
         .then((response) => {
           let userData = response.data[0];
           let bookmarks = response.data[0].bookmarks;
           let isBookmarked = () => {
-            if(bookmarks.length>0){
+            if (bookmarks.length > 0) {
               // Cannot use forEach here because forEach returns undefined
-              for(let i=0; i<bookmarks.length; i++) {
-                if(bookmarks[i].sellerId === this.state.sellerId) {
+              for (let i = 0; i < bookmarks.length; i++) {
+                if (bookmarks[i].sellerId === this.state.sellerId) {
                   return true;
                 } else {
                   return false;
@@ -98,8 +98,10 @@ class StoreFront extends Component {
             bookmarked: isBookmarked() // returns true or false
           })
         })
-      }
-    
+    }
+
+    this.listenToStore();
+
   }
 
   addToOrder(order) {
@@ -127,12 +129,12 @@ class StoreFront extends Component {
     helpers.placeOrder(storeId, orders, token);
   }
 
-  bookmark(status){
+  bookmark(status) {
     this.setState({
       bookmarked: status
     })
 
-    const token = Auth.getToken();    
+    const token = Auth.getToken();
     let data = {
       userId: Auth.getUserId(),
       userFirstName: this.state.buyerFirstName,
@@ -149,13 +151,56 @@ class StoreFront extends Component {
       sellerId: this.state.sellerId,
     }
 
-    if(status) {
+    if (status) {
       helpers.bookmarkStore(data, token);
     } else if (!status) {
-      helpers.removeBookmark(deleteData,token)
-      // helpers delete bookmark function
+      helpers.removeBookmark(deleteData, token)
+    // helpers delete bookmark function
     }
-    
+
+  }
+
+  //socket advises all customers store updated
+  listenToStore() {
+    let userID = Auth.getUserId();
+    let socket = io.connect('http://localhost:8080');
+
+    socket.on(this.state.sellerId, function(data) {
+      if (data.message === "Store Updated") {
+        helpers.getPublicStore(sellerId)
+          .then((response) => {
+            let storeData = response.data[0];
+            this.setState({
+              storeId: storeData._id,
+              storeRating: storeData.storeRating,
+              sellerId: storeData.sellerId,
+              name: storeData.name,
+              location: storeData.location,
+              menu: storeData.menuItems,
+              hours: storeData.hours,
+              description: storeData.description,
+              storeImage: storeData.storeImage,
+              reviews: storeData.reviews,
+              isOpen: storeData.isOpen,
+              sellerFirstName: storeData.firstName,
+              sellerLastName: storeData.lastName,
+              storeName: storeData.name,
+              storeLocation: storeData.location
+            });
+          })
+      }
+    });
+  }
+
+  //socket advises all customers store updated
+  notifyCustomers() {
+    let userID = Auth.getUserId();
+    let socket = io.connect('http://localhost:8080');
+
+    socket.emit("users", {
+      storeID: userID,
+      message: "store updated"
+    });
   }
 
   render() {
@@ -174,12 +219,14 @@ class StoreFront extends Component {
           </div>
           <div className='col-lg-6 col-sm-12'>
             <div className='row mb-3'>
-              <Rating ratingStyle='rating col-12 mb-3' rating={this.state.storeRating} numReviews={this.state.reviews.length} />
+              <Rating ratingStyle='rating col-12 mb-3' rating={ this.state.storeRating } numReviews={ this.state.reviews.length } />
               { /* Need a field for rating and number of reviews*/ }
               <div className='store-front-link border'>
-                <Link className='btn col-md-4 col-sm-12' to={`/review/${this.state.sellerId}`}><span style={ { color: 'gold', textShadow: '1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' } }>★</span> { '\u00A0' } Write Review</Link>
+                <Link className='btn col-md-4 col-sm-12' to={ `/review/${this.state.sellerId}` }><span style={ { color: 'gold', textShadow: '1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' } }>★</span>
+                { '\u00A0' } Write Review</Link>
                 <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12' />
-                <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12' bookmarked={this.state.bookmarked} bookmark={this.bookmark}/> {/*  hard coding in bookmark until we determine what model will use it */}
+                <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12' bookmarked={ this.state.bookmarked } bookmark={ this.bookmark } />
+                { /*  hard coding in bookmark until we determine what model will use it */ }
               </div>
             </div>
             <div className='row'>
@@ -193,13 +240,13 @@ class StoreFront extends Component {
             <Menu menu={ this.state.menu } addToOrder={ this.addToOrder } menuStyle='border justify-content-center store-front-menu mt-3 p-3' />
           </div>
           <div className='col-md-6 col-sm-12'>
-            <Order customerOrder={ this.state.customerOrder } placeOrder={this.placeOrder} orderTotal={this.state.orderTotal} orderStyle='border mt-3 order' />
+            <Order customerOrder={ this.state.customerOrder } placeOrder={ this.placeOrder } orderTotal={ this.state.orderTotal } orderStyle='border mt-3 order' />
           </div>
         </div>
         <hr />
         <div className='row'>
           <div className='col-12'>
-            <Reviews reviews={this.state.reviews} />    
+            <Reviews reviews={ this.state.reviews } />
           </div>
           <div className='col-12'>
             <StoreMap storeMapStyle='border d-flex flex-column align-items-center justify-content-center store-map mt-3' location={ this.state.location } />
