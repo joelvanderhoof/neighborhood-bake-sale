@@ -328,10 +328,18 @@ router.route('/order/:orderID?')
             });
     });
 
-router.route('/useLater')
+router.route('/store-marker/:zip')
     .get((req, res) => {
-        console.log('get request');
-        res.send('Get made to /api/useLater')
+        Store.find({
+            zip: req.params.zip
+        })
+        .exec((err, doc) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(doc);
+            }
+        });
     })
     .post((req, res) => {
         res.send('Post made to /api/useLater')
