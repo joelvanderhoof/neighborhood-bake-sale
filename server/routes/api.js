@@ -17,6 +17,8 @@ router.route('/user/:userId?')
         })
             .populate("stores")
             .populate('bookmarks')
+            .populate('orders')
+            .populate('reviews')
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);

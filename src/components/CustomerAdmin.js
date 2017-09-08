@@ -60,9 +60,7 @@ class CustomerAdmin extends Component {
         const reviewsList = this.state.reviews;
         console.log('Review list', reviewsList);
         return reviewsList.map(item => (
-            <CustomerReviews key={item.id}>
-                {item.review}
-            </CustomerReviews>
+            <CustomerReviews key={item.id} item={item}/>
         ));
     }
 
@@ -71,9 +69,7 @@ class CustomerAdmin extends Component {
         const ordersList = this.state.orders;
         console.log('Order list', ordersList);
         return ordersList.map(item => (
-            <CustomerOrders key={item.id}>
-                {item.items}
-            </CustomerOrders>
+            <CustomerOrders key={item.id} item={item} />
         ));
     }
 
@@ -82,9 +78,7 @@ class CustomerAdmin extends Component {
         const bookmarks = this.state.bookmarks;
         console.log('Bookmarks', bookmarks);
         return bookmarks.map(item => (
-            <CustomerBookmarks key={item.id}>
-                {item.storeName}
-            </CustomerBookmarks>
+            <CustomerBookmarks key={item.id} item={item}/>
         ));
     }
 
