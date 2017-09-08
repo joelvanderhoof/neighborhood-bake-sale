@@ -27,10 +27,13 @@ class Message extends Component {
   }
 
   listMenuItems(){
+    let userID = Auth.getUserId();
     let allMessages;
     allMessages = this.props.messages.map((message) => {
-      if (message.status !== "Declined") {
-        return <MessageItems customerName={ message.buyerFirstName + " " + message.buyerLastName } seller={ "Bob" } order={ message.items } orderTotal={ message.orderTotal } />
+      if (userID === message.sellerId && message.status !== "Declined") { //if seller and menu item isnt declined
+        return <MessageItems requery={this.props.requery} entire={message} customerName={ message.buyerFirstName + " " + message.buyerLastName } status={message.status} customer={ false } sellerName={ "Bob" } order={ message.items } orderTotal={ message.orderTotal } />
+      } else if(userID === message.customerId) {
+        return <MessageItems requery={this.props.requery} entire={message} customerName={ message.buyerFirstName + " " + message.buyerLastName } status={message.status} customer={ true } sellerName={ "Bob" } order={ message.items } orderTotal={ message.orderTotal } />
       }
     })
     return allMessages;

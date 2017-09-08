@@ -45,6 +45,14 @@ let helpers = {
   },
 
   // Randy's routes
+  getUserSecure(id, token) {
+    return axios.get(`./../secure/user/${id}`, {
+      headers: {
+        authorization: token
+      }
+    });
+  },
+
   placeOrder(storeId, order, token) {
     return axios.post(`./../secure/order/${storeId}`, {
       customerId: order.customerId, //same as the ID from the Customer model
@@ -100,6 +108,9 @@ let helpers = {
 
   getOrders(sellerID) {
     return axios.get('api/order/' + sellerID);
+  },
+  updateOrderStatus(sellerID, newOrder){
+    return axios.put('api/order/' + sellerID, newOrder);
   }
 }
 

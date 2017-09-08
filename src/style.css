@@ -2,6 +2,15 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+
+  /* background-image: url('https://s-media-cache-ak0.pinimg.com/originals/36/62/29/366229e72efbb7aadf3c8361864d6c5a.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; */
 }
 
 
@@ -19,7 +28,7 @@ a, a:hover, a:active, a:link, a:visited {
 
 .nav, a:visited{
   text-decoration: none;
-  color: #FBF7F7;
+  /* color: #FBF7F7; */
 }
 
 .nav li {

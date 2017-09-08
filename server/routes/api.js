@@ -309,17 +309,21 @@ router.route('/order/:storeId?')
         });
     })
     .put((req, res) => {
-        req.body.orders.forEach((orderData) => {
+        console.log("test");
+       console.log(req.body);
+       let orderData = req.body;
             Order.update({
-                _id: orderData.id
+                _id: orderData._id
             },
                 orderData,
-                (err) => {
+                (err, doc) => {
                     if (err) {
                         console.log(err);
+                    } else {
+                        res.send(doc)
                     }
                 });
-        })
+        
     })
     .delete((req, res) => {
         Order.remove({

@@ -4,39 +4,6 @@ import Auth from './utils/Auth';
 import Message from './Nav/Message';
 import Helpers from "./utils/helpers";
 
-let tempOrders = [
-  {
-    customerID: "213421414", //same as the ID from the Customer model
-    sellerID: "421155423423", //same as the ID from the Seller collection
-    customerName: "Frank",
-    storeName: "Bob's Pizzaria",
-    order: "Pizza", //Array of menu item IDs
-    status: "Pending", //The status will be set to specific strings by specific functions
-    // To check status compare the strings
-
-  },
-  {
-    customerID: "213421414", //same as the ID from the Customer model
-    sellerID: "213421414", //same as the ID from the Seller collection
-    customerName: "Frank",
-    storeName: "Ike's Sandwich",
-    order: "Sandwich", //Array of menu item IDs
-    status: "Accepted", //The status will be set to specific strings by specific functions
-    // To check status compare the strings
-
-  },
-  {
-    customerID: "213421414", //same as the ID from the Customer model
-    sellerID: "213421414", //same as the ID from the Seller collection
-    customerName: "Frank",
-    storeName: "Cakeology",
-    order: "Cake",
-    status: "Rejected", //The status will be set to specific strings by specific functions
-    // To check status compare the strings
-
-  }
-];
-
 class Nav extends Component {
   constructor(props) {
     super(props);
@@ -62,9 +29,17 @@ class Nav extends Component {
   }
 
   queryOrders() {
-    Helpers.getOrders("59ae424b9247f74518bff01d").then((response)=>{
+    console.log("query orders");
+    let userID = Auth.getUserId();
+    let activeOrders = [];
+    Helpers.getOrders(userID).then((response)=>{
       console.log(response);
-      this.setState({messages: response.data})
+      response.data.map((orders)=>{
+        if(!orders.pickedUp){
+          activeOrders.push(orders);
+        }
+      })
+      this.setState({messages: activeOrders})
     });
    
   }
@@ -95,7 +70,7 @@ class Nav extends Component {
           </li>
           { Auth.isUserAuthenticated() &&
             <li>
-              <Message messages={ this.state.messages } />
+              <Message requery={this.queryOrders} messages={ this.state.messages } />
             </li> }
         </ul>
         <ul className='navbar-nav'>
