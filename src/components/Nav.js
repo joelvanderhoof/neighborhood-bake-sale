@@ -32,7 +32,7 @@ class Nav extends Component {
     console.log("query orders");
     let userID = Auth.getUserId();
     let activeOrders = [];
-    Helpers.getOrders(userID).then((response)=>{
+    Helpers.getOrdersCustomer(userID).then((response)=>{
       console.log(response);
       response.data.map((orders)=>{
         if(!orders.pickedUp){
