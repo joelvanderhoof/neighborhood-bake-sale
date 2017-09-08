@@ -28,7 +28,7 @@ a, a:hover, a:active, a:link, a:visited {
 
 .nav, a:visited{
   text-decoration: none;
-  color: #FBF7F7;
+  /* color: #FBF7F7; */
 }
 
 .nav li {
