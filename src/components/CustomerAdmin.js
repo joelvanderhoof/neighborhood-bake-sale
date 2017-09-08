@@ -11,7 +11,7 @@ class CustomerAdmin extends Component {
         super(props);
         this.state = {
             profilename: "",
-            profilephoto: "http://clipartist.net/Holidays/Chinese_New_Year/Snake/bamibal_chinese_smiley_chinese_new_year_year_of_the_dragon_art_sheet_page_black_white_line_art-555px.png",
+            profilephoto: "",
             orders: [],
             reviews: [],
             bookmarks: []
@@ -33,14 +33,15 @@ class CustomerAdmin extends Component {
           let userPhoto = response.data[0].photo;
           let userOrders = response.data[0].orders;
           let userReviews = response.data[0].reviews;
-          //let userBookmarks = response.data[0].bookmarks;
+          let userBookmarks = response.data[0].bookmarks;
           console.log("Response from api for getUser: ", response);  
           this.setState({
             profilename: firstName + " " +lastName,
             profilephoto: userPhoto,
             orders: userOrders,
-            reviews: userReviews
-            //bookmarks: userBookmarks
+            reviews: userReviews,
+            bookmarks: userBookmarks,
+            profilephoto: userPhoto
           });
         }); 
     }
@@ -60,7 +61,7 @@ class CustomerAdmin extends Component {
         console.log('Review list', reviewsList);
         return reviewsList.map(item => (
             <CustomerReviews key={item.id}>
-                {item.comments}
+                {item.review}
             </CustomerReviews>
         ));
     }
@@ -71,7 +72,7 @@ class CustomerAdmin extends Component {
         console.log('Order list', ordersList);
         return ordersList.map(item => (
             <CustomerOrders key={item.id}>
-                {item.food}
+                {item.items}
             </CustomerOrders>
         ));
     }
@@ -82,7 +83,7 @@ class CustomerAdmin extends Component {
         console.log('Bookmarks', bookmarks);
         return bookmarks.map(item => (
             <CustomerBookmarks key={item.id}>
-                {item.bookmark}
+                {item.storeName}
             </CustomerBookmarks>
         ));
     }
