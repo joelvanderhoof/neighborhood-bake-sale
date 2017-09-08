@@ -76,7 +76,7 @@ class SellerAdmin extends Component {
 
     socket.emit("users", {
       storeID: userID,
-      message: "store updated"
+      message: "Store Updated"
     });
   }
 
