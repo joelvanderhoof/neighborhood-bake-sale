@@ -38,6 +38,7 @@ class StoreFront extends Component {
       sellerLastName: '',
       storeName: '',
       storeLocation: '',
+      storeRating: 5,
     }
 
     this.addToOrder = this.addToOrder.bind(this);
@@ -54,6 +55,7 @@ class StoreFront extends Component {
         let storeData = response.data[0];
         this.setState({
           storeId: storeData._id,
+          storeRating: storeData.storeRating,
           sellerId: storeData.sellerId,
           name: storeData.name,
           location: storeData.location,
@@ -172,7 +174,7 @@ class StoreFront extends Component {
           </div>
           <div className='col-lg-6 col-sm-12'>
             <div className='row mb-3'>
-              <Rating ratingStyle='rating col-12 mb-3' rating='4' numReviews='751' />
+              <Rating ratingStyle='rating col-12 mb-3' rating={this.state.storeRating} numReviews={this.state.reviews.length} />
               { /* Need a field for rating and number of reviews*/ }
               <div className='store-front-link border'>
                 <Link className='btn col-md-4 col-sm-12' to={`/review/${this.state.sellerId}`}><span style={ { color: 'gold', textShadow: '1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' } }>★</span> { '\u00A0' } Write Review</Link>

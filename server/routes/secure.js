@@ -23,7 +23,6 @@ router.route('/user/:userId?')
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log('userData', doc)
                     res.send(doc);
                 }
             });
@@ -68,7 +67,6 @@ router.route('/store/:sellerId?')
             })
             .populate('menu')
             .exec((err, doc) => {
-                console.log(doc);
                 if (err) {
                     console.log(err);
                 } else {
@@ -247,7 +245,6 @@ router.route('/order/:storeId?')
                 storeId: req.params.storeId
             })
             .exec((err, doc) => {
-                console.log(doc);
                 if (err) {
                     console.log(err);
                 } else {
@@ -272,7 +269,6 @@ router.route('/order/:storeId?')
                         new: true
                     },
                     function (error, doc) {
-                        console.log(doc);
                         if (err) {
                             console.log(err);
                         } else {
