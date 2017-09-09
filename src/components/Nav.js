@@ -44,8 +44,8 @@ class Nav extends Component {
 
   render() {
     return (
-      <nav className="nav navbar navbar-toggleable-md">
-        <ul className='navbar-nav mr-auto'style={{display: "-webkit-inline-box"}}>
+      <nav className="nav navbar-toggleable-md">
+        <ul className='nav mr-auto'>
           <li>
             <NavLink exact activeClassName='active' to='/'>
               Home
@@ -71,7 +71,7 @@ class Nav extends Component {
               <Message requery={this.queryOrders} messages={ this.state.messages } />
             </li> }
         </ul>
-        <ul className='navbar-nav'>
+        <ul className='nav'>
           { Auth.isUserAuthenticated() ?
             <li>
               <button className='btn btn-sm btn-secondary' onClick={this.handleClick}> Log Out </button>

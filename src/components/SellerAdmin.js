@@ -170,7 +170,11 @@ class SellerAdmin extends Component {
         <div className="text-center row">
         <h1 className="col-lg-6">{ this.state.name } <EditButton saveFunc={ this.setSave }/></h1> 
         <div className="col-lg-6">
+          <div className="row justify-content-lg-center">
+            <div className="col-lg-1">
           Store: < ToggleButton value={ this.state.isOpen } onToggle={ (value) => {this.setState({ isOpen: !value,})} } inactiveLabel="Off" activeLabel="On" />
+          </div>
+          </div>
         </div>
         </div>
         <div className="text-center">
