@@ -8,7 +8,7 @@ export default class Search extends Component {
     //     <span className="input-group-addon" id="Search">Search</span>
     //     <input type="text" placeholder="Type in location..." />
     // </div>
-    <div className="search-container">
+    <div className="search-container">   
     <input style={{
             width: "50%",
             marginLeft: "25%",
