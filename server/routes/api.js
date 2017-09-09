@@ -357,10 +357,11 @@ router.route('/bookmark')
         })
     })
 
-router.route('/store-marker/:zip')
+router.route('/store-marker/:location')
     .get((req, res) => {
+        console.log(JSON.stringify(req.params));
         Store.find({
-            zip: req.params.zip
+            searchCity: req.params.location
         })
         .exec((err, doc) => {
             if (err) {
