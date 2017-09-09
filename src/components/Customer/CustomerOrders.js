@@ -7,7 +7,7 @@ const CustomerOrders = (props) => {
     // Render li tag with props.children 
     return (
         <li className="list-group-item">
-            <h4>Restaurant: {}</h4>
+            <h4>Restaurant: {storeId}</h4>
             {items.map(data => (
                 <p key={data.id}>Item: {data.item}</p>
             ))}

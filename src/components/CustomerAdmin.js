@@ -85,15 +85,13 @@ class CustomerAdmin extends Component {
 
     render() {
         return (
-            <div className="container-fluid">
+            <div className="container-fluid bg-white">
                 <div className="row">
                     <div className="col-lg-3 col-md-3 col-sm-12">
                         <div className="card" style={{width: '20rem'}}>
-                            <img className="card-img-top" src={this.state.profilephoto} alt="Card cap"/>
+                            <img className="card-img-top" src="https://www.shareicon.net/download/2015/09/20/104334_avatar.svg" alt="Card cap"/>
                             <div className="card-body">
                                 <h4 className="card-title">{this.state.profilename}</h4>
-                                <p className="card-text">Hello world</p>
-                                <a href="#" className="btn btn-primary">Edit</a>
                             </div>
                         </div>
                         <div className="list-group" style={{width: '20rem'}} id="list-tab" role="tablist">
