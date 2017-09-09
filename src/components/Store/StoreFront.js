@@ -108,8 +108,6 @@ class StoreFront extends Component {
               for (let i = 0; i < bookmarks.length; i++) {
                 if (bookmarks[i].sellerId === this.state.sellerId) {
                   return true;
-                } else {
-                  return false;
                 }
               }
             } else {

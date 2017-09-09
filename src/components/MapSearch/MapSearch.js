@@ -2,15 +2,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-const zip = 92617
+const zip = 92617;
 
 export default class MapSearch extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            latLng: {lat: 33.6429845, lng: -117.8588866}
-        };
+        // this.state = {
+        //     latLng: {lat: 33.6429845, lng: -117.8588866}
+        // };
 
         this.initMap = this.initMap.bind(this);
         this.loadJS = this.loadJS.bind(this);
@@ -28,21 +28,21 @@ export default class MapSearch extends Component {
         ref.parentNode.insertBefore(script, ref);
     }
 
-    getStoreData(zip) {
+    getStoreData(searchCity) {
         return new Promise((resolve, reject) => {
             let locationData = [];
-            axios.get(`http://localhost:8080/api/store-marker/${zip}`)
+            axios.get(`/api/store-marker/${searchCity}`)
                 .then((res) => {
                   locationData = this.buildDataLayer(res);
-                    console.log(`This location data was just built from the db: ${locationData}`);
+                    console.log(`This location data was just built from the db: ${JSON.stringify(locationData)}`);
                     resolve(locationData);
                 })            
-        })
+        });
     }
-    //async
+
     buildDataLayer(res) {
         let storeArray = [];
-        res.data.forEach(function(store) {
+        res.data.forEach( store => {
             let storeLocation = {
                 "type": "Feature",
                 "properties": {
@@ -57,7 +57,6 @@ export default class MapSearch extends Component {
             };
             storeArray.push(storeLocation);
         });
-        console.log(storeArray);
         return storeArray;        
     }
 
@@ -68,22 +67,21 @@ export default class MapSearch extends Component {
     }
 
     async initMap() {
+        console.log(`this.props.latLng: ${JSON.stringify(this.props.latLng)}`);
+        console.log(`this.props.searchCity: ${this.props.searchCity}`);
         const map = new google.maps.Map(document.getElementById('map'), {
-            center: this.state.latLng,
+            center: this.props.latLng,
             zoom: 14
         });
 
-        let locationData = await this.getStoreData(zip);
-
-        // Why isn't this logging out?
-        console.log(`Here is the locationData: ${locationData}`);
+        let locationData = await this.getStoreData(this.props.searchCity);
         let testGeo = {
             "type": "FeatureCollection",
             "features": locationData
         }; 
         
 
-        // bind data to the markers on 
+        // bind data to the markers on the map
         for (var i = 0; i < testGeo.features.length; i++) {
             var coords = testGeo.features[i].geometry.coordinates;
             var latLng = new google.maps.LatLng(coords[1],coords[0]);
@@ -96,8 +94,8 @@ export default class MapSearch extends Component {
                 console.log(this.storeId);
                 window.location = '/store/'+this.storeId;
             })
-         }
     }
+}
 
     render() {
         return (

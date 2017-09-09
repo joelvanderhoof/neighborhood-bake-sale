@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CustomerReviews from './Customer/CustomerReviews';
 import CustomerOrders from './Customer/CustomerOrders';
-import CustomerBookmarks from './Customer/Customerbookmarks';
+import CustomerBookmarks from './Customer/CustomerBookmarks';
 import Helpers from './utils/helpers';
 import Auth from './utils/Auth';
 
@@ -85,9 +85,9 @@ class CustomerAdmin extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container-fluid">
                 <div className="row">
-                    <div className="col-lg-4 col-md-4 col-sm-12">
+                    <div className="col-lg-3 col-md-3 col-sm-12">
                         <div className="card" style={{width: '20rem'}}>
                             <img className="card-img-top" src={this.state.profilephoto} alt="Card cap"/>
                             <div className="card-body">
@@ -96,23 +96,19 @@ class CustomerAdmin extends Component {
                                 <a href="#" className="btn btn-primary">Edit</a>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-lg-8 col-md-8 col-sm-12">
-                        <div className="tab-content" id="nav-tabContent">
-                            <div className="tab-pane fade show active" id="list-messages" role="tabpanel">future development</div>
-                            <div className="tab-pane fade" id="list-reviews" role="tabpanel">{this.renderReviews()}</div>
-                            <div className="tab-pane fade" id="list-orders" role="tabpanel">{this.renderOrders()}</div>
-                            <div className="tab-pane fade" id="list-bookmarks" role="tabpanel">{this.renderBookmarks()}</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-lg-4 col-md-4 col-sm-12">
                         <div className="list-group" style={{width: '20rem'}} id="list-tab" role="tablist">
-                            <a className="list-group-item list-group-item-action active" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                            {/* <a className="list-group-item list-group-item-action active" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a> */}
                             <a className="list-group-item list-group-item-action" id="list-reviews-list" data-toggle="list" href="#list-reviews" role="tab" aria-controls="reviews">Reviews</a>
                             <a className="list-group-item list-group-item-action" id="list-orders-list" data-toggle="list" href="#list-orders" role="tab" aria-controls="orders">Orders</a>
                             <a className="list-group-item list-group-item-action" id="list-bookmarks-list" data-toggle="list" href="#list-bookmarks" role="tab" aria-controls="bookmarks">Bookmarks</a>
+                        </div>
+                    </div>
+                    <div className="col-lg-9 col-md-9 col-sm-12">
+                        <div className="tab-content" id="nav-tabContent">
+                            {/* <div className="tab-pane fade show active" id="list-messages" role="tabpanel">future development</div> */}
+                            <div className="tab-pane fade" id="list-reviews" role="tabpanel">{this.renderReviews()}</div>
+                            <div className="tab-pane fade" id="list-orders" role="tabpanel">{this.renderOrders()}</div>
+                            <div className="tab-pane fade" id="list-bookmarks" role="tabpanel">{this.renderBookmarks()}</div>
                         </div>
                     </div>
                 </div>
