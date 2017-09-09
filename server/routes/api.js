@@ -191,7 +191,6 @@ router.route('/review/:sellerId?')
             sellerId: req.params.sellerId
         },
             (err, doc) => {
-                console.log(doc);
                 if (err) {
                     console.log(err);
                 } else {
