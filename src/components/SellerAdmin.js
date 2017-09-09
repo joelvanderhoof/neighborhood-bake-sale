@@ -166,8 +166,8 @@ class SellerAdmin extends Component {
 
   render() {
     return (
-      <div className="container-fluid bg-white">
-        <div className="text-center row">
+      <div className="container-fluid mb-3 bg-white">
+        <div className="text-center row pt-3">
         <h1 className="col-lg-6">{ this.state.name } <EditButton saveFunc={ this.setSave }/></h1> 
         <div className="col-lg-6">
           <div className="row justify-content-lg-center">

@@ -185,7 +185,7 @@ a, a:hover, a:active, a:link, a:visited {
   animation-fill-mode: forwards;
 }
 
-@-webkit-keyframes pulse {
+@keyframes pulse {
   0% {
     color: red;
     border-color: red;
@@ -212,7 +212,7 @@ a, a:hover, a:active, a:link, a:visited {
  } */
 
  .pre-scrollable {
-  max-height: 850px;
+  max-height: calc(100vh - 167px);
  }
 
 /* CSS used here will be applied after bootstrap.css */
