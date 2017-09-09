@@ -54,6 +54,7 @@ let helpers = {
   },
 
   postReview(storeId,review,token) {
+    console.log('review@axios secure post route',review);
     return axios.post(`./../secure/review/${storeId}`,{
       review: review.review,
       rating: review.rating,

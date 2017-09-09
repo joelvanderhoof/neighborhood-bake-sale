@@ -56,7 +56,7 @@ class WriteReview extends Component {
   postReview(review) {
     const customerId = Auth.getUserId();
     const token = Auth.getToken();
-    const sellerId = this.props.location.pathname.split('/')[2]
+    const sellerId = this.props.location.pathname.split('/')[2];
 
     let postReview = {
       review: review,
@@ -67,7 +67,6 @@ class WriteReview extends Component {
       storeName: this.state.storeName,
       sellerId: sellerId,
     }
-    console.log('review:', postReview);
     helpers.postReview(sellerId,postReview,token);
   }
 
