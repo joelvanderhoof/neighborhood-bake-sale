@@ -13,7 +13,9 @@ const DBconnect = 'mongodb://tiger-foodie:benColeIsAwesome1@ds119578.mlab.com:19
 
 // Configure DB
 mongoose.Promise = Promise;
-mongoose.connect(DBconnect, { useMongoClient: true });
+mongoose.connect(DBconnect, {
+    useMongoClient: true
+});
 const db = mongoose.connection;
 
 db.on('error', (err) => {
@@ -33,9 +35,13 @@ const PORT = process.env.PORT || 8080;
 
 // Use body parser to parse incoming requests as json
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(bodyParser.text());
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(bodyParser.json({
+    type: 'application/vnd.api+json'
+}));
 app.use(cookieParser());
 
 // Serve files from the public folder
@@ -71,7 +77,7 @@ app.get('/', (req, res) => {
 });
 
 //Sets up express to handle 404 NOT FOUND
-app.use((req, res)=> {
+app.use((req, res) => {
     res.status(404).send('404: Sorry the page you requested is not on this server.');
 });
 
@@ -81,20 +87,23 @@ app.use((error, req, res) => {
 });
 
 // Start server
-server.listen(PORT,()=>{
+server.listen(PORT, () => {
     console.log(`The server is listening on port ${PORT}`);
 });
 
 
 //Socket IO
-io.on('connection', function (socket) {
-    console.log("socket connection made");
-    // socket.emit('news', { hello: 'world' });
-    socket.on('users', function (data) {
-      console.log(data);
-      //tells everyone on the store page to requery store
-      if(data.message == "store updated"){
-          socket.emit(data.storeID, {message: "requery"})
-      }
+io.on('connection', function(socket) {
+    socket.on('users', function(data) {
+        if (data.message == "Store Updated") {
+            io.emit(data.storeID, {
+                message: data.message
+            })
+        }
+        if (data.message == "Orders Updated") {
+            io.emit(data.customerID, {
+                message: data.message
+            })
+        }
     });
-  });
+});

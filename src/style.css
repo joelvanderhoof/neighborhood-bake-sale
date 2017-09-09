@@ -2,6 +2,18 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-image: url('https://s-media-cache-ak0.pinimg.com/originals/36/62/29/366229e72efbb7aadf3c8361864d6c5a.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-white {
+  background-color: whitesmoke;
 }
 
 
@@ -19,7 +31,7 @@ a, a:hover, a:active, a:link, a:visited {
 
 .nav, a:visited{
   text-decoration: none;
-  color: #FBF7F7;
+  /* color: #FBF7F7; */
 }
 
 .nav li {
@@ -32,7 +44,6 @@ a, a:hover, a:active, a:link, a:visited {
 }
 
 /* General commonly used styles */
-
 .border {
   border-width: 1px;
   border-style: solid;
@@ -135,9 +146,6 @@ a, a:hover, a:active, a:link, a:visited {
   margin-bottom: 5px;
 }
 
-
-
-
 .store-map {
   width: 100%;
   height: 600px;
@@ -149,13 +157,10 @@ a, a:hover, a:active, a:link, a:visited {
   height: 200px;
 }
 
-
 /* Order */
-
 .order {
   min-height: 400px;
 }
-
 
 /* Seller Admin */
 

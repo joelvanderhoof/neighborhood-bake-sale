@@ -7,23 +7,28 @@ const Store = require('./../models/Store');
 const MenuItem = require('./../models/MenuItem');
 const Review = require('./../models/Review');
 const Order = require('./../models/Order');
+const Bookmarks = require('./../models/Bookmarks');
 
 // Basic api route structure
-router.route('/user/:userID?')
+router.route('/user/:userId?')
     .get((req, res) => {
         User.find({
-            _id: req.params.userID
+            _id: req.params.userId
         })
             .populate("stores")
+            .populate('bookmarks')
+            .populate('orders')
+            .populate('reviews')
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log("get request")
                     res.send(doc);
                 }
             });
     })
+
+    // Post most likely will not be used here
     .post((req, res) => {
         let newGuy = new User(req.body);
         newGuy.save((err, doc) => {
@@ -264,12 +269,12 @@ router.route('/review/:sellerId?')
         });
     });
 
-router.route('/order/:orderID?')
+router.route('/order/:storeId?')
     .get((req, res) => {
-        Order.find({
-            _id: req.params.orderID
-        })
-            .populate('menu')
+        Order.find({$or: [
+            {sellerId: req.params.storeId},
+            {customerId: req.params.storeId}
+        ]})
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);
@@ -286,7 +291,7 @@ router.route('/order/:orderID?')
             } else {
                 User.findOneAndUpdate(
                     {
-                        _id: req.body.userID
+                        _id: req.body.customerId
                     },
                     {
                         $push: {
@@ -307,17 +312,21 @@ router.route('/order/:orderID?')
         });
     })
     .put((req, res) => {
-        req.body.orders.forEach((orderData) => {
+        console.log("test");
+       console.log(req.body);
+       let orderData = req.body;
             Order.update({
-                _id: orderData.id
+                _id: orderData._id
             },
                 orderData,
-                (err) => {
+                (err, doc) => {
                     if (err) {
                         console.log(err);
+                    } else {
+                        res.send(doc)
                     }
                 });
-        })
+        
     })
     .delete((req, res) => {
         Order.remove({
@@ -327,6 +336,26 @@ router.route('/order/:orderID?')
                 if (err) return handleError(err);
             });
     });
+
+router.route('/bookmark')
+    .put((req, res) => {
+        User.findOneAndUpdate(
+            {
+            _id: req.body.userId
+            }, 
+            {
+            $push: {
+                'bookmarkedStores': req.body.storeId
+            }
+        },
+        function(err, doc) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(doc);
+            }
+        })
+    })
 
 router.route('/store-marker/:zip')
     .get((req, res) => {

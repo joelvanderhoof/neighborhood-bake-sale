@@ -39,8 +39,6 @@ class SellerAdmin extends Component {
     let userID = Auth.getUserId();
     Helpers.getStore(userID).then((response) => {
       let storeInfo = response.data[0];
-      console.log(response);
-      console.log(storeInfo);
       this.setState({
         menuItems: storeInfo.menuItems,
         name: storeInfo.name,
@@ -78,10 +76,10 @@ class SellerAdmin extends Component {
 
     socket.emit("users", {
       storeID: userID,
-      message: "store updated"
+      message: "Store Updated"
     });
   }
-  
+
   //save button - updates DB and sends out socket notification
   setSave() {
     let storeData = this.state;
@@ -137,9 +135,15 @@ class SellerAdmin extends Component {
       });
     }
   }
- 
+
   //updates state - function passed down to inputs
   updateState(key, value, index, type) {
+    if (value === "In Stock!") {
+      value = true;
+    }
+    if (value === "Sold Out!") {
+      value = false;
+    }
     //no index - not an array
     if (index === undefined) {
       let stateObj = {};
@@ -164,7 +168,11 @@ class SellerAdmin extends Component {
     return (
       <div>
         <h1 className="text-center">{ this.state.name }'s Admin Page <EditButton saveFunc={ this.setSave }/></h1> Store:
-        <ToggleButton value={ this.state.isOpen } onToggle={ (value) => {this.setState({isOpen: !value,})} } inactiveLabel="Off" activeLabel="On" />
+        <ToggleButton value={ this.state.isOpen } onToggle={ (value) => {
+                                                               this.setState({
+                                                                 isOpen: !value,
+                                                               })
+                                                             } } inactiveLabel="Off" activeLabel="On" />
         <div className="text-center">
         </div>
         <div className="row sellerContainer">

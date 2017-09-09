@@ -1,6 +1,3 @@
-//  NOT USING
-// Probably going to delete
-
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;

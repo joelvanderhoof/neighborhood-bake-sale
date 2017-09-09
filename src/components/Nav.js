@@ -2,49 +2,44 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import Auth from './utils/Auth';
 import Message from './Nav/Message';
-
-let tempOrders = [
-  {
-    customerID: "213421414", //same as the ID from the Customer model
-    sellerID: "421155423423", //same as the ID from the Seller collection
-    customerName: "Frank",
-    storeName: "Bob's Pizzaria",
-    order: "Pizza", //Array of menu item IDs
-    status: "Pending", //The status will be set to specific strings by specific functions
-    // To check status compare the strings
-
-  },
-  {
-    customerID: "213421414", //same as the ID from the Customer model
-    sellerID: "213421414", //same as the ID from the Seller collection
-    customerName: "Frank",
-    storeName: "Ike's Sandwich",
-    order: "Sandwich", //Array of menu item IDs
-    status: "Accepted", //The status will be set to specific strings by specific functions
-    // To check status compare the strings
-
-  },
-  {
-    customerID: "213421414", //same as the ID from the Customer model
-    sellerID: "213421414", //same as the ID from the Seller collection
-    customerName: "Frank",
-    storeName: "Cakeology",
-    order: "Cake",
-    status: "Rejected", //The status will be set to specific strings by specific functions
-    // To check status compare the strings
-
-  }
-];
+import Helpers from "./utils/helpers";
 
 class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: tempOrders
+      messages: []
     };
 
-  // this.setEdit = this.setEdit.bind(this);
+  this.queryOrders = this.queryOrders.bind(this);
   // this.setSave = this.setSave.bind(this);
+  }
+
+  componentDidMount(){
+    this.queryOrders();
+  }
+
+  // componentDidUpdate(){
+  //   this.queryOrders();
+  // }
+
+  handleClick() {
+    Auth.deauthenticateUser();
+    window.location.href = '/';
+  }
+
+  queryOrders() {
+    let userID = Auth.getUserId();
+    let activeOrders = [];
+    Helpers.getOrdersCustomer(userID).then((response)=>{
+      response.data.map((orders)=>{
+        if(!orders.pickedUp){ //if order is picked up, dont show it
+          activeOrders.push(orders);
+        }
+      })
+      this.setState({messages: activeOrders})
+    });
+   
   }
 
   render() {
@@ -57,7 +52,7 @@ class Nav extends Component {
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName='active' to='/store/59ab34d106e8a23b58e70560'>
+            <NavLink activeClassName='active' to='/store/59ae424b9247f74518bff01d'>
               Store
             </NavLink>
           </li>
@@ -73,15 +68,13 @@ class Nav extends Component {
           </li>
           { Auth.isUserAuthenticated() &&
             <li>
-              <Message messages={ this.state.messages } />
+              <Message requery={this.queryOrders} messages={ this.state.messages } />
             </li> }
         </ul>
         <ul className='navbar-nav'>
           { Auth.isUserAuthenticated() ?
             <li>
-              <NavLink className='mr-3' activeClassName='active' to='/logout'>
-                Log Out
-              </NavLink>
+              <button className='btn btn-sm btn-secondary' onClick={this.handleClick}> Log Out </button>
             </li>
             :
             <li>

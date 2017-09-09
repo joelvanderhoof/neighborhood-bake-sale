@@ -12,31 +12,37 @@ class Message extends Component {
   }
 
 
-  monitorStore() {
+  monitorStore(cb) {
     let userID = Auth.getUserId();
     let socket = io.connect('http://localhost:8080');
     socket.on(userID, function(data) {
-      console.log(data);
-      //query menu DB
-
-    // socket.emit('my other event', {
-    //   my: 'data'
-    // });
+      if (data.message === "Orders Updated") {
+        cb();
+      }
     });
 
   }
 
+  listMenuItems() {
+    let userID = Auth.getUserId();
+    let allMessages;
+    allMessages = this.props.messages.map((message) => {
+      if (userID === message.sellerId) { //if seller and menu item isnt declined
+        return <MessageItems customerID={ message.customerId } sellerId={ message.sellerId } requery={ this.props.requery } entire={ message } customerName={ message.buyerFirstName + " " + message.buyerLastName }
+                 status={ message.status } customer={ false } sellerName={ "Bob" } order={ message.items } orderTotal={ message.orderTotal } />
+      } else if (userID === message.customerId) {
+        return <MessageItems customerID={ message.customerId } sellerId={ message.sellerId } requery={ this.props.requery } entire={ message } customerName={ message.buyerFirstName + " " + message.buyerLastName }
+                 status={ message.status } customer={ true } sellerName={ "Bob" } order={ message.items } orderTotal={ message.orderTotal } />
+      }
+    })
+    return allMessages;
+  }
 
   componentDidMount() {
-    this.monitorStore();
+    this.monitorStore(this.props.requery);
   }
 
   render() {
-    let allMessages;
-
-    allMessages = this.props.messages.map((message) => {
-      return <MessageItems customerName={ message.customerName } storeName={ message.storeName } order={ message.order } />
-    })
     return (
       <div className="dropdown">
         <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
@@ -48,10 +54,9 @@ class Message extends Component {
           </div>
           <li className="divider"></li>
           <div className="notifications-wrapper">
-            { allMessages }
+            { this.listMenuItems() }
           </div>
           <li className="divider"></li>
-          <div className="notification-footer">Possible Footer?</div>
         </ul>
       </div>
       );

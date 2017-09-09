@@ -43,10 +43,23 @@ const StoreSchema = new Schema({
     isOpen: { // Store open or closed
         type: Boolean,
         default: 0
-    }, 
+    },
+    storeRating: { // This will be calculated/updated when a review is added
+        type: Number,
+        default: 5
+    },
     reviews: [{ // Array of review IDs
         type: Schema.Types.ObjectId, 
-        ref: 'Review' }], 
+        ref: 'Review' 
+    }],
+    firstName: {
+        type: String,
+        default: ''
+    },
+    lastName: {
+        type: String,
+        default: ''
+    }
 });
 
 const Store = mongoose.model("Store", StoreSchema);
