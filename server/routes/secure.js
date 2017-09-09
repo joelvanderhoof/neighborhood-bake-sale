@@ -313,6 +313,7 @@ router.route('/bookmark')
 router.route('/review/:storeId?')
     .post((req, res) => {
         console.log('secure review body',req.body);
+        console.log('lastName',req.body.customerLastName)
         // let reviewData = new Review(req.body);
         // reviewData.save((err, doc) => {
         //     if (err) {
