@@ -21,8 +21,8 @@ class StoreName extends Component {
       return (
         <div>
           <h4 className="text-center">Store Name</h4>
-          <div className="row">
-            <div className="col-lg-8 offset-lg-2">
+          <div className="row justify-content-lg-center">
+            <div className="col-lg-8">
               <input className="form-control" name="name" type="text" onChange={ this.handleChange } value={ this.props.name } id="storeName" />
             </div>
           </div>

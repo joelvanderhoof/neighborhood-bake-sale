@@ -22,9 +22,9 @@ class StoreImage extends Component {
         }
         return (
             <div>
-              <h4 className="text-center">Store Photo</h4>
-              <div className="form-group row">
-                <div className="col-lg-10 offset-lg-1">
+              <h4 className="text-center">Store Image</h4>
+              <div className="form-group row justify-content-lg-center">
+                <div className="col-lg-10">
                   <input className="form-control" name="storeimage" type="text" onChange={ this.handleChange } value={ this.props.storeImage } id="storeimage" />
                 </div>
               </div>

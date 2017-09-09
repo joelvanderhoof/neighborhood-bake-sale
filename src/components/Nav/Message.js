@@ -29,10 +29,10 @@ class Message extends Component {
     allMessages = this.props.messages.map((message) => {
       if (userID === message.sellerId) { //if seller and menu item isnt declined
         return <MessageItems customerID={ message.customerId } sellerId={ message.sellerId } requery={ this.props.requery } entire={ message } customerName={ message.buyerFirstName + " " + message.buyerLastName }
-                 status={ message.status } customer={ false } sellerName={ "Bob" } order={ message.items } orderTotal={ message.orderTotal } />
+                 status={ message.status } customer={ false } sellerName={ message.sellerFirstName + " " + message.sellerLastName } order={ message.items } orderTotal={ message.orderTotal } />
       } else if (userID === message.customerId) {
         return <MessageItems customerID={ message.customerId } sellerId={ message.sellerId } requery={ this.props.requery } entire={ message } customerName={ message.buyerFirstName + " " + message.buyerLastName }
-                 status={ message.status } customer={ true } sellerName={ "Bob" } order={ message.items } orderTotal={ message.orderTotal } />
+                 status={ message.status } customer={ true } sellerName={ message.sellerFirstName + " " + message.sellerLastName } order={ message.items } orderTotal={ message.orderTotal } />
       }
     })
     return allMessages;
@@ -45,7 +45,7 @@ class Message extends Component {
   render() {
     return (
       <div className="dropdown">
-        <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+        <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
           <i className="fa fa-cutlery" aria-hidden="true"></i> <span className="badge badge-danger">{ this.props.messages.length }</span>
         </a>
         <ul className="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">

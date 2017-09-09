@@ -188,7 +188,7 @@ router.route('/menu/:menuitemID?')
 router.route('/review/:sellerId?')
     .get((req, res) => {
         Review.find({
-            _id: req.params.sellerId
+            sellerId: req.params.sellerId
         },
             (err, doc) => {
                 if (err) {

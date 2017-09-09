@@ -55,9 +55,9 @@ class MenuItem extends Component {
   render() {
     if (this.props.edit) {
       return (
-        <div className="col-lg-10 offset-lg-1">
+        <div className="col-lg-10">
           <div className="form-group">
-            <div className="row">
+            <div className="row justify-content-lg-center">
               <input className="form-control col-lg-4" type="text" onChange={ (e) => this.handleChange(e, "name") } value={ this.props.item } placeholder="name" />
               <input className="form-control col-lg-4" type="number" onChange={ (e) => this.handleChange(e, "price") } value={ this.props.price } placeholder="price" />
               <select className="form-control col-lg-4" onChange={ (e) => this.handleChange(e, "inStock") } value={ this.inStockForm() }>
@@ -81,10 +81,8 @@ class MenuItem extends Component {
       return (
         <div className="row border m-1 pt-3 pb-3">
           <div className="col-md-4 col-sm-12">
-            <img className="img-fluid border" src={ this.props.image } alt='menu item' />
-
-            { "$" + parseFloat(this.props.price / 100).toFixed(2) }
-
+            <img className="img-fluid border rounded" src={ this.props.image } alt='menu item' />
+            <strong>{ "$" + parseFloat(this.props.price / 100).toFixed(2) } </strong>
           </div>
           <div className="col-md-8 col-sm-12">
             <div className="row">

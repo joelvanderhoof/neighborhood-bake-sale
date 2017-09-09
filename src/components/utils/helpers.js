@@ -1,6 +1,5 @@
 // Axios dependencies for GET/POST requests
 const axios = require('axios');
-const Auth = require('./Auth');
 
 let helpers = {
 
@@ -53,9 +52,8 @@ let helpers = {
     });
   },
 
-  postReview(storeId,review,token) {
-    console.log('review@axios secure post route',review);
-    return axios.post(`./../secure/review/${storeId}`,{
+  postReview(sellerId,review,token) {
+    return axios.post(`./../secure/review/${sellerId}`,{
       review: review.review,
       rating: review.rating,
       customerFirstName: review.customerFirstName,

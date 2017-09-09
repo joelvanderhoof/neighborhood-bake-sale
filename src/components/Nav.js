@@ -44,25 +44,25 @@ class Nav extends Component {
 
   render() {
     return (
-      <nav className="nav navbar navbar-toggleable-md">
-        <ul className='navbar-nav mr-auto'>
+      <nav className="nav navbar-toggleable-md">
+        <ul className='nav mr-auto'>
           <li>
-            <NavLink exact activeClassName='active' to='/'>
+            <NavLink className='white' exact activeClassName='active' to='/'>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName='active' to='/store/59ae424b9247f74518bff01d'>
+            <NavLink className='white' activeClassName='active' to='/store/59ae424b9247f74518bff01d'>
               Store
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName='active' to='/selleradmin'>
+            <NavLink className='white' activeClassName='active' to='/selleradmin'>
               Seller Admin
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName='active' to='/customeradmin'>
+            <NavLink className='white' activeClassName='active' to='/customeradmin'>
               Customer Admin
             </NavLink>
           </li>
@@ -71,17 +71,17 @@ class Nav extends Component {
               <Message requery={this.queryOrders} messages={ this.state.messages } />
             </li> }
         </ul>
-        <ul className='navbar-nav'>
+        <ul className='nav'>
           { Auth.isUserAuthenticated() ?
             <li>
-              <button className='btn btn-sm btn-secondary' onClick={this.handleClick}> Log Out </button>
+              <button className='btn btn-sm btn-danger' onClick={this.handleClick}> Log Out </button>
             </li>
             :
             <li>
-              <NavLink className='mr-3' activeClassName='active' to='/signup'>
+              <NavLink className='white' className='mr-3' activeClassName='active' to='/signup'>
                 Sign Up
               </NavLink>
-              <NavLink activeClassName='active' to='/login'>
+              <NavLink className='white' activeClassName='active' to='/login'>
                 Log In
               </NavLink>
             </li> }

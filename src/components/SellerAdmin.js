@@ -166,16 +166,20 @@ class SellerAdmin extends Component {
 
   render() {
     return (
-      <div>
-        <h1 className="text-center">{ this.state.name }'s Admin Page <EditButton saveFunc={ this.setSave }/></h1> Store:
-        <ToggleButton value={ this.state.isOpen } onToggle={ (value) => {
-                                                               this.setState({
-                                                                 isOpen: !value,
-                                                               })
-                                                             } } inactiveLabel="Off" activeLabel="On" />
+      <div className="container-fluid mb-3 bg-white">
+        <div className="text-center row pt-3">
+        <h1 className="col-lg-6">{ this.state.name } <EditButton saveFunc={ this.setSave }/></h1> 
+        <div className="col-lg-6">
+          <div className="row justify-content-lg-center">
+            <div className="col-lg-1">
+          Store: < ToggleButton value={ this.state.isOpen } onToggle={ (value) => {this.setState({ isOpen: !value,})} } inactiveLabel="Off" activeLabel="On" />
+          </div>
+          </div>
+        </div>
+        </div>
         <div className="text-center">
         </div>
-        <div className="row sellerContainer">
+        <div className="row sellerContainer bg-white">
           <div className="col-md-6 border sellerLeft pre-scrollable">
             <div className="text-center">
               <StoreDescription description={ this.state.description } edit={ false } updateState={ this.updateState } />

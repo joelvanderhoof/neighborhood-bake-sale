@@ -12,8 +12,19 @@ body {
   background-size: cover;
 }
 
+.white .white:hover, .white:link, .white:visited {
+  text-decoration: none;
+  color: #FBF7F7;
+}
+
+.white:active {
+  font-weight: 700;
+}
+
 .bg-white {
   background-color: whitesmoke;
+  opacity: .9;
+  border-radius: 5px;
 }
 
 
@@ -24,8 +35,8 @@ a, a:hover, a:active, a:link, a:visited {
 
 .nav {
   margin-bottom: 15px;
-  padding: 15px;
-  border-bottom: 1px;
+  padding: 10px;
+  padding-bottom: 0px;
   background-color: #1f5380;
 }
 
@@ -60,11 +71,6 @@ a, a:hover, a:active, a:link, a:visited {
 }
 
 /* Store */
-
-.container-store {
-  padding: 15px 15px;
-}
-
 #review-text {
   margin-bottom: 15px;
 }
@@ -188,7 +194,7 @@ a, a:hover, a:active, a:link, a:visited {
   animation-fill-mode: forwards;
 }
 
-@-webkit-keyframes pulse {
+@keyframes pulse {
   0% {
     color: red;
     border-color: red;
@@ -215,7 +221,7 @@ a, a:hover, a:active, a:link, a:visited {
  } */
 
  .pre-scrollable {
-  max-height: 850px;
+  max-height: calc(100vh - 167px);
  }
 
 /* CSS used here will be applied after bootstrap.css */
@@ -281,5 +287,17 @@ background:#ccc;
 border-radius:4px;
 }
 
+/* temp styling */
 
+span > strong {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+}
+
+h4 {
+  font-family: 'Oswald', sans-serif;
+}
 
