@@ -42,7 +42,7 @@ class Home extends Component {
         onSubmit={this.handleSubmit}
       />
       <Image />
-      <Search />
+      // <Search />
       </div>
     );
   }
