@@ -6,7 +6,7 @@ const CustomerReviews = (props) => {
     // Render li tag with props.children 
     return (
         <li className="list-group-item">
-            <h4>Store Name: {storeName}</h4>
+            <h4>Restaurant: {storeName}</h4>
             <p>Comment: {review}</p>
         </li>
     );
