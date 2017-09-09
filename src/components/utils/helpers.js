@@ -1,6 +1,5 @@
 // Axios dependencies for GET/POST requests
 const axios = require('axios');
-const Auth = require('./Auth');
 
 let helpers = {
 

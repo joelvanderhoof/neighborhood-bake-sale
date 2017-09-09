@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import StoreMap from './StoreFront/StoreMap';
-import AddPhoto from './StoreFront/AddPhoto';
+// import StoreMap from './StoreFront/StoreMap';
+// import AddPhoto from './StoreFront/AddPhoto';
 import Bookmark from './StoreFront/Bookmark';
 import Order from './StoreFront/Order';
 import StoreTitle from '../Shared/StoreTitle';
@@ -56,7 +56,6 @@ class StoreFront extends Component {
         let storeData = response.data[0];
         this.setState({
           storeId: storeData._id,
-          storeRating: storeData.storeRating,
           sellerId: storeData.sellerId,
           name: storeData.name,
           location: storeData.location,
@@ -82,8 +81,19 @@ class StoreFront extends Component {
     helpers.getPublicReview(sellerId)
     .then((response) => {
       let reviewData = response.data;
+
+      let getAverageRating = (reviewData)=>{
+        let averageRating = 0;
+        reviewData.forEach( (review)=>{
+          averageRating += review.rating
+        });
+
+        return Math.floor(averageRating/reviewData.length);
+      }
+
       this.setState({
-        reviews: reviewData
+        reviews: reviewData,
+        storeRating: getAverageRating(reviewData)
       });
     })
 
@@ -120,7 +130,8 @@ class StoreFront extends Component {
   }
 
   addToOrder(order) {
-    let newTotal = this.state.orderTotal += parseInt(order.price);
+    let currentOrderTotal =this.state.orderTotal
+    let newTotal = currentOrderTotal += parseInt(order.price);
     this.setState({
       customerOrder: this.state.customerOrder.concat(order),
       orderTotal: newTotal
@@ -151,6 +162,11 @@ class StoreFront extends Component {
         message: "Orders Updated"
       });
     });
+
+    this.setState({
+      customerOrder: [],
+      orderTotal: 0
+    })
   }
 
   bookmark(status) {
@@ -186,7 +202,7 @@ class StoreFront extends Component {
 
   //socket advises all customers store updated
   listenToStore(cb) {
-    let userID = Auth.getUserId();
+    // let userID = Auth.getUserId();
     let socket = io.connect('http://localhost:8080');
     let sellerID = this.props.location.pathname.split('/')[2];
     socket.on(sellerID, function(data) {
@@ -199,12 +215,10 @@ class StoreFront extends Component {
 
   render() {
     return (
-      <div className='container-store bg-white'>
-        <div className='row'>
-          <div className='col-12'>
-            <StoreTitle title={ this.state.name } storeTitleStyle='h1' />
-            <StoreDescription description={ this.state.description } storeDescriptionStyle='h6' />
-          </div>
+      <div>
+        <div className='text-center'>
+            <StoreTitle title={ this.state.name } storeTitleStyle='h1 d-block mt-3' />
+            <StoreDescription description={ this.state.description } storeDescriptionStyle='h6 d-block' />
         </div>
         <hr />
         <div className='row justify-content-between'>
@@ -214,13 +228,11 @@ class StoreFront extends Component {
           <div className='col-lg-6 col-sm-12'>
             <div className='row mb-3'>
               <Rating ratingStyle='rating col-12 mb-3' rating={ this.state.storeRating } numReviews={ this.state.reviews.length } />
-              { /* Need a field for rating and number of reviews*/ }
               <div className='store-front-link border'>
-                <Link className='btn col-md-4 col-sm-12' to={ `/review/${this.state.sellerId}` }><span style={ { color: 'gold', textShadow: '1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' } }>★</span>
+                <Link className='btn col-6' to={ `/review/${this.state.sellerId}` }><span style={ { color: 'gold', textShadow: '1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5)' } }>★</span>
                 { '\u00A0' } Write Review</Link>
-                <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12' />
-                <Bookmark BookmarkStyle='btn red col-md-4 col-sm-12' bookmarked={ this.state.bookmarked } bookmark={ this.bookmark } />
-                { /*  hard coding in bookmark until we determine what model will use it */ }
+                {/* <AddPhoto AddPhotoStyle='btn red col-md-4 col-sm-12' /> */}
+                <Bookmark BookmarkStyle='btn red col-6' bookmarked={ this.state.bookmarked } bookmark={ this.bookmark } />
               </div>
             </div>
             <div className='row'>
@@ -243,7 +255,7 @@ class StoreFront extends Component {
             <Reviews reviews={ this.state.reviews } />
           </div>
           <div className='col-12'>
-            <StoreMap storeMapStyle='border d-flex flex-column align-items-center justify-content-center store-map mt-3' location={ this.state.location } />
+            {/* <StoreMap storeMapStyle='border d-flex flex-column align-items-center justify-content-center store-map mt-3' location={ this.state.location } /> */}
           </div>
         </div>
       </div>

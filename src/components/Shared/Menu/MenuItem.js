@@ -81,10 +81,8 @@ class MenuItem extends Component {
       return (
         <div className="row border m-1 pt-3 pb-3">
           <div className="col-md-4 col-sm-12">
-            <img className="img-fluid border" src={ this.props.image } alt='menu item' />
-
-            { "$" + parseFloat(this.props.price / 100).toFixed(2) }
-
+            <img className="img-fluid border rounded" src={ this.props.image } alt='menu item' />
+            <strong>{ "$" + parseFloat(this.props.price / 100).toFixed(2) } </strong>
           </div>
           <div className="col-md-8 col-sm-12">
             <div className="row">

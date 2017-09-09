@@ -45,7 +45,7 @@ class Nav extends Component {
   render() {
     return (
       <nav className="nav navbar navbar-toggleable-md">
-        <ul className='navbar-nav mr-auto'>
+        <ul className='navbar-nav mr-auto'style={{display: "-webkit-inline-box"}}>
           <li>
             <NavLink exact activeClassName='active' to='/'>
               Home
