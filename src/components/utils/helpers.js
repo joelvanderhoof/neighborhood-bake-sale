@@ -53,6 +53,22 @@ let helpers = {
     });
   },
 
+  postReview(storeId,review,token) {
+    return axios.post(`./../secure/review/${storeId}`,{
+      review: review.review,
+      rating: review.rating,
+      customerFirstName: review.customerFirstName,
+      customerLastName: review.customerLastName,
+      customerId: review.customerId,
+      storeName: review.storeName,
+      sellerId: review.sellerId
+    }, {
+      headers: {
+        authorization: token
+      }
+    });
+  },
+
   placeOrder(storeId, order, token) {
     return axios.post(`./../secure/order/${storeId}`, {
       customerId: order.customerId, //same as the ID from the Customer model

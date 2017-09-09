@@ -74,10 +74,7 @@ class Nav extends Component {
         <ul className='navbar-nav'>
           { Auth.isUserAuthenticated() ?
             <li>
-              {/* <NavLink className='mr-3' activeClassName='active' to='/logout'>
-                Log Out
-              </NavLink> */}
-              <button className='btn btn-secondary' onClick={this.handleClick}> Log Out </button>
+              <button className='btn btn-sm btn-secondary' onClick={this.handleClick}> Log Out </button>
             </li>
             :
             <li>
