@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CustomerReviews from './Customer/CustomerReviews';
 import CustomerOrders from './Customer/CustomerOrders';
-import CustomerBookmarks from './Customer/Customerbookmarks';
+import CustomerBookmarks from './Customer/CustomerBookmarks';
 import Helpers from './utils/helpers';
 import Auth from './utils/Auth';
 

@@ -3,45 +3,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 const zip = 92617
-// Make a get request to the api with the this.props.searchZip value
-
-    // Map all returned store IDs and lat/lng to the locationData array
-
-// const locationData = [
-//     {
-//         "type": "Feature",
-//         "properties": {
-//             "storeId": "59ab34d106e8a23b58e70560"
-//         },
-//         "geometry": {
-//         "type": "Point",
-//         "coordinates": [
-//             -117.837004,
-//             33.6490177
-//         ]
-//         },
-//         "id": "usc000csx3"
-//     },
-//     {
-//         "type": "Feature",
-//         "properties": {
-//             "storeId": "59ab34d106e8a23b58e70560"            
-//         },
-//         "geometry": {
-//         "type": "Point",
-//         "coordinates": [
-//             -118.2475034,  //longitude
-//             34.0500534,  // latitude
-//             100  // elevation
-//         ]
-//         },
-//         "id": "usc000csw5"
-//     }];
-
-// const testGeo = {
-//     "type": "FeatureCollection",
-//     "features": locationData
-// };
 
 export default class MapSearch extends Component {
     constructor(props) {
@@ -81,9 +42,7 @@ export default class MapSearch extends Component {
     //async
     buildDataLayer(res) {
         let storeArray = [];
-        // console.log(`Build this into an array: ${res.data}`);
         res.data.forEach(function(store) {
-            // console.log(store);
             let storeLocation = {
                 "type": "Feature",
                 "properties": {
@@ -98,7 +57,6 @@ export default class MapSearch extends Component {
             };
             storeArray.push(storeLocation);
         });
-        console.log(storeArray);
         return storeArray;        
     }
 
@@ -115,16 +73,13 @@ export default class MapSearch extends Component {
         });
 
         let locationData = await this.getStoreData(zip);
-
-        // Why isn't this logging out?
-        console.log(`Here is the locationData: ${locationData}`);
         let testGeo = {
             "type": "FeatureCollection",
             "features": locationData
         }; 
         
 
-        // bind data to the markers on 
+        // bind data to the markers on the map
         for (var i = 0; i < testGeo.features.length; i++) {
             var coords = testGeo.features[i].geometry.coordinates;
             var latLng = new google.maps.LatLng(coords[1],coords[0]);
@@ -133,15 +88,11 @@ export default class MapSearch extends Component {
               map: map,
               storeId: testGeo.features[i].properties.storeId
             });
-          }
-
-       // map.data.addGeoJson(testGeo)
-        
-        marker.addListener('click', function(event) {
-            console.log(this.storeId);
-            window.location = '/store/'+this.storeId;
-        })
-
+            marker.addListener('click', function(event) {
+                console.log(this.storeId);
+                window.location = '/store/'+this.storeId;
+            })
+        }
     }
 
     render() {
@@ -153,32 +104,3 @@ export default class MapSearch extends Component {
     }
     
 }
-
-// https://developers.google.com/maps/documentation/javascript/datalayer#load_geojson
-// https://developers.google.com/maps/documentation/javascript/3.exp/reference#Data.GeoJsonOptions
-// map.data.loadGeoJson('google.json');  display points, line-strings and polygons.
-// google.maps.Data model arbitrary data
-
-// Set the global styles.
-// map.data.setStyle()
-// clickable: If true, the feature receives mouse and touch events
-// cursor: Mouse cursor to show on hover.
-
-
-// map.data.addListener('click', function(event) {} )
-// The following events are common to all features, regardless of their geometry type:
-
-// addfeature
-// click
-// dblclick
-// mousedown
-// mouseout
-// mouseover
-// mouseup
-// removefeature
-// removeproperty
-// rightclick
-// setgeometry
-// setproperty
-
-
