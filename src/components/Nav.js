@@ -78,7 +78,7 @@ class Nav extends Component {
             </li>
             :
             <li>
-              <NavLink className='white' className='mr-3' activeClassName='active' to='/signup'>
+              <NavLink className='mr-3 white' activeClassName='active' to='/signup'>
                 Sign Up
               </NavLink>
               <NavLink className='white' activeClassName='active' to='/login'>

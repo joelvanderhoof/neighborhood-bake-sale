@@ -13,7 +13,7 @@ export default class Search extends Component {
         marginLeft: "25%",
         marginRight: 5,
         marginTop: 40}}
-        className="img-fluid rounded" 
+        className="img-fluid rounded pl-2" 
         type="text" 
         id="search-bar" 
         placeholder="Enter Address"
