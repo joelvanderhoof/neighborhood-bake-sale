@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Helpers from "../utils/helpers";
 import io from 'socket.io-client';
-let socket = io.connect('http://localhost:8080');
+let socket = io.connect('https://neighborhood-bake-sale.herokuapp.com/');
 
 class MessageItems extends Component {
     constructor(props) {
