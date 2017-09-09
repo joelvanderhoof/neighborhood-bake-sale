@@ -19,7 +19,7 @@ class ReviewForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     let review = this.state.reviewText;
-    this.props.getReview(review);
+    this.props.postReview(review);
     this.setState({reviewText: ''})
   }
 
@@ -29,6 +29,7 @@ class ReviewForm extends Component {
         <div className='form-group'>
           <textarea
             className='form-control'
+            rows='5'
             type='text'
             id='review-text'
             name='reviewText'
@@ -38,7 +39,7 @@ class ReviewForm extends Component {
             required />
         </div>
         <button type='button' className='btn btn-sm ' onClick={ this.handleClick } >Attach Photo {'\u00A0'} <i className="fa fa-camera" aria-hidden="true" ></i></button>
-        <button type='submit' className='btn btn-sm pull-right'>Preview Review {'\u00A0'} <i className="fa fa-eye" aria-hidden="true"></i></button>
+        <button type='submit' className='btn btn-sm pull-right'>Submit Review {'\u00A0'} <i className="fa fa-eye" aria-hidden="true"></i></button>
     </form>
     )
   }

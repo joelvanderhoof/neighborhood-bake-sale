@@ -179,66 +179,6 @@ router.route('/menu/:menuitemID?')
             });
     });
 
-router.route('/review/:reviewID?')
-    .get((req, res) => {
-        Review.find({
-                _id: req.params.reviewID
-            },
-            (err, doc) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.send(doc);
-                }
-            })
-    })
-    .post((req, res) => {
-        let reviewData = new Review(req.body);
-        reviewData.save((err, doc) => {
-            if (err) {
-                console.log(err);
-            } else {
-                Store.findOneAndUpdate({
-                        _id: req.body.StoreID
-                    }, {
-                        $push: {
-                            'reviews': doc._id
-                        }
-                    }, {
-                        new: true
-                    },
-                    (error, doc) => {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            res.send(doc);
-                        }
-                    })
-            }
-        });
-    })
-    // Send an array of objects in  req.body.reviews
-    .put((req, res) => {
-        req.body.reviews.forEach((reviewData) => {
-            Review.update({
-                    _id: reviewData.id
-                },
-                reviewData,
-                (err) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                });
-        })
-    })
-    .delete((req, res) => {
-        Review.remove({
-            _id: req.params.reviewID
-        }, (err) => {
-            if (err) return handleError(err);
-        });
-    });
-
 router.route('/order/:storeId?')
     .get((req, res) => {
         Order.find({
@@ -369,4 +309,38 @@ router.route('/bookmark')
             }
         })
     });
+
+router.route('/review/:sellerId?')
+    .post((req, res) => {
+        let reviewData = new Review(req.body);
+        reviewData.save((err, doc) => {
+            if (err) {
+                console.log(err);
+            } else {
+                User.findOneAndUpdate({
+                        _id: req.body.customerId
+                    }, {
+                        $push: {
+                            'reviews': doc._id
+                        }
+                    }, {
+                        new: true
+                    },
+                    (error, doc) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.send(doc);
+                        }
+                    })
+            }
+        });
+    })
+    .delete((req, res) => {
+        Review.remove({
+            _id: req.params.reviewID
+        }, (err) => {
+            if (err) return handleError(err);
+        });
+});
 module.exports = router;
