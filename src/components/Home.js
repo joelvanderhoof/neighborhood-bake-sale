@@ -18,7 +18,6 @@ class Home extends Component {
       searchCity: '',
       secretData: '',
       value: '',
-      searchButtonClicked: false
     };
   }
 
@@ -54,9 +53,7 @@ class Home extends Component {
   async handleSubmit(event) {
     this.extractSearchCity(this.state.value);
     let latLng = await this.getStartLatLng(this.state.value);
-    this.setState({ latLng });
-    this.setState({ searchButtonClicked: true })
-    
+    this.setState({ latLng });    
   }
 
   render () {
@@ -68,7 +65,7 @@ class Home extends Component {
             fontFamily: "Lobster Two, cursive",
             fontSize: 200}}>Foodies</h1>
         {/* Name of the App- still being decided "Foodies" */}
-      {this.state.searchButtonClicked ?  (
+      {this.state.latLng ?  (
         <MapSearch 
           latLng={this.state.latLng}
           searchCity={this.state.searchCity}
