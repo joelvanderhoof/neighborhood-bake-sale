@@ -12,6 +12,15 @@ body {
   background-size: cover;
 }
 
+.white .white:hover, .white:link, .white:visited {
+  text-decoration: none;
+  color: #FBF7F7;
+}
+
+.white:active {
+  font-weight: 700;
+}
+
 .bg-white {
   background-color: whitesmoke;
   opacity: .9;
