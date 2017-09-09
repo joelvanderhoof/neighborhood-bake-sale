@@ -12,20 +12,11 @@ const ReviewSchema = new Schema({
         type: String,
         default: ''
     },
-    storeId: String,
     storeName: { // Optional? not sure if we should use
         type: String,
         default: ''
     },
     sellerId: String,
-    sellerFirstName: { // Might not need
-        type: String,
-        default: ''
-    }, 
-    sellerLastName: { // Might not need
-        type: String,
-        default: ''
-    },
     review: { // Review text
         type: String,
         default: ''

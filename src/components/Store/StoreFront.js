@@ -192,7 +192,7 @@ class StoreFront extends Component {
 
   render() {
     return (
-      <div className='container-store'>
+      <div className='container-store bg-white'>
         <div className='row'>
           <div className='col-12'>
             <StoreTitle title={ this.state.name } storeTitleStyle='h1' />
