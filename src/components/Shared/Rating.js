@@ -11,9 +11,9 @@ class Rating extends Component {
 
   handleClick (event) {
     this.setState({
-      rating: parseInt(event.target.id)
+      rating: parseInt(event.target.id,10)
     });
-    this.props.getRating(parseInt(event.target.id));
+    this.props.getRating(parseInt(event.target.id,10));
   }
 
   render() {
