@@ -310,33 +310,31 @@ router.route('/bookmark')
         })
     });
 
-router.route('/review/:storeId?')
+router.route('/review/:sellerId?')
     .post((req, res) => {
-        console.log('secure review body',req.body);
-        console.log('lastName',req.body.customerLastName)
-        // let reviewData = new Review(req.body);
-        // reviewData.save((err, doc) => {
-        //     if (err) {
-        //         console.log(err);
-        //     } else {
-        //         Store.findOneAndUpdate({
-        //                 _id: req.body.StoreID
-        //             }, {
-        //                 $push: {
-        //                     'reviews': doc._id
-        //                 }
-        //             }, {
-        //                 new: true
-        //             },
-        //             (error, doc) => {
-        //                 if (err) {
-        //                     console.log(err);
-        //                 } else {
-        //                     res.send(doc);
-        //                 }
-        //             })
-        //     }
-        // });
+        let reviewData = new Review(req.body);
+        reviewData.save((err, doc) => {
+            if (err) {
+                console.log(err);
+            } else {
+                User.findOneAndUpdate({
+                        _id: req.body.customerId
+                    }, {
+                        $push: {
+                            'reviews': doc._id
+                        }
+                    }, {
+                        new: true
+                    },
+                    (error, doc) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.send(doc);
+                        }
+                    })
+            }
+        });
     })
     .delete((req, res) => {
         Review.remove({

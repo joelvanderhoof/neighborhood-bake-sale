@@ -28,7 +28,7 @@ class WriteReview extends Component {
 
     helpers.getPublicReview(sellerId)
       .then((response) => {
-        let reviewData = response.data[0];
+        let reviewData = response.data;
         this.setState({
           reviews: reviewData
         });
@@ -62,7 +62,7 @@ class WriteReview extends Component {
       review: review,
       rating: this.state.rating,
       customerFirstName: this.state.customerFirstName,
-      customerlastName: this.state.customerLastName,
+      customerLastName: this.state.customerLastName,
       customerId: customerId,
       storeName: this.state.storeName,
       sellerId: sellerId,
