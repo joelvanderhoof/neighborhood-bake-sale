@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import MenuItem from "../Shared/Menu/MenuItem";
-import AddMenuItemButton from "./AddMenuItemButton";
+// import AddMenuItemButton from "./AddMenuItemButton";
 
 class Menu extends Component {
   constructor(props) {

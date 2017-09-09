@@ -4,9 +4,11 @@ import helpers from '../utils/helpers';
 
 class Reviews extends Component {
   mapReviews() {
-    return this.props.reviews.map((reviewItem, i) => {
-      return <ReviewItem key={ i } rating={ reviewItem.rating } review={ reviewItem.review } />
+    let mappedReviews = this.props.reviews.map((reviewItem, i) => {
+      return <ReviewItem key={ i } rating={ reviewItem.rating } review={ reviewItem.review } customerFirstName={reviewItem.customerFirstName} customerLastName={reviewItem.customerLastName} storeName={reviewItem.storeName}/>
     });
+
+    return mappedReviews;
   }
 
   render() {

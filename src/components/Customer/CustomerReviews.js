@@ -1,10 +1,13 @@
 import React from 'react';
 
 const CustomerReviews = (props) => {
+
+    const {customerFirstName, customerId, customerLastName, date, imageURL, rating, review, sellerFirstName, sellerLastName, storeId, storeName} = props.item;
     // Render li tag with props.children 
     return (
         <li className="list-group-item">
-            {props.children}
+            <h4>Store Name: {storeName}</h4>
+            <p>Comment: {review}</p>
         </li>
     );
 };

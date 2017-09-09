@@ -12,36 +12,34 @@ class Message extends Component {
   }
 
 
-  monitorStore() {
+  monitorStore(cb) {
     let userID = Auth.getUserId();
     let socket = io.connect('http://localhost:8080');
     socket.on(userID, function(data) {
-      console.log(data);
-      //query menu DB
-
-    // socket.emit('my other event', {
-    //   my: 'data'
-    // });
+      if (data.message === "Orders Updated") {
+        cb();
+      }
     });
 
   }
 
-  listMenuItems(){
+  listMenuItems() {
+    let userID = Auth.getUserId();
     let allMessages;
     allMessages = this.props.messages.map((message) => {
-      if (message.status !== "Declined") {
-        return <MessageItems customerName={ message.buyerFirstName + " " + message.buyerLastName } seller={ "Bob" } order={ message.items } orderTotal={ message.orderTotal } />
+      if (userID === message.sellerId) { //if seller and menu item isnt declined
+        return <MessageItems customerID={ message.customerId } sellerId={ message.sellerId } requery={ this.props.requery } entire={ message } customerName={ message.buyerFirstName + " " + message.buyerLastName }
+                 status={ message.status } customer={ false } sellerName={ "Bob" } order={ message.items } orderTotal={ message.orderTotal } />
+      } else if (userID === message.customerId) {
+        return <MessageItems customerID={ message.customerId } sellerId={ message.sellerId } requery={ this.props.requery } entire={ message } customerName={ message.buyerFirstName + " " + message.buyerLastName }
+                 status={ message.status } customer={ true } sellerName={ "Bob" } order={ message.items } orderTotal={ message.orderTotal } />
       }
     })
     return allMessages;
   }
 
-  updateOrderStatus() {
-    //helper function - pass params to update status to declined or accepted - add picked up here or in another function
-  }
-
   componentDidMount() {
-    this.monitorStore();
+    this.monitorStore(this.props.requery);
   }
 
   render() {
@@ -59,7 +57,6 @@ class Message extends Component {
             { this.listMenuItems() }
           </div>
           <li className="divider"></li>
-          <div className="notification-footer">Possible Footer?</div>
         </ul>
       </div>
       );

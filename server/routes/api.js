@@ -7,6 +7,7 @@ const Store = require('./../models/Store');
 const MenuItem = require('./../models/MenuItem');
 const Review = require('./../models/Review');
 const Order = require('./../models/Order');
+const Bookmarks = require('./../models/Bookmarks');
 
 // Basic api route structure
 router.route('/user/:userId?')
@@ -15,6 +16,9 @@ router.route('/user/:userId?')
             _id: req.params.userId
         })
             .populate("stores")
+            .populate('bookmarks')
+            .populate('orders')
+            .populate('reviews')
             .exec((err, doc) => {
                 if (err) {
                     console.log(err);
@@ -23,6 +27,8 @@ router.route('/user/:userId?')
                 }
             });
     })
+
+    // Post most likely will not be used here
     .post((req, res) => {
         let newGuy = new User(req.body);
         newGuy.save((err, doc) => {
@@ -62,7 +68,6 @@ router.route('/store/:sellerId?')
             .populate('menu')
             .populate('reviews')
             .exec((err, doc) => {
-                console.log(doc)
                 if (err) {
                     console.log(err);
                 } else {
@@ -183,9 +188,10 @@ router.route('/menu/:menuitemID?')
 router.route('/review/:sellerId?')
     .get((req, res) => {
         Review.find({
-            _id: req.params.sellerId
+            sellerId: req.params.sellerId
         },
             (err, doc) => {
+                console.log(doc);
                 if (err) {
                     console.log(err);
                 } else {
@@ -266,11 +272,11 @@ router.route('/review/:sellerId?')
 
 router.route('/order/:storeId?')
     .get((req, res) => {
-        Order.find({
-            sellerId: req.params.storeId
-        })
+        Order.find({$or: [
+            {sellerId: req.params.storeId},
+            {customerId: req.params.storeId}
+        ]})
             .exec((err, doc) => {
-                console.log(doc);
                 if (err) {
                     console.log(err);
                 } else {
@@ -297,7 +303,6 @@ router.route('/order/:storeId?')
                         new: true
                     },
                     function(error, doc) {
-                        console.log(doc);
                         if (err) {
                             console.log(err);
                         } else {
@@ -308,17 +313,21 @@ router.route('/order/:storeId?')
         });
     })
     .put((req, res) => {
-        req.body.orders.forEach((orderData) => {
+        console.log("test");
+       console.log(req.body);
+       let orderData = req.body;
             Order.update({
-                _id: orderData.id
+                _id: orderData._id
             },
                 orderData,
-                (err) => {
+                (err, doc) => {
                     if (err) {
                         console.log(err);
+                    } else {
+                        res.send(doc)
                     }
                 });
-        })
+        
     })
     .delete((req, res) => {
         Order.remove({
@@ -341,7 +350,6 @@ router.route('/bookmark')
             }
         },
         function(err, doc) {
-            console.log(doc);
             if (err) {
                 console.log(err);
             } else {
@@ -350,10 +358,18 @@ router.route('/bookmark')
         })
     })
 
-router.route('/useLater')
+router.route('/store-marker/:zip')
     .get((req, res) => {
-        console.log('get request');
-        res.send('Get made to /api/useLater')
+        Store.find({
+            zip: req.params.zip
+        })
+        .exec((err, doc) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(doc);
+            }
+        });
     })
     .post((req, res) => {
         res.send('Post made to /api/useLater')

@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
 import Search from './Homepage/Search';
 import Image from './Homepage/Image';
-import MapSearch from './MapSearch';
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
     this.state = {
-      secretData: ''
+      secretData: '',
+      value: ''
     };
   }
 
   componentDidMount() {
-}
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handleSubmit(event) {
+    alert(`A location was submitted: ${this.state.value}`);
+    event.preventDefualt();
+  }
 
   render () {
     return (
@@ -24,7 +36,11 @@ class Home extends Component {
             fontFamily: "Lobster Two, cursive",
             fontSize: 200}}>Foodies</h1>
         {/* Name of the App- still being decided "Foodies" */}
-      {/* <MapSearch /> */}
+      <Search 
+        value={this.state.value}
+        onChangeValue={this.handleChange}
+        onSubmit={this.handleSubmit}
+      />
       <Image />
       <Search />
       </div>
