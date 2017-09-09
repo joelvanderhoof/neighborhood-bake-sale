@@ -14,7 +14,7 @@ class Message extends Component {
 
   monitorStore(cb) {
     let userID = Auth.getUserId();
-    let socket = io.connect('http://localhost:8080');
+    let socket = io.connect('https://neighborhood-bake-sale.herokuapp.com/');
     socket.on(userID, function(data) {
       if (data.message === "Orders Updated") {
         cb();
