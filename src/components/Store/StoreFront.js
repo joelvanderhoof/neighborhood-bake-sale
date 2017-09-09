@@ -64,7 +64,6 @@ class StoreFront extends Component {
           hours: storeData.hours,
           description: storeData.description,
           storeImage: storeData.storeImage,
-          reviews: storeData.reviews,
           isOpen: storeData.isOpen,
           sellerFirstName: storeData.firstName,
           sellerLastName: storeData.lastName,
@@ -79,6 +78,14 @@ class StoreFront extends Component {
     const token = Auth.getToken();
     const customerId = Auth.getUserId()
     this.updateStoreState(sellerId);
+
+    helpers.getPublicReview(sellerId)
+    .then((response) => {
+      let reviewData = response.data;
+      this.setState({
+        reviews: reviewData
+      });
+    })
 
     if (Auth.isUserAuthenticated()) {
       helpers.getUserSecure(customerId, token)
