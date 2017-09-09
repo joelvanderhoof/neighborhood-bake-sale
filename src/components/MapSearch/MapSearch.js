@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-const zip = 92617
+const zip = 92617;
 
 export default class MapSearch extends Component {
     constructor(props) {
@@ -37,12 +37,12 @@ export default class MapSearch extends Component {
                     console.log(`This location data was just built from the db: ${locationData}`);
                     resolve(locationData);
                 })            
-        })
+        });
     }
-    //async
+
     buildDataLayer(res) {
         let storeArray = [];
-        res.data.forEach(function(store) {
+        res.data.forEach( store => {
             let storeLocation = {
                 "type": "Feature",
                 "properties": {
@@ -84,16 +84,16 @@ export default class MapSearch extends Component {
             var coords = testGeo.features[i].geometry.coordinates;
             var latLng = new google.maps.LatLng(coords[1],coords[0]);
             var marker = new google.maps.Marker({
-              position: latLng,
-              map: map,
-              storeId: testGeo.features[i].properties.storeId
+                position: latLng,
+                map: map,
+                storeId: testGeo.features[i].properties.storeId
             });
             marker.addListener('click', function(event) {
                 console.log(this.storeId);
                 window.location = '/store/'+this.storeId;
             })
-        }
     }
+}
 
     render() {
         return (
