@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReviewItem from './Reviews/ReviewItem';
-import helpers from '../utils/helpers';
 
 class Reviews extends Component {
   mapReviews() {
@@ -13,9 +12,9 @@ class Reviews extends Component {
 
   render() {
     return (
-      <ul className='list-unstyled mt-3'>
-        <strong>Current Reviews: </strong>
-        { this.props.reviews ? this.mapReviews() : <li className='container-store border'><h6><strong>No Reviews Found </strong></h6></li> }
+      <ul className='list-unstyled p-3 mt-3 border'>
+        <h3 className='mb-3' >Reviews: </h3>
+        { this.props.reviews ? this.mapReviews() : <li className='p-3 mb-3 border'><h6><strong>No Reviews Found </strong></h6></li> }
       </ul>
     )
   }
