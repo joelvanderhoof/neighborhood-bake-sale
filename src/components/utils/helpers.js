@@ -109,8 +109,17 @@ let helpers = {
   getOrders(sellerID) {
     return axios.get('api/order/' + sellerID);
   },
+
+  getOrdersCustomer(ID) {
+    return axios.get('./../api/order/' + ID);
+  },
+
   updateOrderStatus(sellerID, newOrder){
     return axios.put('api/order/' + sellerID, newOrder);
+  },
+
+  updateOrderStatusCustomer(sellerID, newOrder){
+    return axios.put('./../api/order/' + sellerID, newOrder);
   }
 }
 

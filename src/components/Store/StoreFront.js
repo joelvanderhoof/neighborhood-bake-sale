@@ -14,6 +14,7 @@ import Menu from '../Shared/Menu';
 import helpers from '../utils/helpers'
 import Auth from '../utils/Auth';
 import io from 'socket.io-client';
+let socket = io.connect('http://localhost:8080');
 
 
 class StoreFront extends Component {
@@ -43,15 +44,13 @@ class StoreFront extends Component {
       storeRating: 5,
     }
     this.listenToStore = this.listenToStore.bind(this);
+    this.updateStoreState = this.updateStoreState.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
     this.bookmark = this.bookmark.bind(this);
   }
 
-  componentDidMount() {
-    let sellerId = this.props.location.pathname.split('/')[2]
-    const token = Auth.getToken();
-    const customerId = Auth.getUserId()
+  updateStoreState(sellerId) {
     helpers.getPublicStore(sellerId)
       .then((response) => {
         let storeData = response.data[0];
@@ -73,6 +72,13 @@ class StoreFront extends Component {
           storeLocation: storeData.location
         });
       })
+  }
+
+  componentDidMount() {
+    let sellerId = this.props.location.pathname.split('/')[2]
+    const token = Auth.getToken();
+    const customerId = Auth.getUserId()
+    this.updateStoreState(sellerId);
 
     if (Auth.isUserAuthenticated()) {
       helpers.getUserSecure(customerId, token)
@@ -102,7 +108,7 @@ class StoreFront extends Component {
         })
     }
 
-    this.listenToStore();
+    this.listenToStore(this.updateStoreState);
 
   }
 
@@ -128,7 +134,16 @@ class StoreFront extends Component {
       sellerFirstName: this.state.sellerFirstName,
       sellerLastName: this.state.sellerLastName
     };
-    helpers.placeOrder(storeId, orders, token);
+    helpers.placeOrder(storeId, orders, token).then((response) => {
+      socket.emit("users", {
+        customerID: this.state.sellerId,
+        message: "Orders Updated"
+      });
+      socket.emit("users", {
+        customerID: Auth.getUserId(),
+        message: "Orders Updated"
+      });
+    });
   }
 
   bookmark(status) {
@@ -163,33 +178,14 @@ class StoreFront extends Component {
   }
 
   //socket advises all customers store updated
-  listenToStore() {
+  listenToStore(cb) {
     let userID = Auth.getUserId();
     let socket = io.connect('http://localhost:8080');
-
-    socket.on(this.state.sellerId, function(data) {
+    let sellerID = this.props.location.pathname.split('/')[2];
+    socket.on(sellerID, function(data) {
+      console.log(data);
       if (data.message === "Store Updated") {
-        helpers.getPublicStore(this.state.sellerId)
-          .then((response) => {
-            let storeData = response.data[0];
-            this.setState({
-              storeId: storeData._id,
-              storeRating: storeData.storeRating,
-              sellerId: storeData.sellerId,
-              name: storeData.name,
-              location: storeData.location,
-              menu: storeData.menuItems,
-              hours: storeData.hours,
-              description: storeData.description,
-              storeImage: storeData.storeImage,
-              reviews: storeData.reviews,
-              isOpen: storeData.isOpen,
-              sellerFirstName: storeData.firstName,
-              sellerLastName: storeData.lastName,
-              storeName: storeData.name,
-              storeLocation: storeData.location
-            });
-          })
+        cb(sellerID);
       }
     });
   }

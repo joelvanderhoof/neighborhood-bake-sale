@@ -29,13 +29,11 @@ class Nav extends Component {
   }
 
   queryOrders() {
-    console.log("query orders");
     let userID = Auth.getUserId();
     let activeOrders = [];
-    Helpers.getOrders(userID).then((response)=>{
-      console.log(response);
+    Helpers.getOrdersCustomer(userID).then((response)=>{
       response.data.map((orders)=>{
-        if(!orders.pickedUp){
+        if(!orders.pickedUp){ //if order is picked up, dont show it
           activeOrders.push(orders);
         }
       })
