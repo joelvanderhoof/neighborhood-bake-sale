@@ -1,21 +1,24 @@
 /* eslint-disable no-undef */
 import React, { Component } from 'react';
 import axios from 'axios';
+import StoreList from './StoreList';
 
-const zip = 92617;
 
 export default class MapSearch extends Component {
     constructor(props) {
         super(props);
 
-        // this.state = {
-        //     latLng: {lat: 33.6429845, lng: -117.8588866}
-        // };
+        this.state = {
+            readyToRender: false,
+            storeData: []
+        };
 
         this.initMap = this.initMap.bind(this);
         this.loadJS = this.loadJS.bind(this);
         this.getStoreData = this.getStoreData.bind(this);
         this.buildDataLayer = this.buildDataLayer.bind(this);
+        this.bindStoreData = this.bindStoreData.bind(this);
+        this.readyToRenderList = this.readyToRenderList.bind(this);
         
     }
     
@@ -30,12 +33,14 @@ export default class MapSearch extends Component {
 
     getStoreData(searchCity) {
         return new Promise((resolve, reject) => {
-            let locationData = [];
-            axios.get(`/api/store-marker/${searchCity}`)
+            let locationData = undefined;
+            axios.get(`http://localhost:8080/api/store-marker/${searchCity}`)
                 .then((res) => {
                   locationData = this.buildDataLayer(res);
-                    console.log(`This location data was just built from the db: ${JSON.stringify(locationData)}`);
+                  this.bindStoreData(res.data);                  
+                    // console.log(`This location data was just built from the db: ${JSON.stringify(locationData)}`);
                     resolve(locationData);
+                    
                 })            
         });
     }
@@ -46,7 +51,7 @@ export default class MapSearch extends Component {
             let storeLocation = {
                 "type": "Feature",
                 "properties": {
-                    "storeId": store._id
+                    "storeId": store.sellerId
                 },
                 "geometry": {
                 "type": "Point",
@@ -58,6 +63,20 @@ export default class MapSearch extends Component {
             storeArray.push(storeLocation);
         });
         return storeArray;        
+    }
+
+    bindStoreData(data) {
+        this.setState({storeData: data}, function() {
+            this.readyToRenderList();
+        });
+        
+        // console.log(`!!!!!!!!!!!!!!!!!!!!!!!location data: ${JSON.stringify(this.state.storeData)}`);
+    }
+
+    readyToRenderList() {
+        
+        this.setState({readyToRender: true});
+        console.log(`set readyToRender to ${this.state.readyToRender}`)
     }
 
     //async
@@ -79,6 +98,7 @@ export default class MapSearch extends Component {
             "type": "FeatureCollection",
             "features": locationData
         }; 
+        console.log(testGeo)
         
 
         // bind data to the markers on the map
@@ -98,11 +118,25 @@ export default class MapSearch extends Component {
 }
 
     render() {
+
+    //    if ( this.state.storeData.length > 1 ) {
+    //     <div>
+    //     <div className="row">
+    //         <div className="col-md-4 col-md-offset-4">
+    //         <StoreList data={this.state.storeData} />
+    //         </div>
+    //     <div id="map" style={{height: '500px', width: '100%'}}></div>
+    //     </div>
+    // </div>
+     //   }
         return (
             <div>
+                    {this.state.storeData ? <StoreList data={this.state.storeData} /> : <div>Loading...</div>}
                 <div id="map" style={{height: '500px', width: '100%'}}></div>
             </div>
         );
     }
     
 }
+
+// style={styles.listStyle}
