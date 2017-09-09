@@ -25,7 +25,9 @@ class StoreHours extends Component {
     return (
       <div className="border">
         <h4 className="text-center" style={{"borderBottom": "4px red solid"}}>Hours of Operation</h4>
+        <div className="form-group row justify-content-lg-center">
         { this.listHours() }
+        </div>
       </div>
       );
   }

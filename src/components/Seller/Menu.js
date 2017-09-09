@@ -25,7 +25,7 @@ class Menu extends Component {
     if (this.props.menuItems.length > 0) {
       return (
         <div className="col-lg-12">
-          <div>
+          <div className="row justify-content-lg-center">
             { this.createMenuItems() }
           </div>
         </div>
