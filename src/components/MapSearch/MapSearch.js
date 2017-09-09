@@ -31,7 +31,7 @@ export default class MapSearch extends Component {
     getStoreData(searchCity) {
         return new Promise((resolve, reject) => {
             let locationData = [];
-            axios.get(`http://localhost:8080/api/store-marker/${searchCity}`)
+            axios.get(`/api/store-marker/${searchCity}`)
                 .then((res) => {
                   locationData = this.buildDataLayer(res);
                     console.log(`This location data was just built from the db: ${JSON.stringify(locationData)}`);
