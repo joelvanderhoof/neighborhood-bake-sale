@@ -21,8 +21,8 @@ class StoreLocation extends Component {
       return (
         <div>
           <h4 className="text-center">Store Location</h4>
-          <div className="row">
-            <div className="col-lg-8 offset-lg-2">
+          <div className="row justify-content-lg-center">
+            <div className="col-lg-8">
               <input className="form-control" name="location" type="text" onChange={ this.handleChange } value={ this.props.location } id="storeLocation" />
             </div>
           </div>
@@ -30,7 +30,10 @@ class StoreLocation extends Component {
         );
     }
     return (
-      <p>Location: { this.props.location }</p>
+      <div className="text-center border">
+        <h4 style={{"borderBottom": "4px navy solid"}}>Location</h4>
+        <p className="text-center">{ this.props.location }</p>
+      </div>
       );
   }
 }

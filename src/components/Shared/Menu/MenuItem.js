@@ -55,9 +55,9 @@ class MenuItem extends Component {
   render() {
     if (this.props.edit) {
       return (
-        <div className="col-lg-10 offset-lg-1">
+        <div className="col-lg-10">
           <div className="form-group">
-            <div className="row">
+            <div className="row justify-content-lg-center">
               <input className="form-control col-lg-4" type="text" onChange={ (e) => this.handleChange(e, "name") } value={ this.props.item } placeholder="name" />
               <input className="form-control col-lg-4" type="number" onChange={ (e) => this.handleChange(e, "price") } value={ this.props.price } placeholder="price" />
               <select className="form-control col-lg-4" onChange={ (e) => this.handleChange(e, "inStock") } value={ this.inStockForm() }>
