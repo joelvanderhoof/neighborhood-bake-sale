@@ -35,22 +35,22 @@ class SignUpForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className='form-group'>
-          <label htmlFor='firstName'>First Name: </label>
+          <label style={{color: 'white'}} htmlFor='firstName'>First Name: </label>
           <input className='form-control' type='text' name='firstName' value={this.state.firstName} onChange={this.handleChange} required />
         </div>
 
         <div className='form-group'>
-          <label htmlFor='lastName'>Last Name: </label>
+          <label style={{color: 'white'}} htmlFor='lastName'>Last Name: </label>
           <input className='form-control' type='text' name='lastName' value={this.state.lastName} onChange={this.handleChange} required />
         </div>
 
         <div className='form-group'>
-          <label htmlFor='email'>Email: </label>
+          <label style={{color: 'white'}} htmlFor='email'>Email: </label>
           <input className='form-control' type='email' name='email' value={this.state.email} onChange={this.handleChange} required />
         </div>
 
         <div className='form-group'>
-          <label htmlFor='password'>Password: </label>
+          <label style={{color: 'white'}} htmlFor='password'>Password: </label>
           <input className='form-control' type='password' name='password' value={this.state.password} onChange={this.handleChange} required />
           <p className='red'>Password must be at least 10 characters long</p>
         </div>

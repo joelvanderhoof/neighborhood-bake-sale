@@ -41,7 +41,7 @@ class Message extends Component {
   componentDidMount() {
     this.monitorStore(this.props.requery);
   }
-
+ 
   render() {
     return (
       <div className="dropdown">
