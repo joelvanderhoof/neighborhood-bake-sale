@@ -34,7 +34,7 @@ class CustomerAdmin extends Component {
           let userOrders = response.data[0].orders;
           let userReviews = response.data[0].reviews;
           let userBookmarks = response.data[0].bookmarks;
-          console.log("Response from api for getUser: ", response);  
+          console.log("Response from api for getUser: ", response); 
           this.setState({
             profilename: firstName + " " +lastName,
             profilephoto: userPhoto,
@@ -45,7 +45,6 @@ class CustomerAdmin extends Component {
           });
         }); 
     }
-
 
     componentDidMount() {
         console.log('Component Did Mount');
