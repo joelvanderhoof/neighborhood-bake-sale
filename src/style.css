@@ -278,5 +278,17 @@ background:#ccc;
 border-radius:4px;
 }
 
+/* temp styling */
 
+span > strong {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+}
+
+h4 {
+  font-family: 'Oswald', sans-serif;
+}
 
