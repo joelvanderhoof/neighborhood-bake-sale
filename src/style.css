@@ -53,6 +53,11 @@ a, a:hover, a:active, a:link, a:visited {
   color: #d0021b;
 }
 
+/* Map Search */
+.search-map {
+  display: block;
+  height: 500px;
+}
 
 /* Store */
 
