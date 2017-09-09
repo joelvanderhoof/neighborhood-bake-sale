@@ -29,7 +29,7 @@ class Home extends Component {
 
   render () {
     return (
-      <div className="img-fluid rounded" clt="Home"> 
+      <div className="img-fluid rounded" çalt="Home"> 
 
         <h1 className="text-center" 
             style={{color:"white",
@@ -42,7 +42,7 @@ class Home extends Component {
         onSubmit={this.handleSubmit}
       />
       <Image />
-      <Search />
+      // <Search />
       </div>
     );
   }
