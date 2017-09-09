@@ -14,7 +14,7 @@ import Menu from '../Shared/Menu';
 import helpers from '../utils/helpers'
 import Auth from '../utils/Auth';
 import io from 'socket.io-client';
-let socket = io.connect('http://localhost:8080');
+let socket = io.connect('https://neighborhood-bake-sale.herokuapp.com/');
 
 
 class StoreFront extends Component {
@@ -201,7 +201,7 @@ class StoreFront extends Component {
   //socket advises all customers store updated
   listenToStore(cb) {
     // let userID = Auth.getUserId();
-    let socket = io.connect('http://localhost:8080');
+    let socket = io.connect('https://neighborhood-bake-sale.herokuapp.com/');
     let sellerID = this.props.location.pathname.split('/')[2];
     socket.on(sellerID, function(data) {
       console.log(data);
