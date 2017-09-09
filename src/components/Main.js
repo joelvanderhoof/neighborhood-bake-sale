@@ -7,6 +7,7 @@ import Logout from './Logout';
 import SignUp from './SignUp';
 import Home from './Home';
 import Store from './Store';
+import WriteReview from './Store/WriteReview';
 import SellerAdmin from './SellerAdmin'
 import CustomerAdmin from './CustomerAdmin';
 import Auth from './utils/Auth';
@@ -29,6 +30,7 @@ export default class Main extends Component {
                         <Route exact path='/' component={ Home }  />
                         <Route path='/map' component={MapSearch} />
                         <Route path='/store/:sellerId' component={ Store } />
+                        <Route path='/review/:sellerId' component={ WriteReview } />
                         <Route path='/selleradmin' render={ () => (loggedIn ? (<SellerAdmin/>) : (<Redirect to="/login"/>))} />
                         <Route path='/customeradmin' render={ () => (loggedIn ? (<CustomerAdmin/>) : (<Redirect to="/login"/>))} />
                         <Route path='/signup' component={ SignUp } />
