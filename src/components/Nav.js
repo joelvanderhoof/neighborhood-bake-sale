@@ -52,7 +52,7 @@ class Nav extends Component {
             </NavLink>
           </li>
           <li>
-            <NavLink className='white' activeClassName='active' to='/store/59ae424b9247f74518bff01d'>
+            <NavLink className='white' activeClassName='active' to='/store/59b5e9f35bc5691f78487b7f'>
               Store
             </NavLink>
           </li>
