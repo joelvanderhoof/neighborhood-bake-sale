@@ -17,8 +17,7 @@ var BookmarksSchema = new Schema({
   },
   storeId: {
     type: String,
-    default: '',
-    unique: false
+    default: ''
   },
   sellerId:{
     type: String,
