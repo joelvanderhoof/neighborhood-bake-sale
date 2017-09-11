@@ -46,7 +46,7 @@ class Message extends Component {
     return (
       <div className="dropdown">
         <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
-          <i className="fa fa-cutlery" aria-hidden="true"></i> <span className="badge badge-danger">{ this.props.messages.length }</span>
+          <i className="fa fa-cutlery mr-2" aria-hidden="true"></i> <span className="badge badge-danger">{ this.props.messages.length }</span>
         </a>
         <ul className="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
           <div className="notification-heading">
