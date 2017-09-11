@@ -258,7 +258,9 @@ router.route('/useLater')
 // Randy's secure routes
 router.route('/bookmark')
     .post((req, res) => {
+        console.log(req.body)
         let bookmark = new Bookmarks(req.body);
+        bookmark.isNew = false;
         bookmark.save((err, doc) => {
             if (err) {
                 console.log(err.message);

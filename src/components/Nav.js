@@ -43,6 +43,7 @@ class Nav extends Component {
   }
 
   render() {
+    const yourStore = `/store/${Auth.getUserId()}`
     return (
       <nav className="nav navbar-toggleable-md">
         <ul className='nav mr-auto'>
@@ -51,21 +52,27 @@ class Nav extends Component {
               Home
             </NavLink>
           </li>
+          {Auth.isUserAuthenticated() &&
           <li>
-            <NavLink className='white' activeClassName='active' to='/store/59ae424b9247f74518bff01d'>
-              Store
+            <NavLink className='white' activeClassName='active' to={yourStore}>
+              Your Store
             </NavLink>
           </li>
-          <li>
+          }
+
+          {Auth.isUserAuthenticated() && <li>
             <NavLink className='white' activeClassName='active' to='/selleradmin'>
               Seller Admin
             </NavLink>
           </li>
-          <li>
+          }
+          
+          {Auth.isUserAuthenticated() && <li>
             <NavLink className='white' activeClassName='active' to='/customeradmin'>
               Customer Admin
             </NavLink>
           </li>
+          }
           { Auth.isUserAuthenticated() &&
             <li>
               <Message requery={this.queryOrders} messages={ this.state.messages } />
