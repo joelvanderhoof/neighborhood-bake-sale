@@ -68,7 +68,6 @@ class Home extends Component {
     //this.extractSearchCity(this.state.value);
     let latLng = await this.getStartLatLng(this.state.value);
     let searchCity = await this.getSearchCity(latLng);
-    console.log(searchCity);
     this.setState({ latLng, searchCity });    
   }
 
