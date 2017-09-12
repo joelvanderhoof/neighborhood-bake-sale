@@ -34,7 +34,7 @@ export default class MapSearch extends Component {
     getStoreData(searchCity) {
         return new Promise((resolve, reject) => {
             let locationData = undefined;
-            axios.get(`/store-marker/${searchCity}`)
+            axios.get(`https://neighborhood-bake-sale.herokuapp.com/api/store-marker/${searchCity}`)
                 .then((res) => {
                   locationData = this.buildDataLayer(res);
                   this.bindStoreData(res.data);                  
@@ -90,7 +90,7 @@ export default class MapSearch extends Component {
         console.log(`this.props.searchCity: ${this.props.searchCity}`);
         const map = new google.maps.Map(document.getElementById('map'), {
             center: this.props.latLng,
-            zoom: 14
+            zoom: 13
         });
 
         let locationData = await this.getStoreData(this.props.searchCity);
