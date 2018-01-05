@@ -90,7 +90,7 @@ export default class MapSearch extends Component {
         console.log(`this.props.searchCity: ${this.props.searchCity}`);
         const map = new google.maps.Map(document.getElementById('map'), {
             center: this.props.latLng,
-            zoom: 13
+            zoom: 11
         });
 
         let locationData = await this.getStoreData(this.props.searchCity);
