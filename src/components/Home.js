@@ -65,6 +65,7 @@ class Home extends Component {
   }
 
   async handleSubmit(event) {
+    event.preventDefault();
     //this.extractSearchCity(this.state.value);
     let latLng = await this.getStartLatLng(this.state.value);
     let searchCity = await this.getSearchCity(latLng);
